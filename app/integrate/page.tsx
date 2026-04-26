@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BackButton } from '@/components/ui/BackButton';
 
 // /integrate — "Integration Reference (Prototype)". Spec §9.
 // Public-facing page; server-rendered; no client state required.
@@ -21,7 +22,7 @@ function Endpoint({
   response: string;
 }) {
   return (
-    <div className="rounded border border-neutral-300 bg-white p-4">
+    <div className="rounded border border-wb-line bg-white p-4">
       <div className="flex items-baseline gap-3">
         <span
           className={`rounded px-2 py-0.5 text-xs font-bold ${
@@ -32,15 +33,15 @@ function Endpoint({
         </span>
         <code className="text-sm font-semibold">{path}</code>
       </div>
-      <p className="mt-2 text-sm text-neutral-700">{description}</p>
+      <p className="mt-2 text-sm text-wb-ink/80">{description}</p>
       {request && (
         <>
-          <div className="mt-3 text-xs uppercase tracking-wide text-neutral-600">Request</div>
-          <pre className="mt-1 overflow-x-auto rounded bg-neutral-50 p-3 text-xs">{request}</pre>
+          <div className="mt-3 text-xs uppercase tracking-wide text-wb-ink/70">Request</div>
+          <pre className="mt-1 overflow-x-auto rounded bg-wb-sand p-3 text-xs">{request}</pre>
         </>
       )}
-      <div className="mt-3 text-xs uppercase tracking-wide text-neutral-600">Response</div>
-      <pre className="mt-1 overflow-x-auto rounded bg-neutral-50 p-3 text-xs">{response}</pre>
+      <div className="mt-3 text-xs uppercase tracking-wide text-wb-ink/70">Response</div>
+      <pre className="mt-1 overflow-x-auto rounded bg-wb-sand p-3 text-xs">{response}</pre>
     </div>
   );
 }
@@ -87,14 +88,15 @@ export default function IntegratePage() {
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-10">
+      <BackButton href="/" label="Back to role selector" className="mb-4" />
       <header>
-        <Link href="/" className="text-xs text-neutral-500 underline">
-          ← UNMAPPED
-        </Link>
-        <h1 className="mt-1 text-3xl font-semibold">
-          Integration Reference <span className="text-neutral-500">(Prototype)</span>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-wb-ink/50">
+          For integration partners
+        </p>
+        <h1 className="mt-3 text-4xl font-bold tracking-tight text-wb-navy">
+          Integration Reference <span className="text-wb-ink/60">(Prototype)</span>
         </h1>
-        <p className="mt-2 text-sm text-neutral-700">
+        <p className="mt-3 text-base leading-relaxed text-wb-ink/80">
           UNMAPPED is a protocol, not an app. NGOs, training providers, employers,
           and ministries plug in via the endpoints below. Four config fields are
           all it takes to spin up a new country.
@@ -118,12 +120,12 @@ export default function IntegratePage() {
 
       <section className="mt-8">
         <h2 className="text-xl font-semibold">Portable profile schema</h2>
-        <p className="mt-1 text-sm text-neutral-700">
+        <p className="mt-1 text-sm text-wb-ink/80">
           Every endpoint that produces a candidate identity emits a JSON-LD
           document with <code>schema: "unmapped.profile/v1"</code>. Employers
           read this document directly — no custom ATS adapter needed.
         </p>
-        <pre className="mt-3 overflow-x-auto rounded border border-neutral-300 bg-white p-3 text-xs">{`{
+        <pre className="mt-3 overflow-x-auto rounded border border-wb-line bg-white p-3 text-xs">{`{
   "@context": "https://unmapped.example/schema/profile/v1",
   "@type": "SkillIdentity",
   "schema": "unmapped.profile/v1",
@@ -259,11 +261,11 @@ export default function IntegratePage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold">Drop-in integration example</h2>
-        <p className="mt-1 text-sm text-neutral-700">
+        <p className="mt-1 text-sm text-wb-ink/80">
           An NGO forwards an intake form from their existing CRM. Three lines
           of code.
         </p>
-        <pre className="mt-3 overflow-x-auto rounded border border-neutral-300 bg-white p-3 text-xs">{`// An NGO intake adapter (TypeScript, 12 lines)
+        <pre className="mt-3 overflow-x-auto rounded border border-wb-line bg-white p-3 text-xs">{`// An NGO intake adapter (TypeScript, 12 lines)
 const res = await fetch("https://unmapped.example/api/skills-map", {
   method: "POST",
   headers: { "content-type": "application/json", "x-tenant": "GIZ_GH" },
@@ -281,21 +283,21 @@ const profile = await res.json();  // unmapped.profile/v1 skeleton + explanation
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold">Country config diff</h2>
-        <p className="mt-1 text-sm text-neutral-700">
+        <p className="mt-1 text-sm text-wb-ink/80">
           Every country on UNMAPPED is a JSON config file. Four fields change
           between Ghana and Vietnam — no code edits.
         </p>
         <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
           <div>
-            <div className="text-xs uppercase text-neutral-600">countries/GH.json</div>
-            <pre className="mt-1 overflow-x-auto rounded border border-neutral-300 bg-white p-3 text-xs">{ghConfig}</pre>
+            <div className="text-xs uppercase text-wb-ink/70">countries/GH.json</div>
+            <pre className="mt-1 overflow-x-auto rounded border border-wb-line bg-white p-3 text-xs">{ghConfig}</pre>
           </div>
           <div>
-            <div className="text-xs uppercase text-neutral-600">countries/VN.json</div>
-            <pre className="mt-1 overflow-x-auto rounded border border-neutral-300 bg-white p-3 text-xs">{vnConfig}</pre>
+            <div className="text-xs uppercase text-wb-ink/70">countries/VN.json</div>
+            <pre className="mt-1 overflow-x-auto rounded border border-wb-line bg-white p-3 text-xs">{vnConfig}</pre>
           </div>
         </div>
-        <p className="mt-3 text-xs text-neutral-600">
+        <p className="mt-3 text-xs text-wb-ink/70">
           Tour:{' '}
           <Link href="/policymaker/config" className="underline">
             /policymaker/config
@@ -307,14 +309,14 @@ const profile = await res.json();  // unmapped.profile/v1 skeleton + explanation
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold">Tenants already connected (demo data)</h2>
-        <p className="mt-1 text-sm text-neutral-700">
+        <p className="mt-1 text-sm text-wb-ink/80">
           The <Link href="/policymaker/ecosystem" className="underline">ecosystem page</Link>{' '}
           shows API keys issued to pilot tenants. In a real deployment each
           tenant is scoped to a subset of the endpoints above.
         </p>
       </section>
 
-      <footer className="mt-10 border-t border-neutral-200 pt-4 text-xs text-neutral-500">
+      <footer className="mt-10 border-t border-wb-line pt-4 text-xs text-wb-ink/60">
         See <Link href="/about/limits" className="underline">/about/limits</Link>{' '}
         for what UNMAPPED deliberately does not do.
       </footer>

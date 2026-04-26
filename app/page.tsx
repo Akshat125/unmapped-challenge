@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Sparkles, Briefcase, HeartHandshake, Landmark, ArrowRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useRole, ROLE_HOMES, type ActiveRole } from '@/lib/role-store';
+import { BrandMark } from '@/components/ui/BrandMark';
 
 // Role selector landing. The only surface where all four user groups are
 // visible to each other. Picking a tile routes into that role's shell and
@@ -74,20 +75,9 @@ export default function RoleSelectorLanding() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Slim brand bar — intentionally quieter than the role-shell headers. */}
       <header className="border-b border-wb-line">
         <div className="mx-auto flex max-w-[72rem] items-center justify-between px-6 py-4">
-          <div className="inline-flex items-center gap-2 text-sm font-bold tracking-tight text-wb-navy">
-            <span
-              aria-hidden
-              className="inline-block h-5 w-5 rounded"
-              style={{
-                backgroundImage:
-                  'linear-gradient(135deg, #002244 0%, #009FDF 60%, #00A499 100%)',
-              }}
-            />
-            UNMAPPED
-          </div>
+          <BrandMark />
           <nav className="flex items-center gap-5 text-xs text-wb-ink/60">
             <Link href="/integrate" className="hover:text-wb-navy">
               Integration reference

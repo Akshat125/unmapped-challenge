@@ -1,10 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HeartHandshake } from 'lucide-react';
 import { useNgoStore } from '@/lib/ngo-store';
 import { RoleSwitcher } from './RoleSwitcher';
+import { BrandMark } from './ui/BrandMark';
 import { WorkflowStepper } from './ui/WorkflowStepper';
 import { NGO_STEPS, matchStep } from '@/lib/workflow-steps';
 
@@ -17,15 +16,7 @@ export function NgoHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-wb-line bg-wb-sand/95 backdrop-blur">
       <div className="mx-auto flex max-w-[80rem] flex-wrap items-center justify-between gap-4 px-6 py-4">
-        <Link
-          href="/ngo"
-          className="inline-flex items-center gap-2 rounded text-lg font-bold text-wb-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue"
-        >
-          <HeartHandshake className="h-5 w-5 text-ys-teal" strokeWidth={2} aria-hidden />
-          <span>UNMAPPED</span>
-          <span className="text-wb-ink/40">·</span>
-          <span className="text-wb-ink/80">NGOs &amp; Training Providers</span>
-        </Link>
+        <BrandMark href="/ngo" subtitle="NGOs & Training Providers" />
         <div className="flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-2 text-sm">
             <span className="text-wb-ink/60">Navigator:</span>

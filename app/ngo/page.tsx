@@ -1,9 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 import { useNgoStore } from '@/lib/ngo-store';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import { Button } from '@/components/ui/Button';
+import { LinkButton } from '@/components/ui/LinkButton';
+import { Plus, X } from 'lucide-react';
 
 export default function NgoCaseload() {
   const profiles = useNgoStore((s) => s.profiles);
@@ -44,12 +46,12 @@ export default function NgoCaseload() {
             exported.
           </p>
         </div>
-        <button
+        <Button
           onClick={() => setOpen((v) => !v)}
-          className="rounded bg-ink px-4 py-2 text-sm text-white"
+          icon={open ? X : Plus}
         >
           {open ? 'Cancel' : 'Add intake'}
-        </button>
+        </Button>
       </header>
 
       <section className="mt-4 grid grid-cols-4 gap-3 text-sm">
@@ -62,23 +64,23 @@ export default function NgoCaseload() {
       {open && (
         <form
           onSubmit={submit}
-          className="mt-6 space-y-3 rounded border border-neutral-300 bg-white p-4"
+          className="mt-6 space-y-4 rounded-lg border border-wb-line bg-white p-6"
         >
           <label className="block">
-            <span className="text-sm font-medium">Display name (or alias)</span>
+            <span className="text-sm font-medium text-wb-navy">Display name (or alias)</span>
             <input
               value={draft.displayName}
               onChange={(e) => setDraft({ ...draft, displayName: e.target.value })}
-              className="mt-1 w-full rounded border border-neutral-300 bg-white px-3 py-2"
+              className="mt-1 w-full rounded border border-wb-line bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-wb-blue"
               required
             />
           </label>
           <label className="block">
-            <span className="text-sm font-medium">Country</span>
+            <span className="text-sm font-medium text-wb-navy">Country</span>
             <select
               value={draft.country}
               onChange={(e) => setDraft({ ...draft, country: e.target.value as CountryCode })}
-              className="mt-1 w-full rounded border border-neutral-300 bg-white px-3 py-2"
+              className="mt-1 w-full rounded border border-wb-line bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-wb-blue"
             >
               {(Object.keys(COUNTRIES) as CountryCode[])
                 .filter((c) => COUNTRIES[c].active)
@@ -90,31 +92,29 @@ export default function NgoCaseload() {
             </select>
           </label>
           <label className="block">
-            <span className="text-sm font-medium">Work they've done</span>
+            <span className="text-sm font-medium text-wb-navy">Work they&rsquo;ve done</span>
             <textarea
               value={draft.workText}
               onChange={(e) => setDraft({ ...draft, workText: e.target.value })}
-              className="mt-1 w-full rounded border border-neutral-300 bg-white px-3 py-2"
+              className="mt-1 w-full rounded border border-wb-line bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-wb-blue"
               rows={2}
             />
           </label>
           <label className="block">
-            <span className="text-sm font-medium">Tools / software</span>
+            <span className="text-sm font-medium text-wb-navy">Tools / software</span>
             <textarea
               value={draft.toolsText}
               onChange={(e) => setDraft({ ...draft, toolsText: e.target.value })}
-              className="mt-1 w-full rounded border border-neutral-300 bg-white px-3 py-2"
+              className="mt-1 w-full rounded border border-wb-line bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-wb-blue"
               rows={2}
             />
           </label>
-          <button type="submit" className="rounded bg-ink px-4 py-2 text-sm text-white">
-            Create profile
-          </button>
+          <Button type="submit">Create profile</Button>
         </form>
       )}
 
       {profiles.length === 0 ? (
-        <p className="mt-8 rounded border border-dashed border-neutral-300 bg-white p-6 text-center text-sm text-neutral-600">
+        <p className="mt-8 rounded-lg border border-dashed border-wb-line bg-white p-6 text-center text-sm text-wb-ink/60">
           No profiles yet. Add your first intake with the button above.
         </p>
       ) : (
@@ -122,37 +122,39 @@ export default function NgoCaseload() {
           {profiles.map((p) => (
             <li
               key={p.id}
-              className="rounded border border-neutral-300 bg-white p-4"
+              className="rounded-lg border border-wb-line bg-white p-6 shadow-sm"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <div>
-                  <h3 className="text-lg font-semibold">{p.displayName}</h3>
-                  <p className="text-xs text-neutral-500">
+                  <h3 className="text-lg font-semibold text-wb-navy">{p.displayName}</h3>
+                  <p className="text-xs text-wb-ink/60">
                     {COUNTRIES[p.country].name} · created{' '}
                     {new Date(p.createdAt).toLocaleDateString()} · status {p.status}
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 text-sm">
-                  <Link
+                  <LinkButton
                     href={`/ngo/${p.id}`}
-                    className="rounded border border-ink bg-white px-3 py-1"
+                    variant="secondary"
+                    size="sm"
                   >
                     Open
-                  </Link>
-                  <button
+                  </LinkButton>
+                  <Button
+                    variant="danger"
+                    size="sm"
                     onClick={() => removeProfile(p.id)}
-                    className="rounded border border-red-400 bg-white px-3 py-1 text-red-700"
                   >
                     Remove
-                  </button>
+                  </Button>
                 </div>
               </div>
               {p.workText && (
-                <p className="mt-2 text-sm text-neutral-800">
-                  <em>&ldquo;{p.workText}&rdquo;</em>
+                <p className="mt-3 text-sm italic text-wb-ink/80">
+                  &ldquo;{p.workText}&rdquo;
                 </p>
               )}
-              <div className="mt-2 text-xs text-neutral-600">
+              <div className="mt-2 text-xs text-wb-ink/60">
                 {p.validations.length} validation{p.validations.length === 1 ? '' : 's'} ·{' '}
                 {p.localPathways.length} local pathway
                 {p.localPathways.length === 1 ? '' : 's'}

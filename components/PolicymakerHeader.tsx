@@ -14,6 +14,7 @@ import {
 import { useProfile } from '@/lib/profile-store';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { RoleSwitcher } from './RoleSwitcher';
+import { BrandMark } from './ui/BrandMark';
 
 const ORDER: CountryCode[] = ['GH', 'BD', 'VN', 'KE', 'BR'];
 
@@ -38,22 +39,7 @@ export function PolicymakerHeader() {
     <header className="sticky top-0 z-40 bg-wb-navy text-white shadow-lg">
       <div className="mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-4 px-6 py-4">
         <div className="flex items-center gap-4">
-          <Link
-            href="/policymaker"
-            className="inline-flex items-center gap-2 rounded text-lg font-bold tracking-tight text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ys-teal"
-          >
-            <span
-              aria-hidden
-              className="inline-block h-6 w-6 rounded"
-              style={{
-                backgroundImage:
-                  'linear-gradient(135deg, #00A499 0%, #009FDF 50%, #F4B400 100%)',
-              }}
-            />
-            <span>UNMAPPED</span>
-            <span className="text-white/40">·</span>
-            <span className="text-white/80">Policymaker</span>
-          </Link>
+          <BrandMark href="/policymaker" subtitle="Policymaker" tone="dark" />
           <span className="hidden text-[10px] uppercase tracking-[0.2em] text-white/50 lg:inline">
             National Human Capital Command Center
           </span>

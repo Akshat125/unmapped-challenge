@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { useProfile } from '@/lib/profile-store';
 import { BackButton } from '@/components/ui/BackButton';
+import { Button } from '@/components/ui/Button';
+import { CheckCircle2 } from 'lucide-react';
 
 // White-label config UI. Policymaker pastes a JSON that matches the
 // CountryConfig schema; we validate via /api/policymaker/validate-config
@@ -98,13 +100,15 @@ export default function ConfigPage() {
       </section>
 
       <section className="mt-6 flex flex-wrap items-center gap-2 text-sm">
-        <span>Start from:</span>
+        <span className="text-wb-ink/70">Start from:</span>
         {(['GH', 'BD', 'VN', 'KE', 'BR'] as CountryCode[]).map((c) => (
           <button
             key={c}
             onClick={() => loadExisting(c)}
-            className={`rounded border px-3 py-1 ${
-              pretending === c ? 'border-ink bg-ink text-white' : 'border-neutral-300 bg-white'
+            className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue ${
+              pretending === c
+                ? 'border-wb-navy bg-wb-navy text-white'
+                : 'border-wb-line bg-white text-wb-ink hover:border-wb-blue'
             }`}
           >
             {COUNTRIES[c].name}
@@ -112,28 +116,25 @@ export default function ConfigPage() {
         ))}
         <button
           onClick={generateStub}
-          className="rounded border border-neutral-300 bg-white px-3 py-1"
+          className="rounded-full border border-wb-line bg-white px-3 py-1 text-xs font-medium text-wb-ink hover:border-wb-blue focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue"
         >
           Blank template
         </button>
       </section>
 
-      <section className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <section className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
-          <label className="block text-sm font-medium">Config JSON</label>
+          <label className="block text-sm font-semibold text-wb-navy">Config JSON</label>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
-            className="mt-1 h-[420px] w-full rounded border border-neutral-300 bg-white p-3 font-mono text-xs"
+            className="mt-2 h-[420px] w-full rounded-lg border border-wb-line bg-white p-3 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-wb-blue"
             spellCheck={false}
           />
-          <div className="mt-2 flex gap-2">
-            <button
-              onClick={validate}
-              className="rounded bg-ink px-4 py-2 text-sm text-white"
-            >
+          <div className="mt-3 flex gap-2">
+            <Button onClick={validate} icon={CheckCircle2}>
               Validate
-            </button>
+            </Button>
             {ok && (
               <span className="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs text-emerald-900">
                 Config is valid · would ship as-is

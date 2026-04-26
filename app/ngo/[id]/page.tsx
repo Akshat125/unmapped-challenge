@@ -11,6 +11,8 @@ import { signVerification } from '@/lib/profile-schema';
 import { buildNavigatorProfileV1 } from '@/lib/profile-v1-builder';
 import { resilienceGaps } from '@/lib/resilience';
 import { BackButton } from '@/components/ui/BackButton';
+import { Button } from '@/components/ui/Button';
+import { Download, Plus } from 'lucide-react';
 
 const VALIDATION_METHODS = [
   { id: 'observation', label: 'Observation (demonstrated in person)' },
@@ -137,12 +139,14 @@ export default function NgoCaseloadProfilePage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={Download}
             onClick={() => downloadProfileJson(profile)}
-            className="rounded border border-ink bg-white px-3 py-1 text-sm"
           >
             Export (JSON)
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -261,13 +265,14 @@ export default function NgoCaseloadProfilePage() {
             />
           </label>
         </div>
-        <button
+        <Button
           onClick={submitValidation}
-          className="mt-3 rounded bg-ink px-3 py-1 text-sm text-white disabled:opacity-50"
           disabled={!validationDraft.skillUri}
+          size="sm"
+          className="mt-3 disabled:opacity-50"
         >
           Record validation
-        </button>
+        </Button>
       </section>
 
       {profile.validations.length > 0 && (
@@ -335,12 +340,9 @@ export default function NgoCaseloadProfilePage() {
             placeholder="e.g. GIZ Ghana — Electronics apprenticeship, starts March"
             className="flex-1 rounded border border-neutral-300 bg-white px-3 py-2"
           />
-          <button
-            onClick={submitPathway}
-            className="rounded bg-ink px-3 py-2 text-sm text-white"
-          >
+          <Button onClick={submitPathway} size="sm" icon={Plus}>
             Add
-          </button>
+          </Button>
         </div>
         {profile.localPathways.length > 0 && (
           <ul className="mt-3 list-disc space-y-1 pl-6 text-sm">

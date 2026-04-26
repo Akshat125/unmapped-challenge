@@ -11,6 +11,7 @@ import { useEmployerStore } from '@/lib/employer-store';
 import { useCatalog } from '@/lib/catalog-client';
 import { useMarketSignalStore } from '@/lib/market-signal-store';
 import { Button } from '@/components/ui/Button';
+import { LinkButton } from '@/components/ui/LinkButton';
 import { Card } from '@/components/ui/Card';
 import { Disclosure } from '@/components/ui/Disclosure';
 import { BackButton } from '@/components/ui/BackButton';
@@ -157,14 +158,14 @@ export default function EmployerCandidates() {
 
       {/* Import panel — visible by default when shortlist is empty; toggleable otherwise. */}
       {!showImport && (
-        <button
-          type="button"
+        <Button
+          variant="secondary"
+          size="sm"
+          icon={Upload}
           onClick={() => setShowImport(true)}
-          className="inline-flex items-center gap-2 rounded border border-wb-line bg-white px-3 py-2 text-sm text-wb-navy hover:border-wb-blue focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue"
         >
-          <Upload className="h-4 w-4" aria-hidden />
           Add another profile
-        </button>
+        </Button>
       )}
 
       {showImport && (
@@ -358,19 +359,21 @@ export default function EmployerCandidates() {
                       <option value="review">Review later</option>
                       <option value="reject">Pass</option>
                     </select>
-                    <Link
+                    <LinkButton
                       href={`/employer/${encodeURIComponent(record.id)}`}
-                      className="rounded border border-wb-navy bg-white px-3 py-2 text-xs font-medium text-wb-navy hover:bg-wb-sand focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue"
+                      variant="secondary"
+                      size="sm"
                     >
                       Open profile
-                    </Link>
-                    <button
+                    </LinkButton>
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => removeCandidate(record.id)}
-                      className="rounded border border-wb-line bg-white px-2 py-2 text-xs text-wb-ink/60 hover:border-ys-coral hover:text-ys-coral focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue"
                       aria-label="Remove from shortlist"
                     >
                       Remove
-                    </button>
+                    </Button>
                   </div>
                 </div>
 

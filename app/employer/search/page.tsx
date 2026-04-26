@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { useEmployerStore } from '@/lib/employer-store';
 import { useCatalog } from '@/lib/catalog-client';
 import { BackButton } from '@/components/ui/BackButton';
+import { LinkButton } from '@/components/ui/LinkButton';
 
 // Skill-first search. The employer types the skills they need. We rank
 // candidates by verified matches first, self-reported matches second. No
@@ -77,10 +78,10 @@ export default function EmployerSearch() {
               <button
                 key={s.uri}
                 onClick={() => toggle(s.uri)}
-                className={`rounded-full border px-3 py-1 text-xs ${
+                className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue ${
                   on
-                    ? 'border-ink bg-ink text-white'
-                    : 'border-neutral-300 bg-white text-neutral-800'
+                    ? 'border-wb-navy bg-wb-navy text-white'
+                    : 'border-wb-line bg-white text-wb-ink hover:border-wb-blue'
                 }`}
               >
                 {s.label}
@@ -89,9 +90,12 @@ export default function EmployerSearch() {
           })}
         </div>
         {selected.length > 0 && (
-          <p className="mt-3 text-xs text-neutral-600">
+          <p className="mt-3 text-xs text-wb-ink/60">
             Searching for {selected.length} skill{selected.length === 1 ? '' : 's'}.{' '}
-            <button onClick={() => setSelected([])} className="underline">
+            <button
+              onClick={() => setSelected([])}
+              className="text-wb-blue underline hover:text-wb-navy"
+            >
               Clear
             </button>
           </p>
@@ -125,12 +129,13 @@ export default function EmployerSearch() {
                       <span className="font-mono font-semibold">{score}</span>
                     </p>
                   </div>
-                  <Link
+                  <LinkButton
                     href={`/employer/${encodeURIComponent(candidate.id)}`}
-                    className="rounded border border-ink bg-white px-3 py-1 text-sm"
+                    variant="secondary"
+                    size="sm"
                   >
                     Open
-                  </Link>
+                  </LinkButton>
                 </div>
                 <div className="mt-2 flex flex-wrap gap-2 text-xs">
                   <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-emerald-900">
