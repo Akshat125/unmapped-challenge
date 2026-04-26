@@ -62,67 +62,48 @@ export function OpportunityCardView({
         </div>
       </header>
 
-      {/* Match count — plain sentence, not formula. */}
+      {/* Can I do this? — match count in plain language */}
       <section className="mt-5 rounded border border-wb-line bg-wb-sand/60 p-4">
         <div className="flex items-baseline justify-between gap-2">
           <span className="text-sm font-semibold text-wb-navy">
-            {t('opportunities.match_label')}
+            Your skills match
           </span>
           <span className="text-sm text-wb-ink/80">
-            {t('opportunities.match_format')
-              .replace('{matched}', String(card.match.matched))
-              .replace('{total}', String(card.match.total))}
+            {card.match.matched} of {card.match.total} required skills
           </span>
         </div>
         {card.match.missing_labels.length > 0 && (
           <div className="mt-3 text-xs text-wb-ink/70">
-            <span className="font-medium text-wb-ink">
-              {t('opportunities.missing_label')}:
-            </span>{' '}
+            <span className="font-medium text-wb-ink">To go further, you would need:</span>{' '}
             {card.match.missing_labels.join(', ')}
           </div>
         )}
       </section>
 
-      {/* Plain-language risk paragraph — the default surface. */}
-      <section className="mt-5 rounded border border-wb-line bg-white p-4">
-        <div className="text-[10px] font-semibold uppercase tracking-widest text-wb-ink/60">
-          How this job might change
-        </div>
-        <p className="mt-2 text-sm leading-relaxed text-wb-ink">
-          {narrative.sentence}
-        </p>
-        <div className="mt-3 border-t border-wb-line pt-3">
-          <Disclosure summary="Show how we calculated this" variant="default">
-            <RiskLens risk={card.risk} countryCode={countryCode} />
-          </Disclosure>
-        </div>
-      </section>
-
-      {/* The three econometric signals. Source labels always visible. */}
+      {/* What does it pay? + Is this sector growing? */}
       <section className="mt-5">
         <h3 className="text-[10px] font-semibold uppercase tracking-widest text-wb-ink/60">
-          {t('opportunities.signals_heading')}
+          Pay and demand
         </h3>
         <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {card.signals.wage ? (
             <Signal
-              label={t('opportunities.signal_wage')}
+              label="Average monthly pay"
               value={`${card.signals.wage.mean_monthly.toLocaleString()} ${card.signals.wage.currency} / month (${card.signals.wage.year})`}
               source={card.signals.wage.source}
             />
           ) : (
             <Signal
-              label={t('opportunities.signal_wage')}
+              label="Average monthly pay"
               value="—"
               source="data not available for this sector"
             />
           )}
           <Signal
-            label={t('opportunities.signal_growth')}
+            label="Sector job growth"
             value={
               card.signals.growth.yoy_pct != null
-                ? `${card.signals.growth.yoy_pct > 0 ? '+' : ''}${card.signals.growth.yoy_pct}% YoY (${card.signals.growth.latest_year})`
+                ? `${card.signals.growth.yoy_pct > 0 ? '+' : ''}${card.signals.growth.yoy_pct}% year on year (${card.signals.growth.latest_year})`
                 : '—'
             }
             source={card.signals.growth.source}
@@ -143,6 +124,21 @@ export function OpportunityCardView({
         </div>
       </section>
 
+      {/* How stable is this job? — plain-language risk paragraph */}
+      <section className="mt-5 rounded border border-wb-line bg-white p-4">
+        <div className="text-[10px] font-semibold uppercase tracking-widest text-wb-ink/60">
+          How this job might change
+        </div>
+        <p className="mt-2 text-sm leading-relaxed text-wb-ink">
+          {narrative.sentence}
+        </p>
+        <div className="mt-3 border-t border-wb-line pt-3">
+          <Disclosure summary="Show how we calculated this" variant="default">
+            <RiskLens risk={card.risk} countryCode={countryCode} />
+          </Disclosure>
+        </div>
+      </section>
+
       {card.wittgenstein.implication && (
         <section className="mt-5 rounded border border-wb-line bg-wb-sand p-4">
           <div className="text-[10px] font-semibold uppercase tracking-widest text-wb-navy/70">
@@ -158,20 +154,20 @@ export function OpportunityCardView({
       )}
 
       {card.pathway.training_providers.length > 0 && (
-        <section className="mt-5">
+        <section className="mt-5 rounded border border-wb-line bg-wb-sand/40 p-4">
           <h3 className="text-[10px] font-semibold uppercase tracking-widest text-wb-ink/60">
-            {t('opportunities.pathway_heading')}
+            Next step
           </h3>
           <p className="mt-2 text-sm text-wb-ink/80">
-            {t('opportunities.pathway_providers')}:{' '}
-            <span className="text-wb-ink">
+            Training available near you:{' '}
+            <span className="font-medium text-wb-ink">
               {card.pathway.training_providers.join(', ')}
             </span>
           </p>
         </section>
       )}
 
-      {/* Standard code — hidden by default per spec rule for the Youth view. */}
+      {/* Standard occupation code — collapsed by default in the youth view. */}
       <div className="mt-5 border-t border-wb-line pt-4">
         <Disclosure summary="Show the standard occupation code" variant="default">
           <p className="font-mono text-xs text-wb-ink/80">

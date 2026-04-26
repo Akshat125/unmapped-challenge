@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { useProfile } from '@/lib/profile-store';
 import { useT } from '@/lib/i18n';
@@ -14,7 +13,7 @@ import { ProfilePassportView } from '@/components/ProfilePassportView';
 import { BackButton } from '@/components/ui/BackButton';
 import { Button } from '@/components/ui/Button';
 import { LinkButton } from '@/components/ui/LinkButton';
-import { Share2, Printer, Download, ArrowRight } from 'lucide-react';
+import { Share2, Printer, ArrowRight } from 'lucide-react';
 import type { OpportunityCard } from '@/app/api/match/route';
 
 // "My Digital Skill Passport" — the Youth view per V3.0 §3 Group 1.
@@ -64,23 +63,6 @@ export default function ProfilePage() {
     );
   }, [country, answers, mapping, mappedAt, catalog, risks]);
 
-  function downloadJson() {
-    if (!profileV1) return;
-    const blob = new Blob([JSON.stringify(profileV1, null, 2)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `unmapped-profile-${country}-${new Date()
-      .toISOString()
-      .slice(0, 10)}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
-
   // Share: encode the full profile to a URL fragment.
   const shareArtifacts = useMemo(() => {
     if (!profileV1) return null;
@@ -117,9 +99,9 @@ export default function ProfilePage() {
           <p className="mt-3 text-base leading-relaxed text-wb-ink/70">
             A portable, owned, verifiable record of what you can do.
           </p>
-          <p className="mt-2 text-xs text-wb-ink/50">
-            Schema: <code>unmapped.profile/v1</code> · {COUNTRIES[country].name}
-            {educationLabel ? ` · ${educationLabel.localizedLabel ?? educationLabel.label}` : ''}
+          <p className="mt-2 text-sm text-wb-ink/60">
+            {COUNTRIES[country].name}
+            {educationLabel ? ` · ${educationLabel.label}` : ''}
           </p>
         </div>
         <div className="flex flex-wrap gap-2 print:hidden">
@@ -128,9 +110,6 @@ export default function ProfilePage() {
           </Button>
           <Button onClick={() => window.print()} variant="secondary" icon={Printer}>
             {t('profile.print')}
-          </Button>
-          <Button onClick={downloadJson} variant="secondary" icon={Download}>
-            {t('profile.export_json')}
           </Button>
           <LinkButton href="/opportunities" variant="secondary" iconRight={ArrowRight}>
             {t('profile.see_opportunities')}
@@ -210,24 +189,6 @@ export default function ProfilePage() {
         )}
       </section>
 
-      <details className="mt-6 rounded border border-neutral-300 bg-white p-4 print:hidden">
-        <summary className="cursor-pointer text-sm font-medium">
-          For systems: raw JSON-LD ({profileV1?.schema ?? 'loading…'})
-        </summary>
-        <p className="mt-2 text-sm text-neutral-600">
-          Employers, training providers, and governments can consume this
-          document directly — it's the contract documented on the{' '}
-          <Link href="/integrate" className="underline">
-            Integration Reference
-          </Link>
-          .
-        </p>
-        {profileV1 && (
-          <pre className="mt-3 max-h-80 overflow-auto rounded bg-neutral-50 p-3 text-xs">
-            {JSON.stringify(profileV1, null, 2)}
-          </pre>
-        )}
-      </details>
     </article>
   );
 }

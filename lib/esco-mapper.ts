@@ -184,22 +184,15 @@ async function runClaude(_input: SkillMapInput): Promise<SkillMapResult> {
 }
 
 export async function mapSkills(input: SkillMapInput): Promise<SkillMapResult> {
+  // Prototype path: Claude implementation is a stub (see runClaude above).
+  // When ANTHROPIC_API_KEY is set but the stub throws we still want the
+  // deterministic keyword mock to answer, not a dead upstream_error branch —
+  // otherwise the /sms-demo flow shows "no skills recognized" for everyone.
   if (process.env.ANTHROPIC_API_KEY) {
     try {
       return await runClaude(input);
-    } catch (err) {
-      // §7.1.2 step 4
-      return {
-        status: 'upstream_error',
-        esco_skills: [],
-        isco_occupations: [],
-        confidence: 0,
-        gaps_inferred: [],
-        rejected_codes: [],
-        explanations: [],
-        message:
-          'Connection issue — your answers are saved locally. Try again in a moment.',
-      };
+    } catch {
+      return runMock(input);
     }
   }
   return runMock(input);

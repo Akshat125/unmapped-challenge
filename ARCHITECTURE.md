@@ -44,7 +44,7 @@ There is no database. All reference data lives in `public/data/*.json`. All user
 │  lib/resilience.ts         ← adjacent skill recs        │
 │  lib/profile-schema.ts     ← ProfileV1 JSON-LD schema   │
 │  lib/profile-v1-builder.ts ← builds exportable profile  │
-│  lib/config/countries.ts   ← AppConfig (5 countries)    │
+│  lib/config/countries.ts   ← AppConfig (GH + BD)    │
 └────────────────┬────────────────────────────────────────┘
                  │ fs.readFile()
 ┌────────────────▼────────────────────────────────────────┐
@@ -207,12 +207,12 @@ Create `app/api/your-thing/route.ts`. Import data loaders from `lib/data-loaders
 ### Add a new country
 ```typescript
 // lib/config/countries.ts
-export type CountryCode = 'GH' | 'BD' | 'VN' | 'KE' | 'BR' | 'NG'; // add here
+export type CountryCode = 'GH' | 'BD' | 'NG'; // add here
 
 const COUNTRIES = {
   NG: {
-    code: 'NG', name: 'Nigeria', broadbandPenetration: 45,
-    routineTaskShare: 0.50, ...
+    code: 'NG', name: 'Nigeria', locale: 'en', active: true,
+    broadbandPenetration: 45, routineTaskShare: 0.50, ...
   }
 }
 ```
@@ -232,4 +232,4 @@ Then add `ilostat_earnings` + `ilostat_employment` rows for `NG` to the JSON fil
 | Real-time candidate feed (employer sees new profiles) | Server-Sent Events in a new `app/api/feed/route.ts` |
 | Claude-powered skill mapper | `lib/esco-mapper.ts :: runClaude()` — stub ready |
 | Semantic embedding matcher (offline, no API key) | Separate FastAPI microservice at `/embed`, called from `runClaude` fallback |
-| Multi-language UI (Twi, Bengali, etc.) | `messages/en.json` is the string file — add `messages/tw.json`, toggle via `lib/i18n.ts` |
+| Multi-language UI | `messages/en.json` is the string file — add `messages/<locale>.json` and extend `lib/i18n.ts` |

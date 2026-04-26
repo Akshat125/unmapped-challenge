@@ -16,7 +16,7 @@ import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { RoleSwitcher } from './RoleSwitcher';
 import { BrandMark } from './ui/BrandMark';
 
-const ORDER: CountryCode[] = ['GH', 'BD', 'VN', 'KE', 'BR'];
+const ORDER: CountryCode[] = ['GH', 'BD'];
 
 export function PolicymakerHeader() {
   const country = useProfile((s) => s.country);
@@ -52,15 +52,11 @@ export function PolicymakerHeader() {
               onChange={(e) => setCountry(e.target.value as CountryCode)}
               className="min-h-[40px] rounded border border-white/20 bg-wb-ink px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-ys-teal"
             >
-              {ORDER.map((code) => {
-                const c = COUNTRIES[code];
-                return (
-                  <option key={code} value={code} disabled={!c.active}>
-                    {c.name}
-                    {c.active ? '' : ' (stub)'}
-                  </option>
-                );
-              })}
+              {ORDER.map((code) => (
+                <option key={code} value={code}>
+                  {COUNTRIES[code].name}
+                </option>
+              ))}
             </select>
           </label>
           <RoleSwitcher tone="dark" />

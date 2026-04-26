@@ -9,7 +9,7 @@ End-to-end bi-directional protocol across four user groups on one codebase. Ever
 ### Role-gated architecture
 
 - **`/`** — role selector landing. Four equally-weighted tiles for a first-time visitor; a "Continue as [role]" shortcut for returning visitors (driven by `lib/role-store.ts`). Links to `/integrate` and `/about/limits` in a quiet footer.
-- **Youth shell** (`/entry`, `/profile`, `/opportunities`, `/share/[token]`) — the 5-question skill capture, a plain-language Digital Skill Passport, opportunity cards with three econometric signals + risk lens + Wittgenstein 2035 subcard. ISCO / ESCO codes and the risk formula are always behind disclosures.
+- **Youth shell** (`/entry`, `/profile`, `/opportunities`, `/share/[token]`) — the 5-question skill capture, a plain-language Digital Skill Passport (share + QR + print), opportunity cards with wage + sector-growth signals, risk lens, and Wittgenstein 2035 subcard. ISCO codes and risk formula inputs are behind disclosures; no raw JSON export in the youth view.
 - **Employer shell** as a **linear wizard** — `/employer` (Step 1: "Who are you hiring for?" with two tiles, free-text RECOMMENDED), `/employer/jd` (Step 2: Transparency Breadcrumb with three stages), `/employer/candidates` (Step 3: plain-language talent cards), `/employer/[id]` (talent detail), `/employer/search` (alternate granular filter).
 - **NGO shell** (`/ngo`, `/ngo/bulk`, `/ngo/[id]`, `/ngo/impact`) — caseload, bulk CSV + grid intake, signed verifications with SHA-256 audit trail, resilience-gap coaching, transition monitoring. The practitioner doing the vouching is called a "navigator"; the group they work for is "NGOs & Training Providers".
 - **Policymaker shell** (`/policymaker`, `/policymaker/skill-gaps`, `/sectors`, `/invest`, `/divergence`, `/config`, `/ecosystem`) — "National Human Capital Command Center" with three KPIs (Skill Divergence Index, Automation Hotspots, ROI on Training), adjustable-weight investment prioritization with CSV export, supply-vs-demand divergence heatmap, white-label config validator, API key / tenant ecosystem.
@@ -58,7 +58,7 @@ Plus **`/integrate`** (API contract + production-vs-prototype disclosure) and **
 /lib
   role-store.ts            ← Zustand; activeRole drives role-gated landing
   workflow-steps.ts        ← per-role stepper definitions + path matcher
-  config/countries.ts      ← GH, BD active; VN, KE, BR stubs
+  config/countries.ts      ← GH, BD (English only)
   data-loaders/            ← 9 typed loaders per source
   risk-calibration.ts      ← near-term + V3.0 final-risk formulas
   returns-to-education.ts, skill-match.ts, sector-map.ts
@@ -72,7 +72,7 @@ Plus **`/integrate`** (API contract + production-vs-prototype disclosure) and **
   profile-store.ts (youth), ngo-store.ts, employer-store.ts,
   ecosystem-store.ts, market-signal-store.ts
 
-/messages                  ← next-intl catalogs: en + tw-Latn
+/messages                  ← next-intl catalog: en (English only)
 /public/data/              ← committed JSON outputs from the Python pipeline
 /scripts/data-prep/        ← Python fetchers + orchestrator + crosswalk CSV
 ```
@@ -81,7 +81,7 @@ Plus **`/integrate`** (API contract + production-vs-prototype disclosure) and **
 
 | Group | Always visible | Behind disclosure |
 |---|---|---|
-| **Youth** | skill names, verified ✓, plain-language risk sentence, econometric numbers with plain labels, opportunity-type badge | ISCO / ESCO codes, risk formula inputs, raw JSON export |
+| **Youth** | skill names, verified ✓, plain-language risk sentence, wage + sector-growth signals with plain labels, opportunity-type badge, next-step training providers | ISCO / ESCO codes, risk formula inputs |
 | **Employer** | role name, candidate name + country, "X of Y skills match" progress bar, verified-vs-self chips, action verbs | ISCO code behind each role, match-weight math, signature hex, ranking algorithm |
 | **NGOs & Training Providers** | names, skill counts, validation state, placements | SHA-256 signatures, risk formula inputs |
 | **Policymaker** | everything — dense tables, visible formulas, KPI sparklines, CSV exports | (nothing hidden — this group wants the numbers) |
@@ -157,7 +157,7 @@ The schema field names keep `navigator_id` / `navigator_name` even though the ro
 
 Full page at [/about/limits](app/about/limits/page.tsx). Short version:
 
-- Two countries demo-grade (GH, BD); three stubs (VN, KE, BR)
+- Two countries demo-grade: Ghana (GH) and Bangladesh (BD)
 - LMIC risk calibration is a defensible heuristic, not a validated econometric model
 - Returns to education is a wage ratio within sector, not a controlled regression
 - Seed data realistic-order-of-magnitude; every envelope carries a `source` flag

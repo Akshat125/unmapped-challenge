@@ -1,4 +1,4 @@
-export type CountryCode = 'GH' | 'BD' | 'VN' | 'KE' | 'BR';
+export type CountryCode = 'GH' | 'BD';
 
 export type OpportunityEmphasis = 'self_employment_gig' | 'formal_training';
 
@@ -37,13 +37,13 @@ export const COUNTRIES: Record<CountryCode, CountryConfig> = {
   GH: {
     code: 'GH',
     name: 'Ghana',
-    locale: 'tw-Latn',
+    locale: 'en',
     active: true,
     educationLevels: [
-      { id: 'none', label: 'No formal schooling', localizedLabel: 'Mennya sukuu biara' },
-      { id: 'bece', label: 'BECE (Junior High)', localizedLabel: 'BECE (JHS)' },
-      { id: 'shs', label: 'SHS / WASSCE', localizedLabel: 'SHS / WASSCE' },
-      { id: 'tertiary', label: 'Tertiary / University', localizedLabel: 'Sukuupɔn' },
+      { id: 'none', label: 'No formal schooling' },
+      { id: 'bece', label: 'BECE (Junior High)' },
+      { id: 'shs', label: 'SHS / WASSCE' },
+      { id: 'tertiary', label: 'Tertiary / University' },
     ],
     languages: [
       { code: 'en', label: 'English' },
@@ -62,8 +62,6 @@ export const COUNTRIES: Record<CountryCode, CountryConfig> = {
   BD: {
     code: 'BD',
     name: 'Bangladesh',
-    // Locale reserved — Bangla strings not shipped this session
-    // (see LOCALE_DECISION.md). UI falls back to English for BD.
     locale: 'en',
     active: true,
     educationLevels: [
@@ -81,72 +79,6 @@ export const COUNTRIES: Record<CountryCode, CountryConfig> = {
     broadbandPenetration: 40,
     routineTaskShare: 0.52,
     trainingProviders: ['BTEB', 'a2i Skills', 'BRAC Skills Development', 'ILO Bangladesh'],
-  },
-
-  VN: {
-    code: 'VN',
-    name: 'Vietnam',
-    locale: 'en',
-    active: false,
-    educationLevels: [
-      { id: 'none', label: 'No formal schooling' },
-      { id: 'lower_secondary', label: 'Lower secondary' },
-      { id: 'upper_secondary', label: 'Upper secondary' },
-      { id: 'tertiary', label: 'Tertiary / University' },
-    ],
-    languages: [
-      { code: 'vi', label: 'Vietnamese' },
-      { code: 'en', label: 'English' },
-    ],
-    currencyLabel: 'VND',
-    opportunityEmphasis: 'formal_training',
-    broadbandPenetration: 82,
-    routineTaskShare: 0.44,
-    trainingProviders: ['[stub] vocational college', '[stub] training provider'],
-  },
-
-  KE: {
-    code: 'KE',
-    name: 'Kenya',
-    locale: 'en',
-    active: false,
-    educationLevels: [
-      { id: 'none', label: 'No formal schooling' },
-      { id: 'kcpe', label: 'KCPE (Primary)' },
-      { id: 'kcse', label: 'KCSE (Secondary)' },
-      { id: 'tertiary', label: 'Tertiary / University' },
-    ],
-    languages: [
-      { code: 'sw', label: 'Swahili' },
-      { code: 'en', label: 'English' },
-    ],
-    currencyLabel: 'KES',
-    opportunityEmphasis: 'self_employment_gig',
-    broadbandPenetration: 55,
-    routineTaskShare: 0.5,
-    trainingProviders: ['[stub] TVET institute', '[stub] training provider'],
-  },
-
-  BR: {
-    code: 'BR',
-    name: 'Brazil',
-    locale: 'en',
-    active: false,
-    educationLevels: [
-      { id: 'none', label: 'No formal schooling' },
-      { id: 'ensino_fundamental', label: 'Ensino fundamental' },
-      { id: 'ensino_medio', label: 'Ensino médio' },
-      { id: 'superior', label: 'Ensino superior' },
-    ],
-    languages: [
-      { code: 'pt', label: 'Portuguese' },
-      { code: 'en', label: 'English' },
-    ],
-    currencyLabel: 'BRL',
-    opportunityEmphasis: 'formal_training',
-    broadbandPenetration: 90,
-    routineTaskShare: 0.42,
-    trainingProviders: ['[stub] SENAI', '[stub] training provider'],
   },
 };
 

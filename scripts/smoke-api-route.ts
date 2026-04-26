@@ -126,7 +126,7 @@ async function main() {
   const valid = await post(validateConfigPOST, 'http://local/api/policymaker/validate-config', {
     code: 'GH',
     name: 'Ghana',
-    locale: 'tw-Latn',
+    locale: 'en',
     currencyLabel: 'GHS',
     opportunityEmphasis: 'self_employment_gig',
     broadbandPenetration: 68,

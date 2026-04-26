@@ -76,9 +76,9 @@ export default function RoleSelectorLanding() {
   return (
     <div className="min-h-screen bg-white">
       <header className="border-b border-wb-line">
-        <div className="mx-auto flex max-w-[72rem] items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-[72rem] items-center justify-between px-6 py-5">
           <BrandMark />
-          <nav className="flex items-center gap-5 text-xs text-wb-ink/60">
+          <nav className="flex items-center gap-6 text-sm text-wb-ink/60">
             <Link href="/integrate" className="hover:text-wb-navy">
               Integration reference
             </Link>

@@ -190,7 +190,7 @@ export default function EntryFlow() {
 
         <div className="sticky bottom-4 flex items-center justify-end gap-3 rounded-xl border border-wb-line bg-white/95 p-4 shadow-lg backdrop-blur">
           <p className="mr-auto hidden text-sm text-wb-ink/60 md:block">
-            You can skip any question. We'll flag a profile that needs more
+            You can skip any question. We&apos;ll flag a profile that needs more
             detail.
           </p>
           <Button

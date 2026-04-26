@@ -63,8 +63,8 @@ export default function LimitsPage() {
           </li>
           <li>
             It does <strong>not</strong> issue formal credentials. A navigator
-            signature proves "Kofi at GIZ Accra observed this on March 12," not
-            "the government of Ghana accredits this skill."
+            signature proves &ldquo;Kofi at GIZ Accra observed this on March 12,&rdquo; not
+            &ldquo;the government of Ghana accredits this skill.&rdquo;
           </li>
           <li>
             It does <strong>not</strong> hide or infer protected attributes.
@@ -78,8 +78,8 @@ export default function LimitsPage() {
         <ul className="list-disc space-y-1 pl-6">
           <li>
             Two countries are demo-grade: <strong>Ghana</strong> and{' '}
-            <strong>Bangladesh</strong>. Vietnam, Kenya, Brazil ship as stub
-            configs to prove the localization protocol.
+            <strong>Bangladesh</strong>. Additional countries can be added via
+            a single JSON config — see the Integration Reference.
           </li>
           <li>
             Seed data in <code>public/data/*.json</code> is
@@ -91,7 +91,7 @@ export default function LimitsPage() {
           </li>
           <li>
             The O*NET SOC-to-ISCO-08 crosswalk loses ~15% of occupations on a
-            full fetch. The prototype's curated subset joins at 100%;
+            full fetch. The prototype&apos;s curated subset joins at 100%;
             production will see and log the ~15% drop in{' '}
             <code>public/data/crosswalk_misses.json</code>.
           </li>
@@ -131,7 +131,7 @@ export default function LimitsPage() {
           <li>
             <strong>Navigator signatures</strong> are SHA-256 over a canonical
             string. Auditable and deterministic in the prototype. Production
-            adds a real PKI (navigator's signing key, rotation, and a public
+            adds a real PKI (navigator&apos;s signing key, rotation, and a public
             verifier).
           </li>
           <li>

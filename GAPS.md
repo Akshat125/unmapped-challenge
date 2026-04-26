@@ -74,7 +74,7 @@ The 100 loaded skills are biased toward the tech sector. Missing entire clusters
 | **ESCO subset expansion** | Fetch the full 13,890-skill ESCO API and store a larger static extract | The `scripts/data-prep/fetch_esco.py` exists — run it with wider filters |
 | **Transferability graph** | Build a skill adjacency graph (ESCO `broaderSkill` links + O*NET crosswalks) and traverse it for gap-filling suggestions | This would unlock "Amara knows X, she's 2 skills away from occupation Y" narrative |
 | **Verification portability** | Replace SHA-256 with an Ed25519 keypair per NGO (private key stays with NGO, public key is in the JSON-LD) | Makes verification machine-checkable by any employer, not just printable |
-| **Informal skill taxonomy** | Annotate the ESCO subset with "informal equivalent labels" in Twi, Bengali, etc. so the form prompts can be in local language | This is the UX hook that makes the brief's "human-readable, owned by Amara" requirement real |
+| **Informal skill taxonomy** | Annotate the ESCO subset with "informal equivalent labels" in local languages so the form prompts can be in the user's first language | This is the UX hook that makes the brief's "human-readable, owned by Amara" requirement real |
 
 ---
 
@@ -131,7 +131,7 @@ The brief and its example persona (Amara, phone repair, informal economy) center
 | **Gender disaggregation** | Split risk scores by M/F given ILOSTAT gender × sector data | The brief appendix lists WBL 2024 and ILO gender statistics — surfacing female LMIC automation risk would be a standout angle |
 | **Informality risk buffer** | Add `informality_factor` to risk calibration — informal occupations get a delay multiplier | Uses ILOSTAT informality data already in scope |
 | **Wittgenstein narrative engine** | Given `country + education_level`, generate a "your cohort in 2030" projection sentence | Concrete, Amara-first framing the brief explicitly asks for |
-| **STEP data integration** | Fetch/embed a STEP subset for Ghana/Bangladesh/Vietnam | The one signal that provides direct LMIC skill-level evidence rather than proxies |
+| **STEP data integration** | Fetch/embed a STEP subset for Ghana and Bangladesh | The one signal that provides direct LMIC skill-level evidence rather than proxies |
 
 ---
 
@@ -208,7 +208,7 @@ The brief lists these required data sources. Here's the honest status:
 
 | Source | Required? | In `public/data/`? | Coverage |
 |---|---|---|---|
-| ILO ILOSTAT wages | ✅ Required | ✅ `ilostat_earnings.json` | Partial — 5 countries, some sectors |
+| ILO ILOSTAT wages | ✅ Required | ✅ `ilostat_earnings.json` | Partial — GH + BD, some sectors |
 | ILO ILOSTAT employment | ✅ Required | ✅ `ilostat_employment.json` | Partial |
 | ILO ISCO-08 | ✅ Required | ✅ `isco08.json` | Full labels |
 | ILO FoW task indices | ✅ Required | ✅ `ilo_fow_tasks.json` | Partial |
