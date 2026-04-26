@@ -10,7 +10,8 @@
     "data-prep": "cd scripts/data-prep && python3 build_occupation_subset.py",
     "smoke": "tsx scripts/smoke-loaders.ts",
     "smoke:api": "tsx scripts/smoke-api-route.ts",
-    "smoke:profile": "tsx scripts/smoke-profile-v1.ts"
+    "smoke:profile": "tsx scripts/smoke-profile-v1.ts",
+    "smoke:bm25": "tsx scripts/smoke-bm25.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.27.0",

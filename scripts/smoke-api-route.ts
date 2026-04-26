@@ -142,7 +142,7 @@ async function main() {
 
   console.log('── /api/map-job-description (employer JD) ──');
   const jd = await post(mapJdPOST, 'http://local/api/map-job-description', {
-    text: 'Need a reliable person for phone screen repairs and stock management.',
+    text: 'Looking for a mobile phone repair technician to replace screens and batteries, diagnose faults, and manage spare parts inventory.',
   });
   console.log(
     `  status=${jd.status} top_isco=${jd.body.isco_top_occupation} skills=${jd.body.esco_skills.length} highlights=${jd.body.highlights.length}`,
