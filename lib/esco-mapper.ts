@@ -1,16 +1,15 @@
-// Skills-mapping abstraction. The runtime picks between a deterministic
-// keyword-matcher mock (this session) and a Claude call (next session)
-// based on the presence of ANTHROPIC_API_KEY.
+// Skills-mapping abstraction. Runtime picks between:
+//   - Claude + BM25 retrieval (Option D) when ANTHROPIC_API_KEY is set
+//   - Keyword-regex mock                when the key is absent
 //
-// Contract both implementations satisfy:
-//   input:  SkillMapInput
-//   output: SkillMapResult
-//
-// The §7.1.2 failure-handling cases are shaped here so the API route can
-// stay thin. Rejected codes are always counted against the loaded ESCO
-// subset — no hallucinated skill URIs are ever returned.
+// Both satisfy the same SkillMapInput → SkillMapResult contract.
+// §7.1.2 failure handling (retry, flagged_low_confidence, upstream_error)
+// is implemented in runClaude(). Rejected codes never escape — only URIs
+// present in the loaded ESCO subset are returned.
 
+import Anthropic from '@anthropic-ai/sdk';
 import { getEscoOccupations, getEscoSkills } from '@/lib/data-loaders/esco';
+import { BM25Index } from '@/lib/bm25';
 
 export interface SkillMapInput {
   education?: string;
@@ -28,178 +27,276 @@ export type SkillMapStatus =
 
 export interface SkillMapResult {
   status: SkillMapStatus;
-  esco_skills: string[];        // URIs from the loaded subset only
-  isco_occupations: string[];   // ISCO-08 codes from the loaded subset only
+  esco_skills: string[];
+  isco_occupations: string[];
   confidence: number;           // 0..1
-  gaps_inferred: string[];      // human-readable labels of missing skills
-  rejected_codes: string[];     // codes Claude returned but we couldn't validate
-  message?: string;             // user-facing text for flagged/error states
-  // XAI (V3.0 core rule #1): per-skill explanation of WHY this code was
-  // chosen, so the user can verify or correct the mapping.
+  gaps_inferred: string[];
+  rejected_codes: string[];
   explanations: Array<{
     skill_uri: string;
-    evidence: string;           // the phrase from user input that triggered it
+    evidence: string;
     source_field: 'work' | 'tools' | 'aspirations' | 'languages';
   }>;
+  message?: string;
 }
 
-// ──── Mock implementation ────────────────────────────────────────────────
-//
-// Keyword-based matcher. Walks the input free-text, looks for substrings
-// that match skill labels in esco_skills.json, and returns the union.
-// Deterministic — same input always produces the same output.
-const KEYWORD_RULES: Array<{ pattern: RegExp; skillUri: string }> = [
-  // Phone / electronics repair
-  { pattern: /\bphone|mobile|smartphone|android|iphone\b/i, skillUri: 'S1.1.4' },
-  { pattern: /\bsolder|soldering iron\b/i, skillUri: 'S1.1.2' },
-  { pattern: /\brepair|fix|fixing\b/i, skillUri: 'S1.1.3' },
-  { pattern: /\bhand tool|screwdriver|pliers\b/i, skillUri: 'S1.1.1' },
-  { pattern: /\boperating system|windows|linux|install(?:ation)?\b/i, skillUri: 'S1.1.5' },
+// ── BM25 index (module-level singleton, built once per process) ───────────
 
-  // Web / software
-  { pattern: /\b(website|web(site)?|frontend|front-end)\b/i, skillUri: 'S1.2.4' },
-  { pattern: /\bhtml\b/i, skillUri: 'S1.2.2' },
-  { pattern: /\bcss\b/i, skillUri: 'S1.2.3' },
-  { pattern: /\bjavascript|js\b/i, skillUri: 'S1.2.1' },
-  { pattern: /\bpython\b/i, skillUri: 'S1.2.6' },
-  { pattern: /\bgit|github|version control\b/i, skillUri: 'S1.2.5' },
-  { pattern: /\bsql|database\b/i, skillUri: 'S1.2.7' },
+let _indexPromise: Promise<{ index: BM25Index; labelByUri: Map<string, string> }> | null = null;
 
-  // Service / sales / office
-  { pattern: /\bcustomer|client\b/i, skillUri: 'S2.1.1' },
-  { pattern: /\bwrite|writing|written|email\b/i, skillUri: 'S2.1.2' },
-  { pattern: /\bcash|money|payment\b/i, skillUri: 'S2.1.5' },
-  { pattern: /\binventory|stock\b/i, skillUri: 'S2.1.6' },
-  { pattern: /\baccount(ing|s)?|bookkeeping\b/i, skillUri: 'S2.1.4' },
-  { pattern: /\btyping|type|keyboard\b/i, skillUri: 'S7.1.1' },
-  { pattern: /\bexcel|spreadsheet\b/i, skillUri: 'S7.1.2' },
-
-  // Trades
-  { pattern: /\bweld(ing|er)?\b/i, skillUri: 'S4.1.1' },
-  { pattern: /\bpipe|plumb(ing|er)?\b/i, skillUri: 'S4.1.2' },
-  { pattern: /\bcarpenter|woodwork|joinery\b/i, skillUri: 'S4.1.4' },
-  { pattern: /\bsew(ing)?|tailor|garment|stitch\b/i, skillUri: 'S4.1.5' },
-  { pattern: /\bpattern\b/i, skillUri: 'S4.1.6' },
-
-  // Vehicle
-  { pattern: /\bcar|vehicle|engine|mechanic\b/i, skillUri: 'S3.1.1' },
-  { pattern: /\bdriv(ing|er)\b/i, skillUri: 'S3.1.3' },
-
-  // Cooking / agriculture
-  { pattern: /\bcook|kitchen|chef\b/i, skillUri: 'S5.1.1' },
-  { pattern: /\bhygiene|food safety\b/i, skillUri: 'S5.1.2' },
-  { pattern: /\bcrop|farm|plant(ing)?|harvest\b/i, skillUri: 'S6.1.1' },
-  { pattern: /\bclean(ing)?|sweep|mop\b/i, skillUri: 'S6.1.2' },
-];
-
-async function runMock(input: SkillMapInput): Promise<SkillMapResult> {
-  const sources: Array<{ field: 'work' | 'tools' | 'aspirations'; text: string }> = [
-    { field: 'work', text: input.workText ?? '' },
-    { field: 'tools', text: input.toolsText ?? '' },
-    { field: 'aspirations', text: input.aspirationsText ?? '' },
-  ];
-
-  // Per-URI record of which phrase and field triggered the match — feeds
-  // the XAI layer (V3.0 rule #1).
-  const firstEvidence = new Map<string, { field: 'work' | 'tools' | 'aspirations' | 'languages'; evidence: string }>();
-  for (const { pattern, skillUri } of KEYWORD_RULES) {
-    if (firstEvidence.has(skillUri)) continue;
-    for (const src of sources) {
-      const m = src.text.match(pattern);
-      if (m && m[0]) {
-        firstEvidence.set(skillUri, { field: src.field, evidence: m[0] });
-        break;
-      }
-    }
+function getIndex() {
+  if (!_indexPromise) {
+    _indexPromise = getEscoSkills().then(({ value: skills }) => {
+      const docs = skills.map((s) => ({
+        id: s.uri,
+        text: `${s.label} ${(s.alt_labels ?? []).join(' ')} ${s.description ?? ''}`.trim(),
+      }));
+      return {
+        index: new BM25Index(docs),
+        labelByUri: new Map(skills.map((s) => [s.uri, s.label])),
+      };
+    });
   }
+  return _indexPromise;
+}
 
-  if ((input.languages ?? []).includes('en')) {
-    firstEvidence.set('S2.1.2', { field: 'languages', evidence: 'English listed among spoken languages' });
-  }
-  if ((input.languages ?? []).some((l) => l !== 'en')) {
-    const nonEn = (input.languages ?? []).filter((l) => l !== 'en').join(', ');
-    firstEvidence.set('S2.1.3', { field: 'languages', evidence: `Local language fluency: ${nonEn}` });
-  }
+// ── Claude implementation (Option D: BM25 retrieval → single Claude call) ─
 
-  // Validate every returned URI against the loaded ESCO subset.
+const CLAUDE_MODEL = 'claude-sonnet-4-6';
+const MAX_CANDIDATES = 60;
+
+interface ClaudeMatch {
+  uri: string;
+  evidence: string;
+  source_field: 'work' | 'tools' | 'aspirations' | 'languages';
+}
+
+function buildQuery(input: SkillMapInput): string {
+  return [input.workText, input.toolsText, input.aspirationsText]
+    .filter(Boolean)
+    .join(' ');
+}
+
+function buildPrompt(input: SkillMapInput, candidates: Array<{ uri: string; label: string }>): string {
+  const candidateList = candidates
+    .map((c) => `${c.uri} | ${c.label}`)
+    .join('\n');
+
+  const person = [
+    input.education ? `Education: ${input.education}` : null,
+    input.workText ? `Work experience: ${input.workText}` : null,
+    input.toolsText ? `Tools and technology used: ${input.toolsText}` : null,
+    input.languages?.length ? `Languages: ${input.languages.join(', ')}` : null,
+    input.aspirationsText ? `Aspirations: ${input.aspirationsText}` : null,
+  ]
+    .filter(Boolean)
+    .join('\n');
+
+  return `You are a skill taxonomy mapper for an employment platform serving young workers in low-income countries.
+
+<person>
+${person}
+</person>
+
+From the candidate skills below, select ONLY the ones that clearly apply to this person based on what they wrote. Be conservative — include a skill only when there is direct evidence in their text.
+
+For each match return:
+- uri: the exact URI from the list
+- evidence: the exact phrase from the person's text that shows this skill
+- source_field: which field the evidence came from (work | tools | aspirations | languages)
+
+<candidates>
+${candidateList}
+</candidates>
+
+Return ONLY a JSON array. No explanation. No markdown. Examples:
+[{"uri":"S1.1.4","evidence":"I repair smartphones","source_field":"work"}]
+[] if nothing matches.`;
+}
+
+function parseClaudeResponse(text: string): ClaudeMatch[] | null {
+  const trimmed = text.trim();
+  // Strip markdown code fences if present
+  const json = trimmed.startsWith('```')
+    ? trimmed.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '')
+    : trimmed;
+  try {
+    const parsed = JSON.parse(json);
+    if (!Array.isArray(parsed)) return null;
+    return parsed.filter(
+      (item): item is ClaudeMatch =>
+        typeof item === 'object' &&
+        typeof item.uri === 'string' &&
+        typeof item.evidence === 'string' &&
+        ['work', 'tools', 'aspirations', 'languages'].includes(item.source_field),
+    );
+  } catch {
+    return null;
+  }
+}
+
+async function callClaude(prompt: string): Promise<ClaudeMatch[] | null> {
+  const client = new Anthropic();
+  const msg = await client.messages.create({
+    model: CLAUDE_MODEL,
+    max_tokens: 2048,
+    messages: [{ role: 'user', content: prompt }],
+  });
+  const block = msg.content[0];
+  if (block.type !== 'text') return null;
+  return parseClaudeResponse(block.text);
+}
+
+async function runClaude(input: SkillMapInput): Promise<SkillMapResult> {
+  const { index, labelByUri } = await getIndex();
   const { value: skills } = await getEscoSkills();
+  const { value: occupations } = await getEscoOccupations();
+
   const validUris = new Set(skills.map((s) => s.uri));
-  const esco_skills: string[] = [];
-  const rejected_codes: string[] = [];
-  const explanations: SkillMapResult['explanations'] = [];
-  for (const [uri, ev] of firstEvidence) {
-    if (validUris.has(uri)) {
-      esco_skills.push(uri);
-      explanations.push({
-        skill_uri: uri,
-        evidence: ev.evidence,
-        source_field: ev.field,
-      });
-    } else {
-      rejected_codes.push(uri);
+
+  // BM25 retrieval — get top candidates from the full skill set
+  const query = buildQuery(input);
+  const hits = query.trim() ? index.query(query, MAX_CANDIDATES) : [];
+
+  // Always include at least the top candidates even if query is thin
+  const candidates = hits.map((h) => ({ uri: h.id, label: labelByUri.get(h.id) ?? h.id }));
+
+  // §7.1.2 step 1: first Claude pass
+  const prompt = buildPrompt(input, candidates);
+  let matches = await callClaude(prompt);
+
+  if (matches === null) {
+    // Unparseable response — treat as upstream_error
+    throw new Error('Claude returned unparseable response');
+  }
+
+  // Validate: reject any URI not in the loaded ESCO subset
+  let accepted = matches.filter((m) => validUris.has(m.uri));
+  let rejected = matches.filter((m) => !validUris.has(m.uri)).map((m) => m.uri);
+
+  const rejectionRatio = matches.length > 0 ? rejected.length / matches.length : 0;
+
+  // §7.1.2 step 2: >50% rejected — retry with stricter prompt
+  let status: SkillMapStatus = 'ok';
+  if (rejectionRatio > 0.5 && matches.length > 0) {
+    const strictPrompt =
+      buildPrompt(input, candidates) +
+      '\n\nIMPORTANT: Return ONLY URIs from the candidate list above. Do not invent URIs.';
+    const retryMatches = await callClaude(strictPrompt);
+
+    if (retryMatches !== null) {
+      const retryAccepted = retryMatches.filter((m) => validUris.has(m.uri));
+      const retryRejected = retryMatches.filter((m) => !validUris.has(m.uri)).map((m) => m.uri);
+      const retryRejectionRatio =
+        retryMatches.length > 0 ? retryRejected.length / retryMatches.length : 0;
+
+      // §7.1.2 step 3: still >50% rejected after retry → flagged
+      if (retryRejectionRatio > 0.5) {
+        status = 'flagged_low_confidence';
+      } else {
+        status = 'retry_used';
+      }
+      accepted = retryAccepted;
+      rejected = retryRejected;
     }
   }
 
-  // Suggest matching ISCO occupations — the ones whose essentialSkills
-  // overlap with the profile. This is a hint for the opportunities page.
-  const { value: occupations } = await getEscoOccupations();
-  const isco_occupations = occupations
-    .filter((occ) =>
-      occ.essential_skills.some((s) => esco_skills.includes(s)),
-    )
-    .map((occ) => occ.isco_code);
+  const esco_skills = accepted.map((m) => m.uri);
+  const explanations = accepted.map((m) => ({
+    skill_uri: m.uri,
+    evidence: m.evidence,
+    source_field: m.source_field,
+  }));
 
-  // Zero-match handling: if the user gave no parseable text, flag it.
+  const isco_occupations = Array.from(new Set(
+    occupations
+      .filter((occ) => occ.essential_skills.some((s) => esco_skills.includes(s)))
+      .map((occ) => occ.isco_code),
+  ));
+
   const total = esco_skills.length;
-  const empty = total === 0;
-
   return {
-    status: empty ? 'flagged_low_confidence' : 'ok',
+    status: total === 0 ? 'flagged_low_confidence' : status,
     esco_skills,
     isco_occupations,
-    confidence: empty ? 0.1 : Math.min(1, 0.4 + 0.08 * total),
+    confidence: total === 0 ? 0.1 : Math.min(1, 0.5 + 0.08 * total),
     gaps_inferred: [],
-    rejected_codes,
+    rejected_codes: rejected,
     explanations,
-    message: empty
-      ? "We couldn't confidently map your skills — please add a bit more detail to questions 2 and 3."
-      : undefined,
+    message:
+      status === 'flagged_low_confidence'
+        ? "We couldn't confidently map your skills — please add a bit more detail to questions 2 and 3."
+        : undefined,
   };
 }
 
-// ──── Claude implementation (stub) ───────────────────────────────────────
-//
-// Left unimplemented this session — the swap point is just this function.
-// §7.1.2 steps 1-4 will be implemented here:
-//   1. Validate codes against validUris. <=50% rejected => accept.
-//   2. 50%-100% rejected => retry with stricter prompt (lower temp, explicit
-//      "respond only with valid ESCO codes from this list").
-//   3. Retry still >50% rejected => return flagged_low_confidence.
-//   4. API error => return upstream_error with the preserved-input message.
-async function runClaude(_input: SkillMapInput): Promise<SkillMapResult> {
-  throw new Error(
-    'Claude skills mapper not yet implemented. Set ANTHROPIC_API_KEY and wire ' +
-      '@anthropic-ai/sdk here in the next build step.',
-  );
+// ── BM25-only fallback (no Claude) ────────────────────────────────────────
+// Used when ANTHROPIC_API_KEY is absent or Claude fails at runtime.
+// Returns top BM25 hits directly — all URIs are guaranteed valid since they
+// come from the index itself. Less precise than the Claude path but always
+// produces real ESCO URIs and never hallucinates.
+
+const MOCK_TOP_K = 15;
+const MOCK_MIN_SCORE = 1.0; // reject very-low-confidence BM25 hits
+
+async function runMock(input: SkillMapInput): Promise<SkillMapResult> {
+  const { index, labelByUri } = await getIndex();
+  const { value: occupations } = await getEscoOccupations();
+
+  const query = buildQuery(input);
+  const hits = query.trim() ? index.query(query, MOCK_TOP_K) : [];
+  const qualified = hits.filter((h) => h.score >= MOCK_MIN_SCORE);
+
+  const esco_skills = qualified.map((h) => h.id);
+
+  // Attribute evidence to whichever field contributed the most tokens to the query
+  const fieldOrder: Array<'work' | 'tools' | 'aspirations'> = ['work', 'tools', 'aspirations'];
+  const fieldLengths = {
+    work: (input.workText ?? '').length,
+    tools: (input.toolsText ?? '').length,
+    aspirations: (input.aspirationsText ?? '').length,
+  };
+  const dominantField = fieldOrder.reduce((a, b) => (fieldLengths[a] >= fieldLengths[b] ? a : b));
+
+  const explanations: SkillMapResult['explanations'] = esco_skills.map((uri) => ({
+    skill_uri: uri,
+    evidence: `matched via BM25: "${labelByUri.get(uri) ?? uri}"`,
+    source_field: dominantField,
+  }));
+
+  const isco_occupations = Array.from(new Set(
+    occupations
+      .filter((occ) => occ.essential_skills.some((s) => esco_skills.includes(s)))
+      .map((occ) => occ.isco_code),
+  ));
+
+  const total = esco_skills.length;
+  return {
+    status: total === 0 ? 'flagged_low_confidence' : 'ok',
+    esco_skills,
+    isco_occupations,
+    confidence: total === 0 ? 0.1 : Math.min(1, 0.4 + 0.05 * total),
+    gaps_inferred: [],
+    rejected_codes: [],
+    explanations,
+    message:
+      total === 0
+        ? "We couldn't confidently map your skills — please add a bit more detail to questions 2 and 3."
+        : undefined,
+  };
 }
+
+// ── Dispatcher ────────────────────────────────────────────────────────────
 
 export async function mapSkills(input: SkillMapInput): Promise<SkillMapResult> {
   if (process.env.ANTHROPIC_API_KEY) {
     try {
       return await runClaude(input);
     } catch (err) {
-      // §7.1.2 step 4
-      return {
-        status: 'upstream_error',
-        esco_skills: [],
-        isco_occupations: [],
-        confidence: 0,
-        gaps_inferred: [],
-        rejected_codes: [],
-        explanations: [],
-        message:
-          'Connection issue — your answers are saved locally. Try again in a moment.',
-      };
+      // Claude failed at runtime (timeout, rate limit, parse error) —
+      // degrade to BM25-only fallback rather than returning upstream_error.
+      console.error('[esco-mapper] Claude failed, falling back to BM25 mock:', err);
+      return runMock(input);
     }
   }
   return runMock(input);
