@@ -11,6 +11,10 @@ import type { OccupationRiskSummary } from '@/lib/profile-v1-builder';
 import { encodeShareToken } from '@/lib/share-token';
 import { QRCodeView } from '@/components/QRCodeView';
 import { ProfilePassportView } from '@/components/ProfilePassportView';
+import { BackButton } from '@/components/ui/BackButton';
+import { Button } from '@/components/ui/Button';
+import { LinkButton } from '@/components/ui/LinkButton';
+import { Share2, Printer, Download, ArrowRight } from 'lucide-react';
 import type { OpportunityCard } from '@/app/api/match/route';
 
 // "My Digital Skill Passport" — the Youth view per V3.0 §3 Group 1.
@@ -90,11 +94,9 @@ export default function ProfilePage() {
   if (!mapping) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-semibold">{t('profile.heading')}</h1>
-        <p className="text-neutral-700">{t('profile.no_skills_yet')}</p>
-        <Link href="/" className="inline-block rounded bg-ink px-5 py-2 text-white">
-          {t('profile.edit')}
-        </Link>
+        <h1 className="text-2xl font-semibold text-wb-navy">{t('profile.heading')}</h1>
+        <p className="text-base leading-relaxed text-wb-ink/70">{t('profile.no_skills_yet')}</p>
+        <LinkButton href="/entry">{t('profile.edit')}</LinkButton>
       </div>
     );
   }
@@ -106,42 +108,33 @@ export default function ProfilePage() {
 
   return (
     <article>
+      <BackButton href="/entry" label="Back to your story" className="mb-4" />
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-semibold">My Digital Skill Passport</h1>
-          <p className="mt-1 text-neutral-700">
+          <h1 className="text-4xl font-bold tracking-tight text-wb-navy">
+            My Digital Skill Passport
+          </h1>
+          <p className="mt-3 text-base leading-relaxed text-wb-ink/70">
             A portable, owned, verifiable record of what you can do.
           </p>
-          <p className="mt-1 text-xs text-neutral-500">
+          <p className="mt-2 text-xs text-wb-ink/50">
             Schema: <code>unmapped.profile/v1</code> · {COUNTRIES[country].name}
             {educationLabel ? ` · ${educationLabel.localizedLabel ?? educationLabel.label}` : ''}
           </p>
         </div>
         <div className="flex flex-wrap gap-2 print:hidden">
-          <button
-            onClick={() => setShareOpen((v) => !v)}
-            className="min-h-[44px] rounded bg-ink px-4 py-2 font-medium text-white"
-          >
+          <Button onClick={() => setShareOpen((v) => !v)} icon={Share2}>
             {shareOpen ? 'Close share' : 'Share with employer'}
-          </button>
-          <button
-            onClick={() => window.print()}
-            className="min-h-[44px] rounded border border-ink bg-white px-4 py-2 font-medium"
-          >
+          </Button>
+          <Button onClick={() => window.print()} variant="secondary" icon={Printer}>
             {t('profile.print')}
-          </button>
-          <button
-            onClick={downloadJson}
-            className="min-h-[44px] rounded border border-ink bg-white px-4 py-2 font-medium"
-          >
+          </Button>
+          <Button onClick={downloadJson} variant="secondary" icon={Download}>
             {t('profile.export_json')}
-          </button>
-          <Link
-            href="/opportunities"
-            className="min-h-[44px] inline-flex items-center rounded border border-ink bg-white px-4 py-2 font-medium"
-          >
+          </Button>
+          <LinkButton href="/opportunities" variant="secondary" iconRight={ArrowRight}>
             {t('profile.see_opportunities')}
-          </Link>
+          </LinkButton>
         </div>
       </header>
 
@@ -163,30 +156,31 @@ export default function ProfilePage() {
           </p>
           <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-[1fr_auto]">
             <div>
-              <label className="text-xs text-neutral-600">Link</label>
+              <label className="text-xs text-wb-ink/60">Link</label>
               <input
                 readOnly
                 value={shareArtifacts.url}
                 onClick={(e) => (e.target as HTMLInputElement).select()}
-                className="mt-1 w-full rounded border border-neutral-300 bg-white px-3 py-2 font-mono text-xs"
+                className="mt-1 w-full rounded border border-wb-line bg-white px-3 py-2 font-mono text-xs"
               />
               <div className="mt-2 flex flex-wrap gap-2">
-                <button
+                <Button
+                  size="sm"
                   onClick={() => navigator.clipboard?.writeText(shareArtifacts.url)}
-                  className="rounded bg-ink px-3 py-1 text-sm text-white"
                 >
                   Copy link
-                </button>
-                <a
+                </Button>
+                <LinkButton
+                  size="sm"
+                  variant="secondary"
                   href={shareArtifacts.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded border border-ink bg-white px-3 py-1 text-sm"
                 >
                   Preview
-                </a>
+                </LinkButton>
               </div>
-              <p className="mt-2 text-xs text-neutral-500">
+              <p className="mt-2 text-xs text-wb-ink/50">
                 Payload size {shareArtifacts.size} chars
                 {shareArtifacts.truncated
                   ? ' — too long for QR scanning; use the link instead.'
@@ -209,6 +203,7 @@ export default function ProfilePage() {
             profile={profileV1}
             showSubjectIdentity={false}
             explanations={mapping?.explanations}
+            hideTaxonomyCodes
           />
         ) : (
           <p className="text-sm text-neutral-600">Loading passport…</p>

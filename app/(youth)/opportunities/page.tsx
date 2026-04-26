@@ -6,6 +6,8 @@ import { useProfile } from '@/lib/profile-store';
 import { useT } from '@/lib/i18n';
 import type { OpportunityCard } from '@/app/api/match/route';
 import { OpportunityCardView } from '@/components/OpportunityCardView';
+import { BackButton } from '@/components/ui/BackButton';
+import { LinkButton } from '@/components/ui/LinkButton';
 
 interface MatchResponse {
   country: string;
@@ -55,42 +57,45 @@ export default function OpportunitiesPage() {
   if (!mapping) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-semibold">{t('opportunities.heading')}</h1>
-        <p className="text-neutral-700">{t('opportunities.no_results')}</p>
-        <Link href="/" className="inline-block rounded bg-ink px-5 py-2 text-white">
-          {t('nav.entry')}
-        </Link>
+        <h1 className="text-2xl font-semibold text-wb-navy">{t('opportunities.heading')}</h1>
+        <p className="text-base leading-relaxed text-wb-ink/70">{t('opportunities.no_results')}</p>
+        <LinkButton href="/entry">{t('nav.entry')}</LinkButton>
       </div>
     );
   }
 
   return (
     <div>
+      <BackButton href="/profile" label="Back to your profile" className="mb-4" />
       <header>
-        <h1 className="text-3xl font-semibold">{t('opportunities.heading')}</h1>
-        <p className="mt-1 text-neutral-700">{t('opportunities.subheading')}</p>
+        <h1 className="text-4xl font-bold tracking-tight text-wb-navy">
+          {t('opportunities.heading')}
+        </h1>
+        <p className="mt-3 text-base leading-relaxed text-wb-ink/70">
+          {t('opportunities.subheading')}
+        </p>
         {data && (
-          <p className="mt-2 text-xs text-neutral-500">
+          <p className="mt-2 text-xs text-wb-ink/50">
             {data.country_name} · {data.cards.length} matches
           </p>
         )}
       </header>
 
       {loading && !data && (
-        <p className="mt-6 text-sm text-neutral-600">{t('entry.mapping_in_progress')}</p>
+        <p className="mt-6 text-sm text-wb-ink/60">{t('entry.mapping_in_progress')}</p>
       )}
       {error && (
-        <p className="mt-6 rounded border border-amber-400 bg-amber-50 p-3 text-sm text-amber-900">
+        <p className="mt-6 rounded border border-ys-amber bg-ys-amber/10 p-3 text-sm text-wb-ink">
           {t('entry.mapping_failed')}
         </p>
       )}
 
       {data && data.cards.length === 0 && (
         <div className="mt-8 space-y-4">
-          <p className="text-neutral-700">{t('opportunities.no_results')}</p>
-          <Link href="/" className="inline-block rounded bg-ink px-5 py-2 text-white">
-            {t('profile.edit')}
-          </Link>
+          <p className="text-base leading-relaxed text-wb-ink/70">
+            {t('opportunities.no_results')}
+          </p>
+          <LinkButton href="/entry">{t('profile.edit')}</LinkButton>
         </div>
       )}
 

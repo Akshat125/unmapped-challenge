@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BackButton } from '@/components/ui/BackButton';
 
 export const metadata = {
   title: 'Honest limits · UNMAPPED',
@@ -7,9 +8,9 @@ export const metadata = {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-8">
-      <h2 className="text-xl font-semibold">{title}</h2>
-      <div className="mt-2 space-y-2 text-sm text-neutral-800">{children}</div>
+    <section className="mt-10">
+      <h2 className="text-2xl font-semibold text-wb-navy">{title}</h2>
+      <div className="mt-3 space-y-2 text-base leading-relaxed text-wb-ink/80">{children}</div>
     </section>
   );
 }
@@ -17,15 +18,20 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export default function LimitsPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
-      <Link href="/" className="text-xs text-neutral-500 underline">
-        ← UNMAPPED
-      </Link>
-      <h1 className="mt-1 text-3xl font-semibold">Honest limits</h1>
-      <p className="mt-2 text-sm text-neutral-700">
-        UNMAPPED is a bridge, not a replacement for systemic education reform
-        or live job-matching. This page states what we deliberately do not do,
-        where the data frays, and how to tell the difference.
-      </p>
+      <BackButton href="/" label="Back to role selector" className="mb-4" />
+      <header>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-wb-ink/50">
+          About UNMAPPED
+        </p>
+        <h1 className="mt-3 text-4xl font-bold tracking-tight text-wb-navy">
+          Honest limits
+        </h1>
+        <p className="mt-3 text-base leading-relaxed text-wb-ink/80">
+          UNMAPPED is a bridge, not a replacement for systemic education reform
+          or live job-matching. This page states what we deliberately do not do,
+          where the data frays, and how to tell the difference.
+        </p>
+      </header>
 
       <Section title="The Credential Gap — what a bridge actually is">
         <p>
@@ -166,9 +172,9 @@ export default function LimitsPage() {
         </ul>
       </Section>
 
-      <footer className="mt-10 border-t border-neutral-200 pt-4 text-xs text-neutral-500">
+      <footer className="mt-12 border-t border-wb-line pt-4 text-xs text-wb-ink/60">
         Questions about a specific claim?{' '}
-        <Link href="/integrate" className="underline">
+        <Link href="/integrate" className="text-wb-blue underline hover:text-wb-navy">
           /integrate
         </Link>{' '}
         documents the API contract these limits refer to.

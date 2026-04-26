@@ -6,6 +6,9 @@ import {
   ALL_SCOPES,
   type ApiScope,
 } from '@/lib/ecosystem-store';
+import { BackButton } from '@/components/ui/BackButton';
+import { Button } from '@/components/ui/Button';
+import { Plus, X } from 'lucide-react';
 
 // V3.0 §4 Step 4 — API & Ecosystem Management. Tenant list, per-key scopes
 // with rate limits, revoke + create, last-used + 24h request counts.
@@ -45,6 +48,7 @@ export default function EcosystemPage() {
 
   return (
     <div>
+      <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
       <header className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">API &amp; ecosystem</h1>
@@ -53,12 +57,9 @@ export default function EcosystemPage() {
             consuming the UNMAPPED infrastructure.
           </p>
         </div>
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="rounded bg-ink px-4 py-2 text-sm text-white"
-        >
+        <Button onClick={() => setOpen((v) => !v)} icon={open ? X : Plus}>
           {open ? 'Cancel' : 'Issue new API key'}
-        </button>
+        </Button>
       </header>
 
       <section className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 text-sm">
@@ -112,10 +113,10 @@ export default function EcosystemPage() {
                     key={s}
                     type="button"
                     onClick={() => toggleScope(s)}
-                    className={`rounded-full border px-3 py-1 text-xs ${
+                    className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue ${
                       on
-                        ? 'border-ink bg-ink text-white'
-                        : 'border-neutral-300 bg-white'
+                        ? 'border-wb-navy bg-wb-navy text-white'
+                        : 'border-wb-line bg-white text-wb-ink hover:border-wb-blue'
                     }`}
                   >
                     {s}
@@ -135,12 +136,7 @@ export default function EcosystemPage() {
               className="mt-1 w-40 rounded border border-neutral-300 bg-white px-3 py-2 text-sm"
             />
           </label>
-          <button
-            type="submit"
-            className="rounded bg-ink px-4 py-2 text-sm text-white"
-          >
-            Create key
-          </button>
+          <Button type="submit">Create key</Button>
         </form>
       )}
 

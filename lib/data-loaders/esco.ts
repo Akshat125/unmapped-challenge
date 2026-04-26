@@ -4,6 +4,8 @@ import type { Sourced } from './types';
 export interface EscoSkill {
   uri: string;
   label: string;
+  alt_labels?: string[];
+  description?: string;
 }
 
 export interface EscoOccupation {
@@ -12,6 +14,7 @@ export interface EscoOccupation {
   preferred_label: string;
   plain_language: string;
   essential_skills: string[];
+  frey_osborne_raw?: number;
 }
 
 export async function getEscoSkills(): Promise<Sourced<EscoSkill[]>> {
