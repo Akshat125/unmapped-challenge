@@ -186,10 +186,10 @@ export async function POST(req: Request) {
       },
       risk: {
         breakdown,
-        source_long: 'Frey & Osborne (2013)',
+        source_long: 'Frey & Osborne (2013) · US baseline',
         source_near: taskContent
-          ? `Frey & Osborne × ITU broadband (${config.broadbandPenetration}%) × ILO Future of Work task share (${taskContent.routine_share} for this occupation)`
-          : `Frey & Osborne × ITU broadband (${config.broadbandPenetration}%) × country routine-task share (${config.routineTaskShare})`,
+          ? `ITU broadband (${config.broadbandPenetration}%) × ILO Future of Work task share (${taskContent.routine_share.toFixed(2)})`
+          : `ITU broadband (${config.broadbandPenetration}%) × country routine-task share (${config.routineTaskShare})`,
       },
       wittgenstein: {
         implication,
