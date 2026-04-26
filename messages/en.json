@@ -83,7 +83,8 @@
     "why_demand": "Country demand (50%)",
     "why_skill": "Skill overlap (35%)",
     "why_safety": "Automation safety (15%)",
-    "why_total": "Total score"
+    "why_total": "Total score",
+    "automation_risk_heading": "Automation risk for this job"
   },
   "country_switcher": {
     "label": "Country",

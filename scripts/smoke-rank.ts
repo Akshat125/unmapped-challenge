@@ -108,13 +108,41 @@ async function main() {
         problems += 1;
       }
     }
+
+    // Assertion 4: every safety citation must surface a non-zero
+    // long-term Frey-Osborne probability OR an explicit fallback flag.
+    // The user's bug report was "the recommendation doesn't mention the
+    // automation risk" — i.e. fo_prob silently 0 — so we guard that.
+    let zeroFoCount = 0;
+    let fallbackCount = 0;
+    for (const r of ranked.slice(0, 10)) {
+      const safety = r.citations.find((c) => c.component === 'safety');
+      if (!safety) {
+        console.error(`  FAIL ${country}/${r.occupation.isco_code}: missing safety citation`);
+        problems += 1;
+        continue;
+      }
+      const fo = safety.values.fo_prob as number | undefined;
+      const fallback = safety.values.fallback as string | undefined;
+      if ((fo == null || fo === 0) && !fallback) {
+        zeroFoCount += 1;
+      }
+      if (fallback) fallbackCount += 1;
+    }
+    if (zeroFoCount > 0) {
+      console.error(
+        `  FAIL ${country}: ${zeroFoCount}/10 top cards have fo_prob=0 with no fallback flag`,
+      );
+      problems += 1;
+    }
+    console.log(`  resolved fo_prob for top 10: ${10 - fallbackCount} via overlay, ${fallbackCount} fallback`);
   }
 
-  // Assertion 4: weights sum to 1.0 — defends against silently dropping a
+  // Assertion 5: weights sum to 1.0 — defends against silently dropping a
   // component from the linear blend.
-  const total = RANK_WEIGHTS.demand + RANK_WEIGHTS.skill + RANK_WEIGHTS.safety;
-  if (!approxEqual(total, 1.0)) {
-    console.error(`FAIL: weights sum to ${total}, expected 1.0`);
+  const weightSum = RANK_WEIGHTS.demand + RANK_WEIGHTS.skill + RANK_WEIGHTS.safety;
+  if (!approxEqual(weightSum, 1.0)) {
+    console.error(`FAIL: weights sum to ${weightSum}, expected 1.0`);
     problems += 1;
   }
 

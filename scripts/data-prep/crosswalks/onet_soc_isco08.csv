@@ -154,3 +154,24 @@ soc_code,isco_code,note
 49-9043.00,7233,Maintenance workers machinery -> Agricultural and industrial machinery mechanics
 51-9081.00,7521,Dental laboratory technicians -> Wood treaters
 51-2099.00,8281,Assemblers and fabricators all other -> Assemblers
+# ── ISCO major group 6: Skilled agricultural, forestry and fishery workers ──
+# Critical for BOL/VNM coverage — without these the FO overlay returns empty
+# at every level for agricultural ESCO occupations and the youth card silently
+# falls back to the country routine-task share.
+45-1011.00,6111,First-line supervisors of farming -> Field crop and vegetable growers
+45-2021.00,6129,Animal breeders -> Animal producers NEC
+45-2041.00,9213,Graders and sorters agricultural products -> Crop farm labourers
+45-2091.00,8341,Agricultural equipment operators -> Mobile farm and forestry plant operators
+45-2092.00,9211,Farmworkers crop -> Crop farm labourers
+45-2093.00,6121,Farmworkers farm and ranch animals -> Livestock and dairy producers
+45-3011.00,6222,"Fishers and related fishing workers -> Inland and coastal waters fishery workers"
+45-4011.00,6210,Forest and conservation workers -> Forestry and related workers
+45-4021.00,6210,Fallers -> Forestry and related workers
+45-4022.00,8341,Logging equipment operators -> Mobile farm and forestry plant operators
+45-4023.00,6210,Log graders and scalers -> Forestry and related workers
+45-4029.00,6210,Logging workers all other -> Forestry and related workers
+19-1031.00,2132,Conservation scientists -> Farming and forestry advisers
+19-4011.00,3142,Agricultural and food science technicians -> Agronomy and forestry technicians
+# ── ISCO 0 Armed forces — not represented in Frey-Osborne, intentionally
+# left uncovered. ESCO occupations under ISCO 0 fall through to the country
+# routine-task share, which is acceptable for the youth-facing card.

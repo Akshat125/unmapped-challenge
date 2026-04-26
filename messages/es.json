@@ -84,7 +84,8 @@
     "why_demand": "Demanda en el país (50%)",
     "why_skill": "Coincidencia de habilidades (35%)",
     "why_safety": "Seguridad ante automatización (15%)",
-    "why_total": "Puntuación total"
+    "why_total": "Puntuación total",
+    "automation_risk_heading": "Riesgo de automatización para este trabajo"
   },
   "country_switcher": {
     "label": "País",

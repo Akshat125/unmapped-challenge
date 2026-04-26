@@ -84,7 +84,8 @@
     "why_demand": "Nhu cầu trong nước (50%)",
     "why_skill": "Mức độ trùng kỹ năng (35%)",
     "why_safety": "Mức an toàn trước tự động hóa (15%)",
-    "why_total": "Tổng điểm"
+    "why_total": "Tổng điểm",
+    "automation_risk_heading": "Rủi ro tự động hóa cho công việc này"
   },
   "country_switcher": {
     "label": "Quốc gia",

@@ -59,7 +59,13 @@ async function main() {
   const fowOverlay = await getFreyOsborneOverlay();
   console.log(`ESCO: ${esco.value.length} occupations, ${skills.value.length} skills`);
   console.log(`  source: ${esco.source}`);
-  console.log(`Frey-Osborne overlay: ${Object.keys(fowOverlay.value).length} ISCO codes covered`);
+  const fo4 = Object.keys(fowOverlay.value.by_isco_4 ?? {}).length;
+  const fo3 = Object.keys(fowOverlay.value.by_isco_3 ?? {}).length;
+  const fo2 = Object.keys(fowOverlay.value.by_isco_2 ?? {}).length;
+  const fo1 = Object.keys(fowOverlay.value.by_isco_1 ?? {}).length;
+  console.log(
+    `Frey-Osborne overlay: ${fo4} unit-groups · ${fo3} minor · ${fo2} sub-major · ${fo1} major`,
+  );
   console.log(`  source: ${fowOverlay.source}`);
   console.log(`Rank weights: demand=${RANK_WEIGHTS.demand} skill=${RANK_WEIGHTS.skill} safety=${RANK_WEIGHTS.safety}`);
 

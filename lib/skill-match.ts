@@ -19,7 +19,11 @@
 import type { EscoOccupation, EscoSkill } from '@/lib/data-loaders/esco';
 import type { IloIscoCountry } from '@/lib/data-loaders/ilo-isco';
 import { isco1FromIscoCode } from '@/lib/data-loaders/ilo-isco';
-import type { FreyOsborneIscoMap } from '@/lib/data-loaders/frey-osborne';
+import {
+  resolveFreyOsborne,
+  isco1Label,
+  type FreyOsborneIscoMap,
+} from '@/lib/data-loaders/frey-osborne';
 import type { CountryConfig } from '@/lib/config/countries';
 import {
   calibrateRisk,
@@ -224,42 +228,95 @@ function scoreSafety(
   country: CountryConfig,
   riskOpts: CalibrateOptions,
 ): { value: number; citation: EvidenceCitation; risk: RiskBreakdown } {
-  // Prefer the overlay (employment-weighted SOC→ISCO from frey_osborne.csv).
-  // Fall back to whatever value was baked into esco_occupations.json so cards
-  // still rank deterministically when the crosswalk is sparse.
-  const overlay = fowOverlay[occupation.isco_code];
+  // Resolution order:
+  //   1. Frey-Osborne overlay walked up the ISCO hierarchy (4 → 3 → 2 → 1).
+  //   2. Legacy `frey_osborne_raw` baked into esco_occupations.json.
+  //   3. Country routine-task share as a last resort.
+  // The whole point of (1) being a hierarchical walk is that a flat
+  // 4-digit-only join silently produces "fo_prob = 0" for ~66% of
+  // occupations, which collapses to "0% automation risk" on the youth
+  // card. The user noticed that and asked for the risk to be surfaced
+  // for every recommendation, not just the lucky ones.
+  const resolution = resolveFreyOsborne(occupation.isco_code, fowOverlay);
   const fallbackRaw = occupation.frey_osborne_raw ?? 0;
-  const foRaw = overlay ? overlay.fo_prob : fallbackRaw;
+
+  let foRaw: number;
+  let resolutionPath:
+    | { kind: 'overlay'; level: 1 | 2 | 3 | 4; key: string; nSocs: number; nIsco4?: number; topSocs?: string; isco4Codes?: string[] }
+    | { kind: 'legacy_raw' }
+    | { kind: 'country_default' };
+
+  if (resolution) {
+    foRaw = resolution.fo_prob;
+    resolutionPath = {
+      kind: 'overlay',
+      level: resolution.level,
+      key: resolution.matched_key,
+      nSocs: resolution.n_socs,
+      nIsco4: resolution.n_isco_4,
+      topSocs: resolution.unit_group?.sources.slice(0, 3).map((s) => s.soc).join(', '),
+      isco4Codes: resolution.prefix_group?.isco_4_codes,
+    };
+  } else if (fallbackRaw > 0) {
+    foRaw = fallbackRaw;
+    resolutionPath = { kind: 'legacy_raw' };
+  } else {
+    // Treat the country routine-task share as the FO-equivalent probability:
+    // it is the same kind of "share of tasks at risk of being automated"
+    // signal, just measured at the country level rather than the occupation
+    // level. Surfaces a non-zero risk number rather than a misleading 0%.
+    foRaw = country.routineTaskShare;
+    resolutionPath = { kind: 'country_default' };
+  }
 
   const breakdown = calibrateRisk(foRaw, country, riskOpts);
   const sub = 1 - breakdown.near_term_displacement_risk;
 
-  let detail: string;
-  let citationSource: string;
-  let citationFile: string;
   const values: Record<string, number | string | null> = {
     fo_prob: Number(foRaw.toFixed(3)),
     near_term_risk_pct: Math.round(breakdown.near_term_displacement_risk * 100),
     long_term_risk_pct: Math.round(breakdown.long_term_risk * 100),
     broadband_pct: country.broadbandPenetration,
     routine_share: Number(breakdown.inputs.ilo_routine_task_share.toFixed(2)),
+    isco_code: occupation.isco_code,
   };
 
-  if (overlay) {
-    const topSocs = overlay.sources.slice(0, 3).map((s) => s.soc).join(', ');
-    detail = `Frey-Osborne probability ${foRaw.toFixed(2)} (employment-weighted across ${overlay.n_socs} SOC code${overlay.n_socs === 1 ? '' : 's'}: ${topSocs}${overlay.n_socs > 3 ? '…' : ''}). Calibrated for ${country.name} broadband ${country.broadbandPenetration}% × routine-task share ${breakdown.inputs.ilo_routine_task_share.toFixed(2)} → near-term local risk ${Math.round(breakdown.near_term_displacement_risk * 100)}%; safety = 1 − risk.`;
-    citationSource = fowOverlaySource;
+  let detail: string;
+  let citationSource: string;
+  let citationFile: string;
+
+  const calibrationTail = `Calibrated for ${country.name} broadband ${country.broadbandPenetration}% × routine-task share ${breakdown.inputs.ilo_routine_task_share.toFixed(2)} → near-term local risk ${Math.round(breakdown.near_term_displacement_risk * 100)}%; safety = 1 − risk.`;
+
+  if (resolutionPath.kind === 'overlay') {
+    values.resolution_level = resolutionPath.level;
+    values.matched_isco_prefix = resolutionPath.key;
+    values.n_socs = resolutionPath.nSocs;
+    if (resolutionPath.nIsco4 != null) values.n_isco_4 = resolutionPath.nIsco4;
+    if (resolutionPath.level === 4) {
+      values.top_socs = resolutionPath.topSocs ?? '';
+      detail = `Frey-Osborne probability ${foRaw.toFixed(2)} for ISCO unit group ${resolutionPath.key}, employment-weighted across ${resolutionPath.nSocs} SOC code${resolutionPath.nSocs === 1 ? '' : 's'} (${resolutionPath.topSocs}${resolutionPath.nSocs > 3 ? '…' : ''}). ${calibrationTail}`;
+      citationSource = fowOverlaySource;
+    } else {
+      const levelName =
+        resolutionPath.level === 3
+          ? 'minor group'
+          : resolutionPath.level === 2
+          ? 'sub-major group'
+          : 'major group';
+      const groupLabel =
+        resolutionPath.level === 1 ? ` — ${isco1Label(resolutionPath.key)}` : '';
+      detail = `No exact 4-digit Frey-Osborne match for ISCO ${occupation.isco_code}. Walked up to ISCO ${resolutionPath.level}-digit ${levelName} ${resolutionPath.key}${groupLabel}, where Frey-Osborne probability is ${foRaw.toFixed(2)}, employment-weighted across ${resolutionPath.nIsco4 ?? '?'} unit groups and ${resolutionPath.nSocs} SOC codes. ${calibrationTail}`;
+      citationSource = `${fowOverlaySource} · resolved via ISCO ${resolutionPath.level}-digit ${levelName}`;
+    }
     citationFile = 'data/frey_osborne.csv';
-    values.n_socs = overlay.n_socs;
-    values.top_socs = topSocs;
-  } else if (fallbackRaw > 0) {
-    detail = `Frey-Osborne probability ${foRaw.toFixed(2)} (legacy ISCO-keyed seed; SOC crosswalk had no entry for ISCO ${occupation.isco_code}). Calibrated for ${country.name} broadband ${country.broadbandPenetration}% × routine-task share ${breakdown.inputs.ilo_routine_task_share.toFixed(2)} → near-term local risk ${Math.round(breakdown.near_term_displacement_risk * 100)}%; safety = 1 − risk.`;
+  } else if (resolutionPath.kind === 'legacy_raw') {
+    detail = `Frey-Osborne probability ${foRaw.toFixed(2)} from the legacy ISCO-keyed seed; the SOC crosswalk had no entry at any ISCO depth for ${occupation.isco_code}. ${calibrationTail}`;
     citationSource = 'Frey & Osborne (2013) · ISCO-keyed seed';
     citationFile = 'public/data/esco_occupations.json (frey_osborne_raw)';
     values.fallback = 'esco_occupations.frey_osborne_raw';
   } else {
-    detail = `No Frey-Osborne probability available for ISCO ${occupation.isco_code}. Safety component falls back to country routine-task share (${country.routineTaskShare}) — partial signal only.`;
-    citationSource = `Country routine-task share (${country.code})`;
+    detail = `No Frey-Osborne probability available for ISCO ${occupation.isco_code} at any aggregation level. Substituted the ${country.name} country-level routine-task share (${country.routineTaskShare}) as a conservative proxy. ${calibrationTail}`;
+    citationSource = `ILO FoW + country routine-task share (${country.code})`;
     citationFile = 'lib/config/countries.ts';
     values.fallback = 'country_routine_task_share';
   }
