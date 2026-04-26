@@ -10,10 +10,10 @@ import {
   SlidersHorizontal,
   Settings,
   Globe,
-  ArrowLeft,
 } from 'lucide-react';
 import { useProfile } from '@/lib/profile-store';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import { RoleSwitcher } from './RoleSwitcher';
 
 const ORDER: CountryCode[] = ['GH', 'BD', 'VN', 'KE', 'BR'];
 
@@ -40,7 +40,7 @@ export function PolicymakerHeader() {
         <div className="flex items-center gap-4">
           <Link
             href="/policymaker"
-            className="inline-flex items-center gap-2 text-lg font-bold tracking-tight text-white focus:outline-none focus:ring-2 focus:ring-ys-teal rounded"
+            className="inline-flex items-center gap-2 rounded text-lg font-bold tracking-tight text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ys-teal"
           >
             <span
               aria-hidden
@@ -58,24 +58,27 @@ export function PolicymakerHeader() {
             National Human Capital Command Center
           </span>
         </div>
-        <label className="flex items-center gap-2 text-sm">
-          <span className="text-white/60">Country</span>
-          <select
-            value={country}
-            onChange={(e) => setCountry(e.target.value as CountryCode)}
-            className="min-h-[40px] rounded border border-white/20 bg-wb-ink px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-ys-teal"
-          >
-            {ORDER.map((code) => {
-              const c = COUNTRIES[code];
-              return (
-                <option key={code} value={code} disabled={!c.active}>
-                  {c.name}
-                  {c.active ? '' : ' (stub)'}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+        <div className="flex flex-wrap items-center gap-3">
+          <label className="flex items-center gap-2 text-sm">
+            <span className="text-white/60">Country</span>
+            <select
+              value={country}
+              onChange={(e) => setCountry(e.target.value as CountryCode)}
+              className="min-h-[40px] rounded border border-white/20 bg-wb-ink px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-ys-teal"
+            >
+              {ORDER.map((code) => {
+                const c = COUNTRIES[code];
+                return (
+                  <option key={code} value={code} disabled={!c.active}>
+                    {c.name}
+                    {c.active ? '' : ' (stub)'}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+          <RoleSwitcher tone="dark" />
+        </div>
       </div>
       <nav className="border-t border-white/10 bg-wb-ink/40">
         <div className="mx-auto flex max-w-[90rem] flex-wrap items-center gap-1 px-4 py-2 text-sm">
@@ -86,10 +89,10 @@ export function PolicymakerHeader() {
                 key={href}
                 href={href}
                 aria-current={active ? 'page' : undefined}
-                className={`inline-flex items-center gap-2 rounded px-3 py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-ys-teal ${
+                className={`inline-flex items-center gap-2 rounded px-3 py-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ys-teal ${
                   active
-                    ? 'bg-white/10 text-ys-teal font-semibold'
-                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                    ? 'bg-white/10 font-semibold text-ys-teal'
+                    : 'text-white/70 hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
@@ -97,13 +100,6 @@ export function PolicymakerHeader() {
               </Link>
             );
           })}
-          <Link
-            href="/"
-            className="ml-auto inline-flex items-center gap-1 rounded px-2 py-1 text-xs text-white/50 hover:text-white"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
-            Youth view
-          </Link>
         </div>
       </nav>
     </header>

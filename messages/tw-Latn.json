@@ -10,6 +10,15 @@
     "opportunities": "Adwuma a ɛwɔ hɔ",
     "policymaker": "Aban adwumayɛfoɔ"
   },
+  "role_picker": {
+    "eyebrow": "Labor market infrastructure a yɛn nyinaa kyɛ",
+    "title": "Labor market fam bɛn na wowɔ?",
+    "subtitle": "Yi nea ɛfata w'adwuma ɛnnɛ. Ɔyɛbea biara wɔ workflow a wɔayɛ ama no. Wobetumi asesa akyire.",
+    "returning": "Akwaaba bio",
+    "or_different": "Anaa yi role foforɔ",
+    "continue_as": "Toa so sɛ"
+  },
+  "switch_role": "Sesa role",
   "entry": {
     "title": "Ka w'adwuma ne nea wunim kyerɛ yɛn",
     "subtitle": "Nsɛmmisa num. Wotumi gyae biara.",
@@ -36,8 +45,8 @@
     "subheading": "Nea wunim yɛ dedaw, deɛ wobɛtumi de akɔ baabiara.",
     "skills_found": "Abilities a yɛhunuiɛ",
     "no_skills_yet": "Yɛnhunuu biribiara. San kɔ na fa nsɛm pii ka ho.",
-    "for_systems": "Ma computer system (ESCO / ISCO codes)",
-    "for_systems_intro": "Wei ne codes a employers, training providers, ne aban tumi kenkan.",
+    "for_systems": "Kyerɛ standard codes (ESCO / ISCO)",
+    "for_systems_intro": "Employers, training providers, ne aban tumi kenkan. Wotumi fa wo ho.",
     "occupations_suggested": "Adwuma a ɛfata wo",
     "occupations_intro": "Gyina w'abilities so. Mia Opportunities na hwɛ nsɛm no.",
     "print": "Tintim",
@@ -57,7 +66,9 @@
     "signal_wage": "Average bosome akatua wɔ sector yi mu",
     "signal_growth": "Sector mu adwuma nkɔsoɔ (afe biara)",
     "signal_premium": "Tertiary nhyehyɛeɛ premium wɔ secondary so wɔ sector yi mu",
-    "risk_heading": "Automation ahwɛyie",
+    "risk_heading": "Sɛnea adwuma yi bɛsakra",
+    "show_calculation": "Kyerɛ sɛnea yɛbu",
+    "show_standard_code": "Kyerɛ standard occupation code",
     "risk_long_term": "Daa risk (US baseline)",
     "risk_near_term_gh": "Local exposure index · Ghana",
     "risk_near_term_bd": "Local exposure index · Bangladesh",

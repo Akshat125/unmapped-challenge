@@ -42,7 +42,7 @@ export default function NavigatorImpact() {
     return (
       <p className="rounded border border-dashed border-neutral-300 bg-white p-6 text-center text-sm text-neutral-600">
         No caseload entries yet. Impact metrics will appear once you add intakes
-        on the Caseload page.
+        on the Your youth page.
       </p>
     );
   }

@@ -57,7 +57,7 @@ export default function OpportunitiesPage() {
       <div className="space-y-4">
         <h1 className="text-2xl font-semibold">{t('opportunities.heading')}</h1>
         <p className="text-neutral-700">{t('opportunities.no_results')}</p>
-        <Link href="/" className="inline-block rounded bg-ink px-5 py-2 text-white">
+        <Link href="/entry" className="inline-block rounded bg-wb-navy px-5 py-2 text-white hover:bg-wb-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue focus-visible:ring-offset-2">
           {t('nav.entry')}
         </Link>
       </div>
@@ -88,7 +88,7 @@ export default function OpportunitiesPage() {
       {data && data.cards.length === 0 && (
         <div className="mt-8 space-y-4">
           <p className="text-neutral-700">{t('opportunities.no_results')}</p>
-          <Link href="/" className="inline-block rounded bg-ink px-5 py-2 text-white">
+          <Link href="/entry" className="inline-block rounded bg-wb-navy px-5 py-2 text-white hover:bg-wb-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue focus-visible:ring-offset-2">
             {t('profile.edit')}
           </Link>
         </div>

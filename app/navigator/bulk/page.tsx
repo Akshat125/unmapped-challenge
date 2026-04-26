@@ -100,7 +100,7 @@ export default function BulkIntake() {
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
           <Link href="/navigator" className="text-xs text-neutral-500 underline">
-            ← Caseload
+            ← Your youth
           </Link>
           <h1 className="mt-1 text-2xl font-semibold">Bulk intake</h1>
           <p className="mt-1 text-sm text-neutral-700">

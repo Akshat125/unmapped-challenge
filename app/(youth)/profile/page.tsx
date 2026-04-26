@@ -92,7 +92,7 @@ export default function ProfilePage() {
       <div className="space-y-4">
         <h1 className="text-2xl font-semibold">{t('profile.heading')}</h1>
         <p className="text-neutral-700">{t('profile.no_skills_yet')}</p>
-        <Link href="/" className="inline-block rounded bg-ink px-5 py-2 text-white">
+        <Link href="/entry" className="inline-block rounded bg-wb-navy px-5 py-2 text-white hover:bg-wb-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue focus-visible:ring-offset-2">
           {t('profile.edit')}
         </Link>
       </div>
@@ -209,6 +209,7 @@ export default function ProfilePage() {
             profile={profileV1}
             showSubjectIdentity={false}
             explanations={mapping?.explanations}
+            hideTaxonomyCodes
           />
         ) : (
           <p className="text-sm text-neutral-600">Loading passport…</p>

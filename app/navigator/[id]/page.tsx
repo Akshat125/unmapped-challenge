@@ -132,8 +132,8 @@ export default function NavigatorProfilePage() {
     <div>
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
-          <Link href="/navigator" className="text-xs text-neutral-500 underline">
-            ← Caseload
+          <Link href="/navigator" className="text-xs text-wb-ink/60 underline hover:text-wb-blue">
+            ← Your youth
           </Link>
           <h1 className="mt-1 text-2xl font-semibold">{profile.displayName}</h1>
           <p className="text-xs text-neutral-600">

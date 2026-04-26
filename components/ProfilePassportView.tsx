@@ -11,9 +11,21 @@ interface Props {
   profile: ProfileV1;
   showSubjectIdentity?: boolean;
   explanations?: Array<{ skill_uri: string; evidence: string; source_field: string }>;
+  /**
+   * When true, every ISCO-08 / ESCO code is hidden from the surface.
+   * Used on the Youth `/profile` ("Digital Skill Passport") view. The
+   * Employer / Share views keep codes visible since those audiences
+   * need the taxonomy.
+   */
+  hideTaxonomyCodes?: boolean;
 }
 
-export function ProfilePassportView({ profile, showSubjectIdentity = true, explanations }: Props) {
+export function ProfilePassportView({
+  profile,
+  showSubjectIdentity = true,
+  explanations,
+  hideTaxonomyCodes = false,
+}: Props) {
   const catalog = useCatalog();
   const country = COUNTRIES[profile.country as keyof typeof COUNTRIES];
 
@@ -102,7 +114,9 @@ export function ProfilePassportView({ profile, showSubjectIdentity = true, expla
                         )}
                         {r.label}
                       </span>
-                      <span className="text-xs text-wb-ink/50">{r.code}</span>
+                      {!hideTaxonomyCodes && (
+                        <span className="text-xs text-wb-ink/50">{r.code}</span>
+                      )}
                     </div>
                     {verified ? (
                       <ul className="mt-2 space-y-1 text-xs text-wb-ink">
@@ -138,13 +152,15 @@ export function ProfilePassportView({ profile, showSubjectIdentity = true, expla
         {occupationLabels.length > 0 && (
           <section className="mt-8">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-wb-ink/70">
-              Matched occupations (ISCO-08)
+              {hideTaxonomyCodes ? 'Jobs that fit your skills' : 'Matched occupations (ISCO-08)'}
             </h3>
             <ul className="mt-3 space-y-2 text-sm">
               {occupationLabels.slice(0, 8).map((o) => (
                 <li key={o.isco_code} className="flex items-baseline gap-2">
                   <span className="font-medium">{o.preferred_label}</span>
-                  <span className="text-xs text-wb-ink/50">ISCO-08 {o.isco_code}</span>
+                  {!hideTaxonomyCodes && (
+                    <span className="text-xs text-wb-ink/50">ISCO-08 {o.isco_code}</span>
+                  )}
                 </li>
               ))}
             </ul>

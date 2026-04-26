@@ -37,10 +37,11 @@ export default function NavigatorCaseload() {
     <div>
       <header className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold">Caseload</h1>
-          <p className="mt-1 text-sm text-neutral-700">
-            Profiles you manage on behalf of youth without devices. Validations
-            you record here travel with the profile when it's exported.
+          <h1 className="text-3xl font-bold tracking-tight text-wb-navy">Your youth</h1>
+          <p className="mt-2 text-base leading-relaxed text-wb-ink/70">
+            Profiles you manage on behalf of youth without devices.
+            Validations you record here travel with the profile when it&rsquo;s
+            exported.
           </p>
         </div>
         <button
