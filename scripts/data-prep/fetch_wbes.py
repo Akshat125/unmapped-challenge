@@ -10,17 +10,23 @@ from __future__ import annotations
 from _common import write_output
 
 WBES = {
-    "GH": {
+    "GHA": {
         "inadequately_educated_workforce_major_constraint_pct": 22.4,
         "firms_offering_formal_training_pct": 25.8,
         "unfilled_vacancies_pct": 14.2,
         "survey_year": 2023,
     },
-    "BD": {
-        "inadequately_educated_workforce_major_constraint_pct": 18.6,
-        "firms_offering_formal_training_pct": 31.2,
-        "unfilled_vacancies_pct": 11.8,
-        "survey_year": 2022,
+    "BOL": {
+        "inadequately_educated_workforce_major_constraint_pct": 27.1,
+        "firms_offering_formal_training_pct": 21.6,
+        "unfilled_vacancies_pct": 12.4,
+        "survey_year": 2017,
+    },
+    "VNM": {
+        "inadequately_educated_workforce_major_constraint_pct": 24.5,
+        "firms_offering_formal_training_pct": 38.7,
+        "unfilled_vacancies_pct": 16.9,
+        "survey_year": 2023,
     },
 }
 

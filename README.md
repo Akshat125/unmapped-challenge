@@ -9,7 +9,7 @@ End-to-end bi-directional protocol across four user groups on one codebase. Ever
 ### Role-gated architecture
 
 - **`/`** — role selector landing. Four equally-weighted tiles for a first-time visitor; a "Continue as [role]" shortcut for returning visitors (driven by `lib/role-store.ts`). Links to `/integrate` and `/about/limits` in a quiet footer.
-- **Youth shell** (`/entry`, `/profile`, `/opportunities`, `/share/[token]`) — the 5-question skill capture, a plain-language Digital Skill Passport, opportunity cards with three econometric signals + risk lens + Wittgenstein 2035 subcard. ISCO / ESCO codes and the risk formula are always behind disclosures.
+- **Youth shell** (`/entry`, `/profile`, `/opportunities`, `/share/[token]`) — the 5-question skill capture, a plain-language Digital Skill Passport, opportunity cards with three econometric signals + risk lens + Wittgenstein 2035 subcard. Each card opens **expanded** to a "Why we recommended this" panel that names the country-demand, skill-overlap, and automation-safety sub-scores, surfaces the automation risk, and lists one explicit citation per sub-score (`ilo_isco_country.json`, `esco_occupations.json`, `frey_osborne_isco.json`). ISCO / ESCO codes and the risk formula inputs are still behind disclosures.
 - **Employer shell** as a **linear wizard** — `/employer` (Step 1: "Who are you hiring for?" with two tiles, free-text RECOMMENDED), `/employer/jd` (Step 2: Transparency Breadcrumb with three stages), `/employer/candidates` (Step 3: plain-language talent cards), `/employer/[id]` (talent detail), `/employer/search` (alternate granular filter).
 - **NGO shell** (`/ngo`, `/ngo/bulk`, `/ngo/[id]`, `/ngo/impact`) — caseload, bulk CSV + grid intake, signed verifications with SHA-256 audit trail, resilience-gap coaching, transition monitoring. The practitioner doing the vouching is called a "navigator"; the group they work for is "NGOs & Training Providers".
 - **Policymaker shell** (`/policymaker`, `/policymaker/skill-gaps`, `/sectors`, `/invest`, `/divergence`, `/config`, `/ecosystem`) — "National Human Capital Command Center" with three KPIs (Skill Divergence Index, Automation Hotspots, ROI on Training), adjustable-weight investment prioritization with CSV export, supply-vs-demand divergence heatmap, white-label config validator, API key / tenant ecosystem.
@@ -58,10 +58,11 @@ Plus **`/integrate`** (API contract + production-vs-prototype disclosure) and **
 /lib
   role-store.ts            ← Zustand; activeRole drives role-gated landing
   workflow-steps.ts        ← per-role stepper definitions + path matcher
-  config/countries.ts      ← GH, BD active; VN, KE, BR stubs
-  data-loaders/            ← 9 typed loaders per source
+  config/countries.ts      ← GHA, BOL, VNM (ISO-3); display languages en/es/vi
+  data-loaders/            ← 11 typed loaders per source (incl. ilo-isco, frey-osborne)
   risk-calibration.ts      ← near-term + V3.0 final-risk formulas
   returns-to-education.ts, skill-match.ts, sector-map.ts
+                              ↳ blended ranker: 0.50 demand + 0.35 skill + 0.15 safety
   esco-mapper.ts           ← keyword mock + Claude prompt; emits XAI explanations
   jd-mapper.ts             ← JD → ISCO/ESCO + highlight spans
   wittgenstein-implications.ts, human-capital-kpis.ts
@@ -72,16 +73,17 @@ Plus **`/integrate`** (API contract + production-vs-prototype disclosure) and **
   profile-store.ts (youth), ngo-store.ts, employer-store.ts,
   ecosystem-store.ts, market-signal-store.ts
 
-/messages                  ← next-intl catalogs: en + tw-Latn
+/messages                  ← next-intl catalogs: en (GHA), es (BOL), vi (VNM); tw-Latn retired
 /public/data/              ← committed JSON outputs from the Python pipeline
 /scripts/data-prep/        ← Python fetchers + orchestrator + crosswalk CSV
+                              ↳ build_ilo_isco_country.py, build_frey_osborne_overlay.py
 ```
 
 ## Progressive disclosure by role (what's hidden by default)
 
 | Group | Always visible | Behind disclosure |
 |---|---|---|
-| **Youth** | skill names, verified ✓, plain-language risk sentence, econometric numbers with plain labels, opportunity-type badge | ISCO / ESCO codes, risk formula inputs, raw JSON export |
+| **Youth** | skill names, verified ✓, plain-language risk sentence, econometric numbers with plain labels, opportunity-type badge, **"Why we recommended this" panel (expanded by default)** with the three sub-scores + automation risk + one citation per sub-score | ISCO / ESCO codes, risk formula inputs, raw JSON export |
 | **Employer** | role name, candidate name + country, "X of Y skills match" progress bar, verified-vs-self chips, action verbs | ISCO code behind each role, match-weight math, signature hex, ranking algorithm |
 | **NGOs & Training Providers** | names, skill counts, validation state, placements | SHA-256 signatures, risk formula inputs |
 | **Policymaker** | everything — dense tables, visible formulas, KPI sparklines, CSV exports | (nothing hidden — this group wants the numbers) |
@@ -107,25 +109,27 @@ Next.js 14 requires Node.js **≥ 18.17**. If your system Node is older (e.g. 18
 npm install
 npm run dev               # Next on http://localhost:3000
 npm run data-prep         # regenerate public/data/*.json from Python seeds
-npm run smoke             # loader + pure-fn smoke
-npm run smoke:api         # end-to-end API routes
+npm run smoke             # loader + pure-fn smoke (per-country)
+npm run smoke:rank        # blended-ranker determinism + citation shape
+npm run smoke:api         # end-to-end API routes (GHA, BOL, VNM)
 npm run smoke:profile     # profile v1 + signatures + share token round-trip
 ```
 
-## Data sources — 9 live, more in the roadmap
+## Data sources — 11 live, more in the roadmap
 
 | Source | File | Driven by |
 |---|---|---|
 | ESCO occupations + essential skills | `esco_occupations.json`, `esco_skills.json` | Skill match + profile signals |
 | O*NET task descriptions | `onet_tasks.json` | Pathway narrative |
 | ISCO-08 reference | `isco08.json` | Join key across the stack |
-| ILO ILOSTAT employment | `ilostat_employment.json` | Signal 2: YoY growth |
+| ILO ILOSTAT employment | `ilostat_employment.json` | Signal 2: YoY growth (sector-level) |
 | ILO ILOSTAT earnings | `ilostat_earnings.json` | Signal 1: wage floor; signal 3: tertiary premium |
+| **ILO ILOSTAT employment by ISCO-08 1-digit** | `ilo_isco_country.json` (BOL/GHA/VNM) | **Country-demand sub-score** in the blended ranker |
+| **Frey & Osborne × ISCO-08 overlay** | `frey_osborne_isco.json` | **Automation-safety sub-score** + per-card "Why" citation |
 | World Bank WDI | `wdi.json` | Command Center context stats |
 | World Bank Enterprise Surveys | `wbes.json` | Skill-shortage constraint; investment weights |
 | Wittgenstein Centre projections | `wittgenstein.json` | "Where you are heading by 2035"; Skill Divergence Index |
-| Frey & Osborne automation scores | `frey_osborne.json` | Long-term risk + formula B base |
-| **ILO Future of Work task indices** | `ilo_fow_tasks.json` | Per-occupation routine share → near-term + final risk |
+| ILO Future of Work task indices | `ilo_fow_tasks.json` | Per-occupation routine share → near-term + final risk |
 | ITU mobile broadband (per-country constant) | `lib/config/countries.ts` | `infrastructure_delay_factor` |
 
 Integration roadmap (documented, not wired): WB Human Capital Index, WB GLD, WB STEP, UN Population Projections, UNESCO UIS, Global Findex.
@@ -140,7 +144,7 @@ Youth self-serve and NGO-mediated paths emit the same JSON-LD:
   "@type":    "SkillIdentity",
   "schema":   "unmapped.profile/v1",
   "core":     { "id": uuid, "timestamp": iso8601, "standard": "ISCO-08" },
-  "country":  "GH",
+  "country":  "GHA",
   "subject":  { ... },
   "signals":  [{ "skill_code", "task_description", "confidence" }, ...],
   "isco_occupations": ["7421", "2513", ...],
@@ -157,11 +161,13 @@ The schema field names keep `navigator_id` / `navigator_name` even though the ro
 
 Full page at [/about/limits](app/about/limits/page.tsx). Short version:
 
-- Two countries demo-grade (GH, BD); three stubs (VN, KE, BR)
+- Three countries demo-grade (GHA, BOL, VNM) with their own ILO ISCO-08 1-digit slices; legacy 2-letter codes (GH/BD/VN/KE/BR) are migrated to GHA on hydrate
+- Display languages are English (GHA) / Spanish (BOL) / Vietnamese (VNM); the Spanish + Vietnamese bundles are best-effort drafts pending native-speaker review (see `LOCALE_DECISION.md`)
 - LMIC risk calibration is a defensible heuristic, not a validated econometric model
 - Returns to education is a wage ratio within sector, not a controlled regression
 - Seed data realistic-order-of-magnitude; every envelope carries a `source` flag
-- O*NET SOC↔ISCO-08 crosswalk loses ~15% on full fetch; prototype subset joins at 100%
-- Skill match is count-based ESCO `essentialSkills` overlap, not a semantic similarity model
+- O*NET SOC↔ISCO-08 crosswalk loses ~15% on full fetch; the prototype crosswalk is a focused 144-row seed and the Frey-Osborne overlay falls back to the per-occupation `frey_osborne_raw` and then a country-level routine-task share when an ISCO unit group is uncovered
+- Skill overlap is debiased (`α = 0.5`, hard cap at 5 expected skills) but is still count-based, not a semantic similarity model
+- The blended ranker (`0.50 demand + 0.35 skill + 0.15 safety`) emits one citation per sub-score; weights are configurable in `lib/skill-match.ts#RANK_WEIGHTS` and exposed in the `/api/match` response
 - No live job vacancies — aggregate sector data only
 - Share tokens are base64url in the prototype; production signs them server-side

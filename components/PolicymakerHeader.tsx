@@ -12,11 +12,11 @@ import {
   Globe,
 } from 'lucide-react';
 import { useProfile } from '@/lib/profile-store';
-import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import { ACTIVE_COUNTRIES, COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { RoleSwitcher } from './RoleSwitcher';
 import { BrandMark } from './ui/BrandMark';
 
-const ORDER: CountryCode[] = ['GH', 'BD', 'VN', 'KE', 'BR'];
+const ORDER: CountryCode[] = ACTIVE_COUNTRIES;
 
 export function PolicymakerHeader() {
   const country = useProfile((s) => s.country);
@@ -55,9 +55,8 @@ export function PolicymakerHeader() {
               {ORDER.map((code) => {
                 const c = COUNTRIES[code];
                 return (
-                  <option key={code} value={code} disabled={!c.active}>
-                    {c.name}
-                    {c.active ? '' : ' (stub)'}
+                  <option key={code} value={code}>
+                    {c.nativeName}
                   </option>
                 );
               })}

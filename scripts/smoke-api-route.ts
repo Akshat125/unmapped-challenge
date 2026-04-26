@@ -56,56 +56,46 @@ async function main() {
   const cat = await catRes.json();
   console.log(`  status=${catRes.status} skills=${cat.skills.length} occupations=${cat.occupations.length}`);
 
-  console.log('── /api/match Ghana with Amara skills ──');
-  const gh = await post(matchPOST, 'http://local/api/match', {
-    country: 'GH',
-    profileSkillUris: amaraSkills,
-  });
-  console.log(`  status=${gh.status} cards=${gh.body.cards.length}`);
-  for (const card of gh.body.cards.slice(0, 3)) {
-    const wage = card.signals.wage
-      ? `${card.signals.wage.mean_monthly} ${card.signals.wage.currency}`
-      : '—';
-    const growth = card.signals.growth.yoy_pct != null ? `${card.signals.growth.yoy_pct}%` : '—';
-    const premium = card.signals.premium ? `+${card.signals.premium.premium_pct}%` : '—';
-    const long = Math.round(card.risk.breakdown.long_term_risk * 100);
-    const near = Math.round(card.risk.breakdown.near_term_displacement_risk * 100);
-    console.log(
-      `  · ${card.preferred_label} [${card.isco_code}] ` +
-        `match=${card.match.matched}/${card.match.total} ` +
-        `wage=${wage} growth=${growth} premium=${premium} ` +
-        `risk=${long}%/${near}% ` +
-        `witt=${card.wittgenstein.implication?.rule ?? '(none)'}`,
-    );
-  }
-
-  console.log('── /api/match Bangladesh with same skills (country switch) ──');
-  const bd = await post(matchPOST, 'http://local/api/match', {
-    country: 'BD',
-    profileSkillUris: amaraSkills,
-  });
-  console.log(`  status=${bd.status} cards=${bd.body.cards.length}`);
-  for (const card of bd.body.cards.slice(0, 3)) {
-    const wage = card.signals.wage
-      ? `${card.signals.wage.mean_monthly} ${card.signals.wage.currency}`
-      : '—';
-    const long = Math.round(card.risk.breakdown.long_term_risk * 100);
-    const near = Math.round(card.risk.breakdown.near_term_displacement_risk * 100);
-    console.log(
-      `  · ${card.preferred_label} [${card.isco_code}] wage=${wage} risk=${long}%/${near}%`,
-    );
+  for (const country of ['GHA', 'BOL', 'VNM']) {
+    console.log(`── /api/match ${country} with Amara skills ──`);
+    const res = await post(matchPOST, 'http://local/api/match', {
+      country,
+      profileSkillUris: amaraSkills,
+    });
+    console.log(`  status=${res.status} cards=${res.body.cards.length}`);
+    console.log(`  weights=${JSON.stringify(res.body.weights)}`);
+    for (const card of res.body.cards.slice(0, 3)) {
+      const wage = card.signals.wage
+        ? `${card.signals.wage.mean_monthly} ${card.signals.wage.currency}`
+        : '—';
+      const growth = card.signals.growth.yoy_pct != null ? `${card.signals.growth.yoy_pct}%` : '—';
+      const premium = card.signals.premium ? `+${card.signals.premium.premium_pct}%` : '—';
+      const long = Math.round(card.risk.breakdown.long_term_risk * 100);
+      const near = Math.round(card.risk.breakdown.near_term_displacement_risk * 100);
+      const score = card.score
+        ? `score=${card.score.total.toFixed(2)} (D=${card.score.components.demand.toFixed(2)} S=${card.score.components.skill.toFixed(2)} R=${card.score.components.safety.toFixed(2)})`
+        : 'score=?';
+      const refs = card.references?.length ?? 0;
+      console.log(
+        `  · ${card.preferred_label} [${card.isco_code}] ` +
+          `match=${card.match.matched}/${card.match.total} ` +
+          `wage=${wage} growth=${growth} premium=${premium} ` +
+          `risk=${long}%/${near}% ` +
+          `${score} refs=${refs}`,
+      );
+    }
   }
 
   console.log('── /api/match empty profile (3 cards, zero-match fallback) ──');
   const empty = await post(matchPOST, 'http://local/api/match', {
-    country: 'GH',
+    country: 'GHA',
     profileSkillUris: [],
   });
   console.log(`  status=${empty.status} cards=${empty.body.cards.length}`);
 
-  console.log('── /api/policymaker/aggregate?country=GH ──');
+  console.log('── /api/policymaker/aggregate?country=GHA ──');
   const aggRes = await aggregateGET(
-    new Request('http://local/api/policymaker/aggregate?country=GH'),
+    new Request('http://local/api/policymaker/aggregate?country=GHA'),
   );
   const agg = await aggRes.json();
   const topRisk = [...agg.occupation_risks].sort(
@@ -122,11 +112,11 @@ async function main() {
     `  KPI divergence=${kpi.skill_divergence.index.toFixed(2)} hotspot=${kpi.automation_hotspots[0]?.sector}@${kpi.automation_hotspots[0]?.routine_density.toFixed(2)} top_roi=${kpi.roi_on_training[0]?.sector}@+${kpi.roi_on_training[0]?.roi_per_skill_point.toFixed(0)}%/pt`,
   );
 
-  console.log('── /api/policymaker/validate-config (valid GH config) ──');
+  console.log('── /api/policymaker/validate-config (valid GHA config) ──');
   const valid = await post(validateConfigPOST, 'http://local/api/policymaker/validate-config', {
-    code: 'GH',
+    code: 'GHA',
     name: 'Ghana',
-    locale: 'tw-Latn',
+    locale: 'en',
     currencyLabel: 'GHS',
     opportunityEmphasis: 'self_employment_gig',
     broadbandPenetration: 68,

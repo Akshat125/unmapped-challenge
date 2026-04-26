@@ -27,7 +27,7 @@ import { iscoToSector } from '@/lib/sector-map';
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
-  const country = (url.searchParams.get('country') as CountryCode) ?? 'GH';
+  const country = (url.searchParams.get('country') as CountryCode) ?? 'GHA';
   const config = COUNTRIES[country];
   if (!config) {
     return NextResponse.json({ error: 'unknown_country' }, { status: 400 });

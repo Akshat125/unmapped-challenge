@@ -67,6 +67,7 @@
     "signal_premium": "Wage premium for tertiary over secondary in this sector",
     "risk_heading": "How this job might change",
     "risk_long_term": "Long-term risk (US baseline)",
+    "risk_near_term": "Local exposure index",
     "risk_near_term_gh": "Local exposure index · Ghana",
     "risk_near_term_bd": "Local exposure index · Bangladesh",
     "risk_tooltip_heading": "How we calculate the Local Exposure Index",
@@ -76,7 +77,13 @@
     "show_standard_code": "Show the standard occupation code",
     "wittgenstein_heading": "Where you are heading by 2035",
     "pathway_heading": "To reach this",
-    "pathway_providers": "Local training providers"
+    "pathway_providers": "Local training providers",
+    "why_heading": "Why we recommended this",
+    "why_intro": "This recommendation combines three verifiable references. Each one is computed from a file committed in the repository.",
+    "why_demand": "Country demand (50%)",
+    "why_skill": "Skill overlap (35%)",
+    "why_safety": "Automation safety (15%)",
+    "why_total": "Total score"
   },
   "country_switcher": {
     "label": "Country",

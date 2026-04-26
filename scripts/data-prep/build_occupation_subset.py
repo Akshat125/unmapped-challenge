@@ -11,6 +11,8 @@ import fetch_wdi
 import fetch_wbes
 import fetch_wittgenstein
 import fetch_ilo_fow
+import build_ilo_isco_country
+import build_frey_osborne_overlay
 
 
 def main() -> None:
@@ -23,6 +25,8 @@ def main() -> None:
     fetch_wbes.main()
     fetch_wittgenstein.main()
     fetch_ilo_fow.main()
+    build_ilo_isco_country.main()
+    build_frey_osborne_overlay.main()
     print("=" * 60)
     print("done")
 

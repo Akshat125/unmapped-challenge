@@ -1,0 +1,1433 @@
+{
+  "source": "Frey & Osborne (2013) Table A1 · employment-weighted SOC→ISCO-08 crosswalk · scripts/data-prep/crosswalks/onet_soc_isco08.csv",
+  "fetched_at": "2026-04-26",
+  "values": {
+    "7223": {
+      "fo_prob": 0.7721,
+      "employed_total": 870000.0,
+      "n_socs": 7,
+      "sources": [
+        {
+          "soc": "51-4041",
+          "prob": 0.65,
+          "employed": 391120.0,
+          "occupation": "Machinists"
+        },
+        {
+          "soc": "51-4031",
+          "prob": 0.78,
+          "employed": 192800.0,
+          "occupation": "Cutting, Punching and Press Machine Setters, Operators and Tenders, Metal and Plastic"
+        },
+        {
+          "soc": "51-4072",
+          "prob": 0.95,
+          "employed": 145560.0,
+          "occupation": "Molding, Coremaking and Casting Machine Setters, Operators and Tenders, Metal and Plastic"
+        },
+        {
+          "soc": "51-4033",
+          "prob": 0.95,
+          "employed": 74600.0,
+          "occupation": "Grinding, Lapping, Polishing and Buffing Machine Tool Setters, Operators and Tenders, Metal and Plastic"
+        },
+        {
+          "soc": "51-4034",
+          "prob": 0.84,
+          "employed": 33850.0,
+          "occupation": "Lathe and Turning Machine Tool Setters, Operators and Tenders, Metal and Plastic"
+        },
+        {
+          "soc": "51-4191",
+          "prob": 0.91,
+          "employed": 19780.0,
+          "occupation": "Heat Treating Equipment Setters, Operators and Tenders, Metal and Plastic"
+        },
+        {
+          "soc": "51-4032",
+          "prob": 0.94,
+          "employed": 12290.0,
+          "occupation": "Drilling and Boring Machine Tool Setters, Operators and Tenders, Metal and Plastic"
+        }
+      ]
+    },
+    "8131": {
+      "fo_prob": 0.9101,
+      "employed_total": 118420.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "51-9041",
+          "prob": 0.93,
+          "employed": 71260.0,
+          "occupation": "Extruding, Forming, Pressing and Compacting Machine Setters, Operators and Tenders"
+        },
+        {
+          "soc": "51-9012",
+          "prob": 0.88,
+          "employed": 47160.0,
+          "occupation": "Separating, Filtering, Clarifying, Precipitating and Still Machine Setters, Operators and Tenders"
+        }
+      ]
+    },
+    "3322": {
+      "fo_prob": 0.7215,
+      "employed_total": 1873520.0,
+      "n_socs": 3,
+      "sources": [
+        {
+          "soc": "41-4012",
+          "prob": 0.85,
+          "employed": 1404050.0,
+          "occupation": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products"
+        },
+        {
+          "soc": "41-4011",
+          "prob": 0.25,
+          "employed": 328370.0,
+          "occupation": "Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products"
+        },
+        {
+          "soc": "41-3011",
+          "prob": 0.54,
+          "employed": 141100.0,
+          "occupation": "Advertising Sales Agents"
+        }
+      ]
+    },
+    "1324": {
+      "fo_prob": 0.029,
+      "employed_total": 202760.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "53-1031",
+          "prob": 0.029,
+          "employed": 202760.0,
+          "occupation": "First-Line Supervisors of Transportation and Material-Moving Machine and Vehicle Operators"
+        }
+      ]
+    },
+    "8152": {
+      "fo_prob": 0.9002,
+      "employed_total": 189180.0,
+      "n_socs": 3,
+      "sources": [
+        {
+          "soc": "51-6031",
+          "prob": 0.89,
+          "employed": 139500.0,
+          "occupation": "Sewing Machine Operators"
+        },
+        {
+          "soc": "51-6064",
+          "prob": 0.96,
+          "employed": 30340.0,
+          "occupation": "TextileWinding, Twisting and Drawing Out Machine Setters, Operators and Tenders"
+        },
+        {
+          "soc": "51-6091",
+          "prob": 0.88,
+          "employed": 19340.0,
+          "occupation": "Extruding and Forming Machine Setters, Operators and Tenders, Synthetic and Glass Fibers"
+        }
+      ]
+    },
+    "4120": {
+      "fo_prob": 0.96,
+      "employed_total": 2295510.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "43-6014",
+          "prob": 0.96,
+          "employed": 2295510.0,
+          "occupation": "Secretaries and Administrative Assistants, Except Legal, Medical and Executive"
+        }
+      ]
+    },
+    "7421": {
+      "fo_prob": 0.7419,
+      "employed_total": 39510.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "49-2097",
+          "prob": 0.65,
+          "employed": 25550.0,
+          "occupation": "Electronic Home Entertainment Equipment Installers and Repairers"
+        },
+        {
+          "soc": "49-2093",
+          "prob": 0.91,
+          "employed": 13960.0,
+          "occupation": "Electrical and Electronics Installers and Repairers, Transportation Equipment"
+        }
+      ]
+    },
+    "8121": {
+      "fo_prob": 0.9398,
+      "employed_total": 53130.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "51-4193",
+          "prob": 0.92,
+          "employed": 35570.0,
+          "occupation": "Plating and Coating Machine Setters, Operators and Tenders, Metal and Plastic"
+        },
+        {
+          "soc": "51-4035",
+          "prob": 0.98,
+          "employed": 17560.0,
+          "occupation": "Milling and Planing Machine Setters, Operators and Tenders, Metal and Plastic"
+        }
+      ]
+    },
+    "7422": {
+      "fo_prob": 0.3996,
+      "employed_total": 328510.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "49-2022",
+          "prob": 0.36,
+          "employed": 228430.0,
+          "occupation": "Telecommunications Equipment Installers and Repairers, Except Line Installers"
+        },
+        {
+          "soc": "49-9052",
+          "prob": 0.49,
+          "employed": 100080.0,
+          "occupation": "Telecommunications Line Installers and Repairers"
+        }
+      ]
+    },
+    "3119": {
+      "fo_prob": 0.7865,
+      "employed_total": 171370.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "51-4011",
+          "prob": 0.86,
+          "employed": 146190.0,
+          "occupation": "Computer-Controlled Machine Tool Operators, Metal and Plastic"
+        },
+        {
+          "soc": "51-4012",
+          "prob": 0.36,
+          "employed": 25180.0,
+          "occupation": "Computer Numerically Controlled Machine Tool Programmers, Metal and Plastic"
+        }
+      ]
+    },
+    "8160": {
+      "fo_prob": 0.91,
+      "employed_total": 20080.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-3091",
+          "prob": 0.91,
+          "employed": 20080.0,
+          "occupation": "Food and Tobacco Roasting, Baking and Drying Machine Operators and Tenders"
+        }
+      ]
+    },
+    "2149": {
+      "fo_prob": 0.028,
+      "employed_total": 25410.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "17-2111",
+          "prob": 0.028,
+          "employed": 25410.0,
+          "occupation": "Health and Safety Engineers, Except Mining Safety Engineers and Inspectors"
+        }
+      ]
+    },
+    "2351": {
+      "fo_prob": 0.19,
+      "employed_total": 58810.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "25-3011",
+          "prob": 0.19,
+          "employed": 58810.0,
+          "occupation": "Adult Basic and Secondary Education and Literacy Teachers and Instructors"
+        }
+      ]
+    },
+    "7412": {
+      "fo_prob": 0.4989,
+      "employed_total": 113130.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "49-2094",
+          "prob": 0.41,
+          "employed": 67390.0,
+          "occupation": "Electrical and Electronics Repairers, Commercial and Industrial Equipment"
+        },
+        {
+          "soc": "49-9012",
+          "prob": 0.63,
+          "employed": 45740.0,
+          "occupation": "Control and Valve Installers and Repairers, Except Mechanical Door"
+        }
+      ]
+    },
+    "9313": {
+      "fo_prob": 0.83,
+      "employed_total": 23950.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "47-3011",
+          "prob": 0.83,
+          "employed": 23950.0,
+          "occupation": "Helpers–Brickmasons, Blockmasons, Stonemasons and Tile and Marble Setters"
+        }
+      ]
+    },
+    "5419": {
+      "fo_prob": 0.67,
+      "employed_total": 145100.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "33-9092",
+          "prob": 0.67,
+          "employed": 145100.0,
+          "occupation": "Lifeguards, Ski Patrol and Other Recreational Protective Service Workers"
+        }
+      ]
+    },
+    "4412": {
+      "fo_prob": 0.7077,
+      "employed_total": 439720.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "43-5052",
+          "prob": 0.68,
+          "employed": 328950.0,
+          "occupation": "Postal Service Mail Carriers"
+        },
+        {
+          "soc": "43-5053",
+          "prob": 0.79,
+          "employed": 110770.0,
+          "occupation": "Postal Service Mail Sorters, Processors and Processing Machine Operators"
+        }
+      ]
+    },
+    "2330": {
+      "fo_prob": 0.0078,
+      "employed_total": 1003250.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "25-2031",
+          "prob": 0.0078,
+          "employed": 1003250.0,
+          "occupation": "Secondary School Teachers, Except Special and Career/Technical Education"
+        }
+      ]
+    },
+    "7126": {
+      "fo_prob": 0.4828,
+      "employed_total": 746220.0,
+      "n_socs": 3,
+      "sources": [
+        {
+          "soc": "47-2152",
+          "prob": 0.35,
+          "employed": 411870.0,
+          "occupation": "Plumbers, Pipefitters and Steamfitters"
+        },
+        {
+          "soc": "49-9021",
+          "prob": 0.65,
+          "employed": 294730.0,
+          "occupation": "Heating, Air Conditioning and Refrigeration Mechanics and Installers"
+        },
+        {
+          "soc": "47-2151",
+          "prob": 0.62,
+          "employed": 39620.0,
+          "occupation": "Pipelayers"
+        }
+      ]
+    },
+    "8342": {
+      "fo_prob": 0.95,
+      "employed_total": 356750.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "47-2073",
+          "prob": 0.95,
+          "employed": 356750.0,
+          "occupation": "Operating Engineers and Other Construction Equipment Operators"
+        }
+      ]
+    },
+    "9112": {
+      "fo_prob": 0.66,
+      "employed_total": 2161740.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "37-2011",
+          "prob": 0.66,
+          "employed": 2161740.0,
+          "occupation": "Janitors and Cleaners, Except Maids and Housekeeping Cleaners"
+        }
+      ]
+    },
+    "3122": {
+      "fo_prob": 0.016,
+      "employed_total": 610480.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-1011",
+          "prob": 0.016,
+          "employed": 610480.0,
+          "occupation": "First-Line Supervisors of Production and Operating Workers"
+        }
+      ]
+    },
+    "9333": {
+      "fo_prob": 0.7493,
+      "employed_total": 3293560.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "53-7062",
+          "prob": 0.85,
+          "employed": 2587900.0,
+          "occupation": "Laborers and Freight, Stock and Material Movers, Hand"
+        },
+        {
+          "soc": "53-7064",
+          "prob": 0.38,
+          "employed": 705660.0,
+          "occupation": "Packers and Packagers, Hand"
+        }
+      ]
+    },
+    "2341": {
+      "fo_prob": 0.0044,
+      "employed_total": 1392660.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "25-2021",
+          "prob": 0.0044,
+          "employed": 1392660.0,
+          "occupation": "Elementary School Teachers, Except Special Education"
+        }
+      ]
+    },
+    "7543": {
+      "fo_prob": 0.98,
+      "employed_total": 518950.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-9061",
+          "prob": 0.98,
+          "employed": 518950.0,
+          "occupation": "Inspectors, Testers, Sorters, Samplers and Weighers"
+        }
+      ]
+    },
+    "8183": {
+      "fo_prob": 0.98,
+      "employed_total": 386520.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-9111",
+          "prob": 0.98,
+          "employed": 386520.0,
+          "occupation": "Packaging and Filling Machine Operators and Tenders"
+        }
+      ]
+    },
+    "4223": {
+      "fo_prob": 0.96,
+      "employed_total": 90910.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "43-2011",
+          "prob": 0.96,
+          "employed": 90910.0,
+          "occupation": "Switchboard Operators, Including Answering Service"
+        }
+      ]
+    },
+    "1311": {
+      "fo_prob": 0.047,
+      "employed_total": 4560.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "11-9013",
+          "prob": 0.047,
+          "employed": 4560.0,
+          "occupation": "Farmers, Ranchers and Other Agricultural Managers"
+        }
+      ]
+    },
+    "2635": {
+      "fo_prob": 0.004,
+      "employed_total": 253860.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "21-1014",
+          "prob": 0.0048,
+          "employed": 139820.0,
+          "occupation": "Mental Health Counselors"
+        },
+        {
+          "soc": "21-1023",
+          "prob": 0.0031,
+          "employed": 114040.0,
+          "occupation": "Mental Health and Substance Abuse Social Workers"
+        }
+      ]
+    },
+    "7411": {
+      "fo_prob": 0.1414,
+      "employed_total": 724790.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "47-2111",
+          "prob": 0.15,
+          "employed": 607120.0,
+          "occupation": "Electricians"
+        },
+        {
+          "soc": "49-9051",
+          "prob": 0.097,
+          "employed": 117670.0,
+          "occupation": "Electrical Power-Line Installers and Repairers"
+        }
+      ]
+    },
+    "5141": {
+      "fo_prob": 0.1398,
+      "employed_total": 368280.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "39-5012",
+          "prob": 0.11,
+          "employed": 352380.0,
+          "occupation": "Hairdressers, Hairstylists and Cosmetologists"
+        },
+        {
+          "soc": "39-5011",
+          "prob": 0.8,
+          "employed": 15900.0,
+          "occupation": "Barbers"
+        }
+      ]
+    },
+    "7231": {
+      "fo_prob": 0.59,
+      "employed_total": 647380.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "49-3023",
+          "prob": 0.59,
+          "employed": 647380.0,
+          "occupation": "Automotive Service Technicians and Mechanics"
+        }
+      ]
+    },
+    "3313": {
+      "fo_prob": 0.98,
+      "employed_total": 1639080.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "43-3031",
+          "prob": 0.98,
+          "employed": 1566960.0,
+          "occupation": "Bookkeeping, Accounting and Auditing Clerks"
+        },
+        {
+          "soc": "43-3061",
+          "prob": 0.98,
+          "employed": 72120.0,
+          "occupation": "Procurement Clerks"
+        }
+      ]
+    },
+    "7511": {
+      "fo_prob": 0.94,
+      "employed_total": 149800.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-3022",
+          "prob": 0.94,
+          "employed": 149800.0,
+          "occupation": "Meat, Poultry and Fish Cutters and Trimmers"
+        }
+      ]
+    },
+    "8322": {
+      "fo_prob": 0.69,
+      "employed_total": 858710.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "53-3033",
+          "prob": 0.69,
+          "employed": 858710.0,
+          "occupation": "Light Truck or Delivery Services Drivers"
+        }
+      ]
+    },
+    "8332": {
+      "fo_prob": 0.79,
+      "employed_total": 1704520.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "53-3032",
+          "prob": 0.79,
+          "employed": 1704520.0,
+          "occupation": "Heavy and Tractor-Trailer Truck Drivers"
+        }
+      ]
+    },
+    "7233": {
+      "fo_prob": 0.6539,
+      "employed_total": 1422110.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "49-9071",
+          "prob": 0.64,
+          "employed": 1332480.0,
+          "occupation": "Maintenance and Repair Workers, General"
+        },
+        {
+          "soc": "49-9043",
+          "prob": 0.86,
+          "employed": 89630.0,
+          "occupation": "Maintenance Workers, Machinery"
+        }
+      ]
+    },
+    "7212": {
+      "fo_prob": 0.94,
+      "employed_total": 382730.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-4121",
+          "prob": 0.94,
+          "employed": 382730.0,
+          "occupation": "Welders, Cutters, Solderers and Brazers"
+        }
+      ]
+    },
+    "2161": {
+      "fo_prob": 0.018,
+      "employed_total": 99860.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "17-1011",
+          "prob": 0.018,
+          "employed": 99860.0,
+          "occupation": "Architects, Except Landscape and Naval"
+        }
+      ]
+    },
+    "8344": {
+      "fo_prob": 0.93,
+      "employed_total": 542750.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "53-7051",
+          "prob": 0.93,
+          "employed": 542750.0,
+          "occupation": "Industrial Truck and Tractor Operators"
+        }
+      ]
+    },
+    "7533": {
+      "fo_prob": 0.84,
+      "employed_total": 21660.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-6052",
+          "prob": 0.84,
+          "employed": 21660.0,
+          "occupation": "Tailors, Dressmakers and Custom Sewers"
+        }
+      ]
+    },
+    "5142": {
+      "fo_prob": 0.7235,
+      "employed_total": 301980.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "39-3091",
+          "prob": 0.72,
+          "employed": 286740.0,
+          "occupation": "Amusement and Recreation Attendants"
+        },
+        {
+          "soc": "39-5093",
+          "prob": 0.79,
+          "employed": 15240.0,
+          "occupation": "Shampooers"
+        }
+      ]
+    },
+    "8211": {
+      "fo_prob": 0.82,
+      "employed_total": 38150.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-2031",
+          "prob": 0.82,
+          "employed": 38150.0,
+          "occupation": "Engine and Other Machine Assemblers"
+        }
+      ]
+    },
+    "4226": {
+      "fo_prob": 0.94,
+      "employed_total": 248440.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "43-4081",
+          "prob": 0.94,
+          "employed": 248440.0,
+          "occupation": "Hotel, Motel and Resort Desk Clerks"
+        }
+      ]
+    },
+    "3412": {
+      "fo_prob": 0.13,
+      "employed_total": 360650.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "21-1093",
+          "prob": 0.13,
+          "employed": 360650.0,
+          "occupation": "Social and Human Service Assistants"
+        }
+      ]
+    },
+    "8331": {
+      "fo_prob": 0.67,
+      "employed_total": 169680.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "53-3021",
+          "prob": 0.67,
+          "employed": 169680.0,
+          "occupation": "Bus Drivers, Transit and Intercity"
+        }
+      ]
+    },
+    "4222": {
+      "fo_prob": 0.55,
+      "employed_total": 2707040.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "43-4051",
+          "prob": 0.55,
+          "employed": 2707040.0,
+          "occupation": "Customer Service Representatives"
+        }
+      ]
+    },
+    "2166": {
+      "fo_prob": 0.0737,
+      "employed_total": 240520.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "27-1024",
+          "prob": 0.082,
+          "employed": 210710.0,
+          "occupation": "Graphic Designers"
+        },
+        {
+          "soc": "27-1014",
+          "prob": 0.015,
+          "employed": 29810.0,
+          "occupation": "Multimedia Artists and Animators"
+        }
+      ]
+    },
+    "1120": {
+      "fo_prob": 0.16,
+      "employed_total": 2188870.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "11-1021",
+          "prob": 0.16,
+          "employed": 2188870.0,
+          "occupation": "General and Operations Managers"
+        }
+      ]
+    },
+    "9111": {
+      "fo_prob": 0.69,
+      "employed_total": 924640.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "37-2012",
+          "prob": 0.69,
+          "employed": 924640.0,
+          "occupation": "Maids and Housekeeping Cleaners"
+        }
+      ]
+    },
+    "3411": {
+      "fo_prob": 0.9049,
+      "employed_total": 295190.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "23-2011",
+          "prob": 0.94,
+          "employed": 277310.0,
+          "occupation": "Paralegals and Legal Assistants"
+        },
+        {
+          "soc": "33-3011",
+          "prob": 0.36,
+          "employed": 17880.0,
+          "occupation": "Bailiffs"
+        }
+      ]
+    },
+    "4321": {
+      "fo_prob": 0.6506,
+      "employed_total": 2090460.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "43-5081",
+          "prob": 0.64,
+          "employed": 2016340.0,
+          "occupation": "Stock Clerks and Order Fillers"
+        },
+        {
+          "soc": "43-5021",
+          "prob": 0.94,
+          "employed": 74120.0,
+          "occupation": "Couriers and Messengers"
+        }
+      ]
+    },
+    "7521": {
+      "fo_prob": 0.97,
+      "employed_total": 37110.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-9081",
+          "prob": 0.97,
+          "employed": 37110.0,
+          "occupation": "Dental Laboratory Technicians"
+        }
+      ]
+    },
+    "2643": {
+      "fo_prob": 0.38,
+      "employed_total": 51350.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "27-3091",
+          "prob": 0.38,
+          "employed": 51350.0,
+          "occupation": "Interpreters and Translators"
+        }
+      ]
+    },
+    "7119": {
+      "fo_prob": 0.87,
+      "employed_total": 143320.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "47-4051",
+          "prob": 0.87,
+          "employed": 143320.0,
+          "occupation": "Highway Maintenance Workers"
+        }
+      ]
+    },
+    "4131": {
+      "fo_prob": 0.9438,
+      "employed_total": 262040.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "43-9021",
+          "prob": 0.99,
+          "employed": 194810.0,
+          "occupation": "Data Entry Keyers"
+        },
+        {
+          "soc": "43-9022",
+          "prob": 0.81,
+          "employed": 67230.0,
+          "occupation": "Word Processors and Typists"
+        }
+      ]
+    },
+    "2411": {
+      "fo_prob": 0.94,
+      "employed_total": 1246540.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "13-2011",
+          "prob": 0.94,
+          "employed": 1246540.0,
+          "occupation": "Accountants and Auditors"
+        }
+      ]
+    },
+    "1212": {
+      "fo_prob": 0.0055,
+      "employed_total": 129810.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "11-3121",
+          "prob": 0.0055,
+          "employed": 129810.0,
+          "occupation": "Human Resources Managers"
+        }
+      ]
+    },
+    "3142": {
+      "fo_prob": 0.94,
+      "employed_total": 14710.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "45-2011",
+          "prob": 0.94,
+          "employed": 14710.0,
+          "occupation": "Agricultural Inspectors"
+        }
+      ]
+    },
+    "4110": {
+      "fo_prob": 0.96,
+      "employed_total": 2955550.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "43-9061",
+          "prob": 0.96,
+          "employed": 2955550.0,
+          "occupation": "Office Clerks, General"
+        }
+      ]
+    },
+    "5131": {
+      "fo_prob": 0.94,
+      "employed_total": 2564610.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "35-3031",
+          "prob": 0.94,
+          "employed": 2564610.0,
+          "occupation": "Waiters and Waitresses"
+        }
+      ]
+    },
+    "7115": {
+      "fo_prob": 0.8118,
+      "employed_total": 1589080.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "47-2061",
+          "prob": 0.88,
+          "employed": 912100.0,
+          "occupation": "Construction Laborers"
+        },
+        {
+          "soc": "47-2031",
+          "prob": 0.72,
+          "employed": 676980.0,
+          "occupation": "Carpenters"
+        }
+      ]
+    },
+    "2151": {
+      "fo_prob": 0.1,
+      "employed_total": 183770.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "17-2071",
+          "prob": 0.1,
+          "employed": 183770.0,
+          "occupation": "Electrical Engineers"
+        }
+      ]
+    },
+    "2144": {
+      "fo_prob": 0.011,
+      "employed_total": 285790.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "17-2141",
+          "prob": 0.011,
+          "employed": 285790.0,
+          "occupation": "Mechanical Engineers"
+        }
+      ]
+    },
+    "3213": {
+      "fo_prob": 0.92,
+      "employed_total": 398390.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "29-2052",
+          "prob": 0.92,
+          "employed": 398390.0,
+          "occupation": "Pharmacy Technicians"
+        }
+      ]
+    },
+    "2421": {
+      "fo_prob": 0.13,
+      "employed_total": 637690.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "13-1111",
+          "prob": 0.13,
+          "employed": 637690.0,
+          "occupation": "Management Analysts"
+        }
+      ]
+    },
+    "5223": {
+      "fo_prob": 0.9419,
+      "employed_total": 8069560.0,
+      "n_socs": 2,
+      "sources": [
+        {
+          "soc": "41-2031",
+          "prob": 0.92,
+          "employed": 4528550.0,
+          "occupation": "Retail Salespersons"
+        },
+        {
+          "soc": "41-2011",
+          "prob": 0.97,
+          "employed": 3541010.0,
+          "occupation": "Cashiers"
+        }
+      ]
+    },
+    "2641": {
+      "fo_prob": 0.038,
+      "employed_total": 44690.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "27-3043",
+          "prob": 0.038,
+          "employed": 44690.0,
+          "occupation": "Writers and Authors"
+        }
+      ]
+    },
+    "2412": {
+      "fo_prob": 0.23,
+      "employed_total": 281610.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "13-2051",
+          "prob": 0.23,
+          "employed": 281610.0,
+          "occupation": "Financial Analysts"
+        }
+      ]
+    },
+    "1211": {
+      "fo_prob": 0.069,
+      "employed_total": 543300.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "11-3031",
+          "prob": 0.069,
+          "employed": 543300.0,
+          "occupation": "Financial Managers"
+        }
+      ]
+    },
+    "5120": {
+      "fo_prob": 0.96,
+      "employed_total": 1217370.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "35-2014",
+          "prob": 0.96,
+          "employed": 1217370.0,
+          "occupation": "Cooks, Restaurant"
+        }
+      ]
+    },
+    "5329": {
+      "fo_prob": 0.51,
+      "employed_total": 327290.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "31-9091",
+          "prob": 0.51,
+          "employed": 327290.0,
+          "occupation": "Dental Assistants"
+        }
+      ]
+    },
+    "2142": {
+      "fo_prob": 0.019,
+      "employed_total": 287800.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "17-2051",
+          "prob": 0.019,
+          "employed": 287800.0,
+          "occupation": "Civil Engineers"
+        }
+      ]
+    },
+    "5414": {
+      "fo_prob": 0.84,
+      "employed_total": 1103120.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "33-9032",
+          "prob": 0.84,
+          "employed": 1103120.0,
+          "occupation": "Security Guards"
+        }
+      ]
+    },
+    "8281": {
+      "fo_prob": 0.97,
+      "employed_total": 1112780.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-2092",
+          "prob": 0.97,
+          "employed": 1112780.0,
+          "occupation": "Team Assemblers"
+        }
+      ]
+    },
+    "2262": {
+      "fo_prob": 0.012,
+      "employed_total": 305510.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "29-1051",
+          "prob": 0.012,
+          "employed": 305510.0,
+          "occupation": "Pharmacists"
+        }
+      ]
+    },
+    "2622": {
+      "fo_prob": 0.65,
+      "employed_total": 129350.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "25-4021",
+          "prob": 0.65,
+          "employed": 129350.0,
+          "occupation": "Librarians"
+        }
+      ]
+    },
+    "2120": {
+      "fo_prob": 0.21,
+      "employed_total": 19940.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "15-2011",
+          "prob": 0.21,
+          "employed": 19940.0,
+          "occupation": "Actuaries"
+        }
+      ]
+    },
+    "5163": {
+      "fo_prob": 0.54,
+      "employed_total": 3710.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "39-4011",
+          "prob": 0.54,
+          "employed": 3710.0,
+          "occupation": "Embalmers"
+        }
+      ]
+    },
+    "2132": {
+      "fo_prob": 0.0081,
+      "employed_total": 8420.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "19-1032",
+          "prob": 0.0081,
+          "employed": 8420.0,
+          "occupation": "Foresters"
+        }
+      ]
+    },
+    "2165": {
+      "fo_prob": 0.38,
+      "employed_total": 43340.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "17-1022",
+          "prob": 0.38,
+          "employed": 43340.0,
+          "occupation": "Surveyors"
+        }
+      ]
+    },
+    "5230": {
+      "fo_prob": 0.97,
+      "employed_total": 3541010.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "41-2011",
+          "prob": 0.97,
+          "employed": 3541010.0,
+          "occupation": "Cashiers"
+        }
+      ]
+    },
+    "2113": {
+      "fo_prob": 0.1,
+      "employed_total": 86660.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "19-2031",
+          "prob": 0.1,
+          "employed": 86660.0,
+          "occupation": "Chemists"
+        }
+      ]
+    },
+    "2621": {
+      "fo_prob": 0.0068,
+      "employed_total": 11170.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "25-4012",
+          "prob": 0.0068,
+          "employed": 11170.0,
+          "occupation": "Curators"
+        }
+      ]
+    },
+    "7125": {
+      "fo_prob": 0.73,
+      "employed_total": 47140.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "47-2121",
+          "prob": 0.73,
+          "employed": 47140.0,
+          "occupation": "Glaziers"
+        }
+      ]
+    },
+    "2653": {
+      "fo_prob": 0.13,
+      "employed_total": 10060.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "27-2031",
+          "prob": 0.13,
+          "employed": 10060.0,
+          "occupation": "Dancers"
+        }
+      ]
+    },
+    "2642": {
+      "fo_prob": 0.055,
+      "employed_total": 97170.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "27-3041",
+          "prob": 0.055,
+          "employed": 97170.0,
+          "occupation": "Editors"
+        }
+      ]
+    },
+    "2611": {
+      "fo_prob": 0.035,
+      "employed_total": 619530.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "23-1011",
+          "prob": 0.035,
+          "employed": 619530.0,
+          "occupation": "Lawyers"
+        }
+      ]
+    },
+    "7215": {
+      "fo_prob": 0.89,
+      "employed_total": 21020.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "49-9096",
+          "prob": 0.89,
+          "employed": 21020.0,
+          "occupation": "Riggers"
+        }
+      ]
+    },
+    "7121": {
+      "fo_prob": 0.9,
+      "employed_total": 116410.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "47-2181",
+          "prob": 0.9,
+          "employed": 116410.0,
+          "occupation": "Roofers"
+        }
+      ]
+    },
+    "4211": {
+      "fo_prob": 0.98,
+      "employed_total": 496760.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "43-3071",
+          "prob": 0.98,
+          "employed": 496760.0,
+          "occupation": "Tellers"
+        }
+      ]
+    },
+    "2655": {
+      "fo_prob": 0.37,
+      "employed_total": 48620.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "27-2011",
+          "prob": 0.37,
+          "employed": 48620.0,
+          "occupation": "Actors"
+        }
+      ]
+    },
+    "7512": {
+      "fo_prob": 0.89,
+      "employed_total": 180450.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "51-3011",
+          "prob": 0.89,
+          "employed": 180450.0,
+          "occupation": "Bakers"
+        }
+      ]
+    },
+    "2636": {
+      "fo_prob": 0.0081,
+      "employed_total": 49320.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "21-2011",
+          "prob": 0.0081,
+          "employed": 49320.0,
+          "occupation": "Clergy"
+        }
+      ]
+    },
+    "5249": {
+      "fo_prob": 0.98,
+      "employed_total": 4390.0,
+      "n_socs": 1,
+      "sources": [
+        {
+          "soc": "41-9012",
+          "prob": 0.98,
+          "employed": 4390.0,
+          "occupation": "Models"
+        }
+      ]
+    }
+  }
+}

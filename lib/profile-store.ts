@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { CountryCode } from '@/lib/config/countries';
+import { DEFAULT_COUNTRY, migrateCountryCode, type CountryCode } from '@/lib/config/countries';
 import type { SkillMapResult } from '@/lib/esco-mapper';
 
 // Minimal client-side state per spec §4 ("Zustand for skills profile only").
@@ -33,7 +33,7 @@ const INITIAL_ANSWERS: ProfileAnswers = {};
 export const useProfile = create<ProfileState>()(
   persist(
     (set) => ({
-      country: 'GH',
+      country: DEFAULT_COUNTRY,
       answers: INITIAL_ANSWERS,
       mapping: null,
       mappedAt: null,
@@ -47,13 +47,23 @@ export const useProfile = create<ProfileState>()(
     {
       name: 'unmapped-profile',
       storage: createJSONStorage(() => localStorage),
-      // Only persist the user-meaningful bits.
       partialize: (s) => ({
         country: s.country,
         answers: s.answers,
         mapping: s.mapping,
         mappedAt: s.mappedAt,
       }),
+      // §3 (D2): existing localStorage payloads carry the old GH/BD/VN/KE/BR
+      // namespace. Map them onto the BOL/GHA/VNM namespace on first load so a
+      // returning user doesn't crash the dropdown.
+      migrate: (persisted) => {
+        const p = persisted as Partial<ProfileState> & { country?: string };
+        return {
+          ...p,
+          country: migrateCountryCode(p?.country),
+        } as ProfileState;
+      },
+      version: 2,
     },
   ),
 );

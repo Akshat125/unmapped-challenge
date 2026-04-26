@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import { COUNTRIES, DEFAULT_COUNTRY, type CountryCode } from '@/lib/config/countries';
 import { getEscoSkills, getEscoOccupations } from '@/lib/data-loaders/esco';
 import {
   getEmployment,
@@ -9,8 +9,14 @@ import {
 } from '@/lib/data-loaders/ilostat';
 import { getWittgenstein } from '@/lib/data-loaders/wittgenstein';
 import { getFowForCountry } from '@/lib/data-loaders/ilo-fow';
-import { rankMatches } from '@/lib/skill-match';
-import { calibrateRisk, type RiskBreakdown } from '@/lib/risk-calibration';
+import { getIloIscoForCountry } from '@/lib/data-loaders/ilo-isco';
+import { getFreyOsborneOverlay } from '@/lib/data-loaders/frey-osborne';
+import {
+  rankMatches,
+  RANK_WEIGHTS,
+  type EvidenceCitation,
+} from '@/lib/skill-match';
+import type { RiskBreakdown } from '@/lib/risk-calibration';
 import { tertiaryPremium } from '@/lib/returns-to-education';
 import {
   buildImplication,
@@ -21,11 +27,27 @@ import { iscoToSector } from '@/lib/sector-map';
 
 // /api/match
 // Input:  { country: CountryCode, profileSkillUris: string[] }
-// Output: ranked opportunity cards, fully hydrated with signals + risk.
+// Output: ranked opportunity cards, fully hydrated with signals + risk + the
+//         per-card citations that justify the recommendation.
 //
 // Every number rendered in the UI comes from this endpoint, with a source
 // label attached. Spec §D1: "Every econometric figure shown must have a
-// visible source label."
+// visible source label." The card UI consumes `references` to surface the
+// "Why we recommended this" disclosure expanded by default.
+
+export interface RecommendationScore {
+  total: number;
+  components: {
+    demand: number;
+    skill: number;
+    safety: number;
+  };
+  weights: {
+    demand: number;
+    skill: number;
+    safety: number;
+  };
+}
 
 export interface OpportunityCard {
   isco_code: string;
@@ -38,6 +60,8 @@ export interface OpportunityCard {
     missing_uris: string[];
     missing_labels: string[];
   };
+  score: RecommendationScore;
+  references: EvidenceCitation[];
   sector: string;
   signals: {
     wage: { mean_monthly: number; currency: string; year: number; source: string } | null;
@@ -78,7 +102,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'invalid_json' }, { status: 400 });
   }
 
-  const country = body.country ?? 'GH';
+  const country = body.country ?? DEFAULT_COUNTRY;
   const profileSkillUris = body.profileSkillUris ?? [];
   const config = COUNTRIES[country];
   if (!config) {
@@ -93,6 +117,8 @@ export async function POST(req: Request) {
     earningsEdu,
     wittgenstein,
     fow,
+    iloIsco,
+    fowOverlay,
   ] = await Promise.all([
     getEscoOccupations(),
     getEscoSkills(),
@@ -101,10 +127,31 @@ export async function POST(req: Request) {
     getEarningsByEducation(country),
     getWittgenstein(country),
     getFowForCountry(country),
+    getIloIscoForCountry(country),
+    getFreyOsborneOverlay(),
   ]);
 
-  // Rank via ESCO essentialSkills overlap (§7.1.1).
-  const ranked = rankMatches(escoOcc.value, profileSkillUris, escoSkills.value);
+  // §7.1.1 — country-aware blended ranker. Demand:Skill:Safety = 0.50:0.35:0.15
+  // Citations are returned per-card so the UI can render the
+  // "Why we recommended this" disclosure expanded by default.
+  const ranked = rankMatches(escoOcc.value, {
+    profileSkillUris,
+    allSkills: escoSkills.value,
+    ilo: iloIsco.value,
+    iloSourceLabel: iloIsco.source,
+    fowOverlay: fowOverlay.value,
+    fowOverlaySource: fowOverlay.source,
+    country: config,
+    riskOpts: (occupation) => {
+      const tc = fow.value.byIsco.get(occupation.isco_code);
+      return {
+        occupationRoutineShare: tc?.routine_share,
+        cognitiveShare: tc?.cognitive_share,
+        manualShare: tc?.manual_share,
+        usRoutineWeightedMean: fow.value.usRoutineWeightedMean,
+      };
+    },
+  });
 
   // Show top ~6 and always include at least 3 even when matches are thin.
   const topMatched = ranked.filter((r) => r.matched > 0).slice(0, 6);
@@ -119,14 +166,7 @@ export async function POST(req: Request) {
       .filter((r) => r.sector === sector)
       .reduce((max, r) => (r.year > max ? r.year : max), 0);
     const premium = tertiaryPremium(earningsEdu.value, sector);
-    const foRaw = match.occupation.frey_osborne_raw ?? 0;
     const taskContent = fow.value.byIsco.get(iscoCode);
-    const breakdown = calibrateRisk(foRaw, config, {
-      occupationRoutineShare: taskContent?.routine_share,
-      cognitiveShare: taskContent?.cognitive_share,
-      manualShare: taskContent?.manual_share,
-      usRoutineWeightedMean: fow.value.usRoutineWeightedMean,
-    });
     const implication = buildImplication(
       wittgenstein.value,
       iscoToSectorCategory(iscoCode),
@@ -134,11 +174,12 @@ export async function POST(req: Request) {
 
     const source_trace = [
       escoOcc.source,
+      iloIsco.source,
+      fowOverlay.source,
       earnings.source,
       employment.source,
       earningsEdu.source,
-      'Frey & Osborne (2013) + ITU broadband + ' +
-        (taskContent ? fow.source : 'country-level routine-task share'),
+      `weights = demand:${RANK_WEIGHTS.demand} · skill:${RANK_WEIGHTS.skill} · safety:${RANK_WEIGHTS.safety}`,
       wittgenstein.source,
     ];
 
@@ -153,6 +194,16 @@ export async function POST(req: Request) {
         missing_uris: match.missingUris,
         missing_labels: match.missingLabels,
       },
+      score: {
+        total: Number(match.score.total.toFixed(4)),
+        components: {
+          demand: Number(match.score.demand.toFixed(4)),
+          skill: Number(match.score.skill.toFixed(4)),
+          safety: Number(match.score.safety.toFixed(4)),
+        },
+        weights: { ...RANK_WEIGHTS },
+      },
+      references: match.citations,
       sector,
       signals: {
         wage: wageRow
@@ -179,7 +230,7 @@ export async function POST(req: Request) {
           : null,
       },
       risk: {
-        breakdown,
+        breakdown: match.risk,
         source_long: 'Frey & Osborne (2013) · US baseline',
         source_near: taskContent
           ? `ITU broadband (${config.broadbandPenetration}%) × ILO Future of Work task share (${taskContent.routine_share.toFixed(2)})`
@@ -199,5 +250,6 @@ export async function POST(req: Request) {
     cards,
     country_name: config.name,
     currency_label: config.currencyLabel,
+    weights: { ...RANK_WEIGHTS },
   });
 }

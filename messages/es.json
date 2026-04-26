@@ -1,0 +1,98 @@
+{
+  "_note": "Spanish (Bolivia) — best-effort draft strings pending review by a native Spanish speaker familiar with Bolivian usage. Do not ship the demo without that review.",
+  "brand": {
+    "name": "UNMAPPED",
+    "tagline": "Tus habilidades, hechas visibles."
+  },
+  "nav": {
+    "entry": "Empezar",
+    "profile": "Tu perfil",
+    "opportunities": "Oportunidades",
+    "policymaker": "Vista de responsable de políticas"
+  },
+  "role_picker": {
+    "eyebrow": "Una infraestructura compartida del mercado laboral",
+    "title": "¿En qué lado del mercado laboral estás?",
+    "subtitle": "Elige la vista que se ajuste a tu trabajo de hoy. Cada rol tiene un flujo hecho para él. Puedes cambiar después.",
+    "returning": "Bienvenido de nuevo",
+    "or_different": "O elige un rol diferente",
+    "continue_as": "Continuar como"
+  },
+  "switch_role": "Cambiar rol",
+  "entry": {
+    "title": "Cuéntanos sobre tu trabajo y tus habilidades",
+    "subtitle": "Cinco preguntas. Puedes saltarte cualquiera.",
+    "q1_education": "¿Cuál es el nivel más alto de estudios que has completado?",
+    "q2_work": "¿Qué trabajos has hecho, pagados o no?",
+    "q2_placeholder": "ej. Reparo celulares y he hecho dos sitios web pequeños para amigos",
+    "q3_tools": "Herramientas, máquinas o programas que has usado",
+    "q3_placeholder": "ej. soldador, Android, JavaScript",
+    "q4_languages": "Idiomas que hablas",
+    "q5_aspirations": "¿Qué te gustaría hacer mejor o aprender después?",
+    "q5_placeholder": "ej. Me gustaría aprender más sobre aplicaciones web",
+    "skip": "Saltar",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "finish": "Ver mi perfil",
+    "low_bandwidth": "Modo de baja conexión activo",
+    "saving_locally": "Tus respuestas se guardan en este dispositivo.",
+    "country_label": "País",
+    "mapping_in_progress": "Leyendo tus respuestas…",
+    "mapping_failed": "No pudimos contactar al servicio de habilidades. Tus respuestas están guardadas — intenta de nuevo en un momento."
+  },
+  "profile": {
+    "heading": "Tu perfil de habilidades",
+    "subheading": "Un resumen portable de lo que ya sabes hacer.",
+    "skills_found": "Habilidades que reconocimos",
+    "no_skills_yet": "Aún no se han mapeado habilidades. Vuelve y agrega más detalle.",
+    "for_systems": "Mostrar los códigos estándar (ESCO / ISCO)",
+    "for_systems_intro": "Los empleadores, los proveedores de formación y los gobiernos pueden leer estos directamente. Puedes ignorarlos.",
+    "occupations_suggested": "Trabajos que se ajustan a tus habilidades",
+    "occupations_intro": "Basado en lo que nos contaste. Toca Oportunidades para ver el detalle.",
+    "print": "Imprimir",
+    "export_json": "Descargar (JSON)",
+    "see_opportunities": "Ver oportunidades",
+    "flagged_title": "No tenemos confianza en este perfil",
+    "edit": "Editar respuestas"
+  },
+  "opportunities": {
+    "heading": "Oportunidades para ti",
+    "subheading": "Basado en tu perfil y datos del mercado laboral local.",
+    "no_results": "Aún no hay coincidencias. Vuelve y agrega más detalle a tu perfil.",
+    "match_label": "Coincidencia de habilidades",
+    "match_format": "{matched} de {total} habilidades",
+    "missing_label": "Habilidades que faltan",
+    "signals_heading": "Los números",
+    "signal_wage": "Ingreso mensual promedio en este sector",
+    "signal_growth": "Crecimiento del empleo del sector (año contra año)",
+    "signal_premium": "Prima salarial de la educación terciaria sobre la secundaria en este sector",
+    "risk_heading": "Cómo este trabajo podría cambiar",
+    "risk_long_term": "Riesgo a largo plazo (línea base EE. UU.)",
+    "risk_near_term": "Índice local de exposición",
+    "risk_near_term_gh": "Índice local de exposición · Ghana",
+    "risk_near_term_bd": "Índice local de exposición · Bangladesh",
+    "risk_tooltip_heading": "Cómo calculamos el Índice Local de Exposición",
+    "risk_tooltip_formula": "exposición_local = frey_osborne × factor_infraestructura × factor_composición_de_tareas",
+    "risk_tooltip_framing": "El Índice Local de Exposición mide la presión de automatización bajo condiciones locales — penetración de banda ancha y mezcla de tareas rutinarias. En mercados laborales con muchas tareas rutinarias y poca infraestructura digital, la exposición local puede superar la línea base de EE. UU.",
+    "show_calculation": "Mostrar cómo lo calculamos",
+    "show_standard_code": "Mostrar el código de ocupación estándar",
+    "wittgenstein_heading": "Hacia dónde te diriges para 2035",
+    "pathway_heading": "Para llegar a esto",
+    "pathway_providers": "Proveedores locales de formación",
+    "why_heading": "Por qué te recomendamos esto",
+    "why_intro": "Esta recomendación combina tres referencias verificables. Cada una se calcula con archivos comprometidos en el repositorio.",
+    "why_demand": "Demanda en el país (50%)",
+    "why_skill": "Coincidencia de habilidades (35%)",
+    "why_safety": "Seguridad ante automatización (15%)",
+    "why_total": "Puntuación total"
+  },
+  "country_switcher": {
+    "label": "País",
+    "active": "Activo",
+    "stub": "Configuración de prueba"
+  },
+  "bandwidth": {
+    "low": "Modo de baja conexión activo",
+    "offline": "Estás sin conexión — mostrando datos guardados"
+  }
+}

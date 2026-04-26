@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   const REQUIRED: Array<[string, (v: unknown) => boolean, string]> = [
     ['code', isString, 'must be a non-empty 2-letter country code'],
     ['name', isString, 'must be a non-empty country name'],
-    ['locale', isString, 'must be a BCP-47 locale (e.g. en, tw-Latn)'],
+    ['locale', isString, 'must be a BCP-47 locale (e.g. en, es, vi)'],
     ['currencyLabel', isString, 'must be a non-empty currency label'],
     ['opportunityEmphasis', isString, 'must be self_employment_gig or formal_training'],
     ['broadbandPenetration', isNumber, 'ITU broadband, 0..100'],

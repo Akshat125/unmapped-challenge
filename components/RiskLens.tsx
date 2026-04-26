@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { OpportunityCard } from '@/app/api/match/route';
 import { useT } from '@/lib/i18n';
+import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { Card } from './ui/Card';
 import { SourceLabel } from './ui/SourceLabel';
 
@@ -17,7 +18,10 @@ export function RiskLens({
   const t = useT();
   const long = Math.round(risk.breakdown.long_term_risk * 100);
   const near = Math.round(risk.breakdown.near_term_displacement_risk * 100);
-  const nearKey = countryCode === 'BD' ? 'opportunities.risk_near_term_bd' : 'opportunities.risk_near_term_gh';
+  const country = COUNTRIES[countryCode as CountryCode];
+  const nearLabel = country
+    ? t('opportunities.risk_near_term') + ' · ' + country.name
+    : t('opportunities.risk_near_term');
 
   return (
     <Card className="mt-8">
@@ -40,7 +44,7 @@ export function RiskLens({
           <SourceLabel>{risk.source_long}</SourceLabel>
         </div>
         <div className="pl-3">
-          <div className="text-xs text-wb-ink/60">{t(nearKey)}</div>
+          <div className="text-xs text-wb-ink/60">{nearLabel}</div>
           <div className="text-2xl font-bold text-ys-amber">{near}%</div>
           <SourceLabel>{risk.source_near}</SourceLabel>
         </div>

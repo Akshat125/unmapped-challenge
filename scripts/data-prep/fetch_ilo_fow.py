@@ -56,8 +56,9 @@ GLOBAL_BY_ISCO = {
 # can resolve overrides without a schema change when ILO country-level data
 # is fetched live.
 COUNTRY_OVERRIDES: dict[str, dict[str, dict[str, float]]] = {
-    "GH": {},
-    "BD": {},
+    "GHA": {},
+    "BOL": {},
+    "VNM": {},
 }
 
 # Benchmark: US occupation routine share (weighted mean across ISCO-08

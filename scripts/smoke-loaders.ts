@@ -12,10 +12,41 @@ import {
 import { getWdi } from '@/lib/data-loaders/wdi';
 import { getWbes } from '@/lib/data-loaders/wbes';
 import { getWittgenstein } from '@/lib/data-loaders/wittgenstein';
+import { getIloIscoForCountry } from '@/lib/data-loaders/ilo-isco';
+import { getFreyOsborneOverlay } from '@/lib/data-loaders/frey-osborne';
+import { getFowForCountry } from '@/lib/data-loaders/ilo-fow';
 import { buildImplication, iscoToSectorCategory } from '@/lib/wittgenstein-implications';
 import { mapSkills } from '@/lib/esco-mapper';
-import { matchSkills } from '@/lib/skill-match';
+import { matchSkills, RANK_WEIGHTS } from '@/lib/skill-match';
 import { tertiaryPremium } from '@/lib/returns-to-education';
+import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+
+async function probeCountry(code: CountryCode) {
+  const config = COUNTRIES[code];
+  const [emp, earn, earnEdu, wdi, wbes, witt, ilo, fow] = await Promise.all([
+    getEmployment(code),
+    getEarningsBySector(code),
+    getEarningsByEducation(code),
+    getWdi(code),
+    getWbes(code),
+    getWittgenstein(code),
+    getIloIscoForCountry(code),
+    getFowForCountry(code),
+  ]);
+  const ictGrowth = yoyGrowthPct(emp.value, 'Information and communication');
+  const tertPremium = tertiaryPremium(earnEdu.value, 'Manufacturing');
+  const isco1Sample = ilo.value?.by_isco_1?.['7'];
+  const wittImpl = buildImplication(witt.value, iscoToSectorCategory('2513'));
+
+  console.log(`── ${code} (${config.name}, ${config.displayLanguage}) ──`);
+  console.log(`  employment rows=${emp.value.length} ICT_YoY=${ictGrowth}%`);
+  console.log(`  manufacturing wage=${earn.value['Manufacturing']?.mean_monthly} ${earn.value['Manufacturing']?.currency}`);
+  console.log(`  manufacturing tertiary premium=${tertPremium?.premiumPct}%`);
+  console.log(`  WDI gdp/cap=$${wdi.value?.gdp_per_capita_usd.value} WBES vacancies=${wbes.value?.unfilled_vacancies_pct}%`);
+  console.log(`  Wittgenstein rows=${witt.value.length} impl="${wittImpl?.sentence ?? '(none)'}"`);
+  console.log(`  ILO ISCO-1 latest_year=${ilo.value?.latest_year} group_7 share=${isco1Sample?.emp_share} cagr=${isco1Sample?.cagr_3y_pct}%`);
+  console.log(`  ILO FoW byIsco entries=${fow.value.byIsco.size}`);
+}
 
 async function main() {
   const line = '─'.repeat(72);
@@ -25,39 +56,47 @@ async function main() {
 
   const esco = await getEscoOccupations();
   const skills = await getEscoSkills();
+  const fowOverlay = await getFreyOsborneOverlay();
   console.log(`ESCO: ${esco.value.length} occupations, ${skills.value.length} skills`);
   console.log(`  source: ${esco.source}`);
+  console.log(`Frey-Osborne overlay: ${Object.keys(fowOverlay.value).length} ISCO codes covered`);
+  console.log(`  source: ${fowOverlay.source}`);
+  console.log(`Rank weights: demand=${RANK_WEIGHTS.demand} skill=${RANK_WEIGHTS.skill} safety=${RANK_WEIGHTS.safety}`);
 
-  const emp = await getEmployment('GH');
-  const yoy = yoyGrowthPct(emp.value, 'Information and communication');
-  console.log(`GH employment rows: ${emp.value.length}; ICT YoY growth: ${yoy}%`);
-  console.log(`  source: ${emp.source}`);
+  for (const code of ['GHA', 'BOL', 'VNM'] as CountryCode[]) {
+    await probeCountry(code);
+  }
 
-  const earn = await getEarningsBySector('GH');
-  console.log(`GH mean monthly earnings (manufacturing): ${earn.value['Manufacturing'].mean_monthly} GHS`);
-  console.log(`  source: ${earn.source}`);
-
-  const earnEdu = await getEarningsByEducation('GH');
-  const premium = tertiaryPremium(earnEdu.value, 'Manufacturing');
-  console.log(`GH manufacturing — tertiary over secondary premium: ${premium?.premiumPct}%`);
-
-  const wdi = await getWdi('GH');
-  console.log(`GH GDP/capita: $${wdi.value?.gdp_per_capita_usd.value}`);
-  console.log(`  source: ${wdi.source}`);
-
-  const wbes = await getWbes('GH');
-  console.log(`GH unfilled vacancies: ${wbes.value?.unfilled_vacancies_pct}%`);
-  console.log(`  source: ${wbes.source}`);
-
-  const witt = await getWittgenstein('GH');
-  console.log(`GH Wittgenstein rows: ${witt.value.length}`);
-  const impl = buildImplication(witt.value, iscoToSectorCategory('2513'));
-  console.log(`  implication (web dev, GH): "${impl?.sentence}"`);
-
-  const mechanic = esco.value.find((o) => o.isco_code === '7421');
-  if (mechanic) {
-    const match = matchSkills(mechanic, skills.value.slice(0, 20).map((s) => s.uri), skills.value);
-    console.log(`Electronics mechanic sample match: ${match.matched}/${match.total}`);
+  // matchSkills smoke under the new signature.
+  const config = COUNTRIES['GHA'];
+  const ilo = await getIloIscoForCountry('GHA');
+  const fow = await getFowForCountry('GHA');
+  const electronics = esco.value.find((o) => o.isco_code === '7421');
+  if (electronics) {
+    const labelByUri = new Map(skills.value.map((s) => [s.uri, s.label]));
+    const probe = matchSkills(electronics, {
+      profileSkillUris: skills.value.slice(0, 20).map((s) => s.uri),
+      allSkills: skills.value,
+      ilo: ilo.value,
+      iloSourceLabel: ilo.source,
+      fowOverlay: fowOverlay.value,
+      fowOverlaySource: fowOverlay.source,
+      country: config,
+      riskOpts: () => {
+        const tc = fow.value.byIsco.get('7421');
+        return {
+          occupationRoutineShare: tc?.routine_share,
+          cognitiveShare: tc?.cognitive_share,
+          manualShare: tc?.manual_share,
+          usRoutineWeightedMean: fow.value.usRoutineWeightedMean,
+        };
+      },
+    }, labelByUri);
+    console.log(line);
+    console.log('Electronics mechanic (7421) matchSkills probe:');
+    console.log(`  match=${probe.matched}/${probe.total} score.total=${probe.score.total.toFixed(3)}`);
+    console.log(`  components: demand=${probe.score.demand.toFixed(3)} skill=${probe.score.skill.toFixed(3)} safety=${probe.score.safety.toFixed(3)}`);
+    console.log(`  citations: ${probe.citations.map((c) => c.component + '=' + c.weighted_contribution.toFixed(3)).join(' · ')}`);
   }
 
   const mock = await mapSkills({

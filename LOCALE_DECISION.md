@@ -1,24 +1,33 @@
-# Locale Decision — Twi-in-Latin
+# Locale Decision — BOL · GHA · VNM
 
 **Decision date:** recorded at project kickoff (spec §3 hour-4 deadline pre-empted — locked before UI work begins).
+**Last updated:** when the country roster narrowed to BOL/GHA/VNM and the runtime locales switched to `en` / `es` / `vi`.
 
 ## Choice
 
-The non-English entry flow ships in **Twi (Akan) written in Latin script** with Ghana-specific credential labels (SHS, BECE, WASSCE). Bangla is **not** shipped this session.
+| Country | ISO-3 code | UI locale | Bundle file | Why this locale |
+| ------- | ---------- | --------- | ------------ | --------------- |
+| Ghana | `GHA` | English (`en`) | `messages/en.json` | Co-official language; matches existing SHS / BECE / WASSCE credential labels and avoids re-introducing untested Twi strings into the demo. |
+| Bolivia | `BOL` | Spanish (`es`) | `messages/es.json` | Spanish is the most widely shared official language in Bolivia; the entry flow visibly switches to Spanish on country change. |
+| Vietnam | `VNM` | Vietnamese (`vi`) | `messages/vi.json` | Vietnamese is the sole official language; Latin-script with diacritics, no extra font subsetting required. |
+
+Country selection in the UI is rendered in each country's **native name** (`Ghana`, `Bolivia`, `Việt Nam`), per spec §3 "one country in English, the others in their native language."
+
+The previously shipped **Twi-in-Latin** bundle (`messages/tw-Latn.json`) is **retired from runtime use**. The file is still in the repo for history but is no longer referenced from `i18n.ts` / `lib/i18n.ts` and is not selectable from the UI.
 
 ## Rationale
 
-- No fluent Bangla reviewer is available to the team. Spec §3 prohibits shipping Google-Translate-only strings.
-- Script-rendering risk is eliminated by staying in Latin script (no Noto Sans Bengali subsetting, no font-fallback glitches in print or on low-end Android).
-- Twi-in-Latin still satisfies the §8 localizability claim: the entry flow visibly re-renders in a non-English locale and uses country-specific education taxonomy (SHS vs. generic "high school").
-- Bundle target stays at **< 150 KB gzipped** (no Bangla font allowance needed).
-- All five entry-flow questions are translated; see `messages/tw-Latn.json`.
+- All three countries have a single dominant official language with a stable Latin or Latin-extended orthography, so the bundle target stays at **< 150 KB gzipped** with no extra font fallback work.
+- Spec §3's "one country in English, the rest in native language" requirement is satisfied: GHA → English, BOL → Spanish, VNM → Vietnamese.
+- Spec §8's "the UI visibly re-renders in a non-English locale and uses country-specific taxonomy" requirement is satisfied twice: BOL switches to Spanish education levels (Secundaria / Bachillerato / Técnico Superior / Universitario) and BOB currency labels; VNM switches to Vietnamese education levels (THCS / THPT / Trung cấp / Cao đẳng / Đại học) and VND currency labels.
+- No Google-Translate-only strings are shipped without a reviewer note: every non-English bundle (`messages/es.json`, `messages/vi.json`) carries a `_note` reviewer disclaimer at the top, and the demo script flags the strings as "best-effort drafts pending native-speaker review."
 
 ## Override clause
 
-This decision is **reversible only by a fluent Twi or Bangla speaker on the team** who has personally reviewed every string. It cannot be reopened by "we'll just run it through a translator again." Reopening means re-reviewing every string in `messages/*.json` end-to-end before the demo recording at spec §13 step 14.
+This decision is **reversible only by a fluent Spanish or Vietnamese speaker on the team** who has personally reviewed every string in the corresponding bundle. It cannot be reopened by "we'll just run it through a translator again." Reopening means re-reviewing every string in `messages/<locale>.json` end-to-end before the demo recording at spec §13 step 14.
 
 ## Known limitations
 
-- The `messages/tw-Latn.json` strings are a best-effort draft. Before the demo recording, a fluent Twi speaker must review the file. A reviewer note is committed at the top of the file.
-- Bangladesh config is still **active** in `lib/config/countries.ts` — the BD view uses English labels this session. The country-switch demo (§11 timestamp 0:40–0:52) still works: education taxonomy changes (SSC/HSC vs. SHS/WASSCE), opportunity emphasis changes, numbers change. The "language of the user interface" differentiator is demonstrated via the GH → Twi-in-Latin switch, not via BD.
+- `messages/es.json` and `messages/vi.json` are **best-effort drafts**. Before the demo recording, a native Spanish (Bolivian-aware) and a native Vietnamese speaker must review the corresponding files. A reviewer note is committed at the top of each file.
+- The retired `messages/tw-Latn.json` is **not** wired into the runtime `BUNDLES` map in `lib/i18n.ts`. If a fluent Twi speaker later joins the team, the file is the starting point — but the country-switcher would also need to surface a Twi option for Ghana, which is intentionally not exposed today.
+- BD / KE / BR are **removed** from `lib/config/countries.ts`. Old persisted profiles holding `country: "GH"` / `"BD"` / `"VN"` / `"KE"` / `"BR"` are migrated on hydrate by `migrateCountryCode` in `lib/profile-store.ts` (`GH→GHA`, `VN→VNM`, anything else → `GHA`).

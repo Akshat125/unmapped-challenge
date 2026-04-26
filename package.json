@@ -11,7 +11,8 @@
     "smoke": "tsx scripts/smoke-loaders.ts",
     "smoke:api": "tsx scripts/smoke-api-route.ts",
     "smoke:profile": "tsx scripts/smoke-profile-v1.ts",
-    "smoke:bm25": "tsx scripts/smoke-bm25.ts"
+    "smoke:bm25": "tsx scripts/smoke-bm25.ts",
+    "smoke:rank": "tsx scripts/smoke-rank.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.27.0",

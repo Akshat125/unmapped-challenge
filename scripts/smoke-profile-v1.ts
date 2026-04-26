@@ -22,7 +22,7 @@ async function main() {
   const occupations = (await getEscoOccupations()).value;
   const youth = buildYouthProfileV1(
     {
-      country: 'GH',
+      country: 'GHA',
       answers: {
         education: 'shs',
         workText: 'I fix phones and have built two small websites for friends',
