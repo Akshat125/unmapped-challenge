@@ -1,9 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
-import { useNavigatorStore } from '@/lib/navigator-store';
+import { useNgoStore } from '@/lib/ngo-store';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import { BackButton } from '@/components/ui/BackButton';
 
 // Bulk intake — V3.0 §3 Group 3 "digitize skills for groups of youth
 // simultaneously." Two modes:
@@ -31,7 +31,7 @@ const EMPTY_ROW: Row = {
 };
 
 export default function BulkIntake() {
-  const addProfile = useNavigatorStore((s) => s.addProfile);
+  const addProfile = useNgoStore((s) => s.addProfile);
   const [rows, setRows] = useState<Row[]>(Array.from({ length: 4 }, () => ({ ...EMPTY_ROW })));
   const [csv, setCsv] = useState('');
   const [result, setResult] = useState<string | null>(null);
@@ -97,12 +97,10 @@ export default function BulkIntake() {
 
   return (
     <div>
+      <BackButton href="/ngo" label="Back to your youth" className="mb-4" />
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
-          <Link href="/navigator" className="text-xs text-neutral-500 underline">
-            ← Your youth
-          </Link>
-          <h1 className="mt-1 text-2xl font-semibold">Bulk intake</h1>
+          <h1 className="text-2xl font-semibold">Bulk intake</h1>
           <p className="mt-1 text-sm text-neutral-700">
             Digitize several youth profiles at once. Use the grid for a handful
             or paste a CSV for a full cohort.

@@ -1,7 +1,7 @@
 // Builder: produce a unmapped.profile/v1 record from either source of truth.
 //
 //   youth self-serve:  buildYouthProfileV1(answers, mapping, country, catalog, risks)
-//   navigator-mediated: buildNavigatorProfileV1(navigatorProfile, mapping, risks, nav)
+//   ngo-mediated:       buildNavigatorProfileV1(ngoProfile, mapping, risks, nav)
 //
 // Both paths emit the same JSON-LD shape so the employer decoder doesn't
 // care where a profile came from.
@@ -9,7 +9,7 @@
 import type { CountryCode } from '@/lib/config/countries';
 import type { SkillMapResult } from '@/lib/esco-mapper';
 import type { EscoSkill, EscoOccupation } from '@/lib/data-loaders/esco';
-import type { NavigatorProfile } from '@/lib/navigator-store';
+import type { NgoCaseloadProfile } from '@/lib/ngo-store';
 import {
   PROFILE_SCHEMA_VERSION,
   JSONLD_CONTEXT,
@@ -108,9 +108,12 @@ export function buildYouthProfileV1(
   };
 }
 
-// ---- Navigator-mediated --------------------------------------------------
+// ---- NGO-mediated --------------------------------------------------------
+// The function name is preserved (buildNavigatorProfileV1) because it's
+// imported from the ProfileV1 emission path and renaming it would require
+// editing code that touches the JSON-LD schema — see lib/** rename policy.
 export function buildNavigatorProfileV1(
-  profile: NavigatorProfile,
+  profile: NgoCaseloadProfile,
   mapping: SkillMapResult | null,
   nav: { id: string; name: string },
   opts: BuildOpts,

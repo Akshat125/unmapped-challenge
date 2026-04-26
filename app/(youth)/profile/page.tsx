@@ -11,6 +11,7 @@ import type { OccupationRiskSummary } from '@/lib/profile-v1-builder';
 import { encodeShareToken } from '@/lib/share-token';
 import { QRCodeView } from '@/components/QRCodeView';
 import { ProfilePassportView } from '@/components/ProfilePassportView';
+import { BackButton } from '@/components/ui/BackButton';
 import type { OpportunityCard } from '@/app/api/match/route';
 
 // "My Digital Skill Passport" — the Youth view per V3.0 §3 Group 1.
@@ -106,6 +107,7 @@ export default function ProfilePage() {
 
   return (
     <article>
+      <BackButton href="/entry" label="Back to your story" className="mb-4" />
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-3xl font-semibold">My Digital Skill Passport</h1>

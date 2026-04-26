@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
-import { NavigatorHeader } from '@/components/NavigatorHeader';
+import { NgoHeader } from '@/components/NgoHeader';
 
-export default function NavigatorLayout({ children }: { children: ReactNode }) {
+export default function NgoLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-wb-sand/60">
-      <NavigatorHeader />
+      <NgoHeader />
       <main className="mx-auto w-full max-w-[80rem] px-6 py-10">{children}</main>
     </div>
   );

@@ -13,6 +13,7 @@ import { useMarketSignalStore } from '@/lib/market-signal-store';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Disclosure } from '@/components/ui/Disclosure';
+import { BackButton } from '@/components/ui/BackButton';
 
 // Step 3 of the Employer wizard: "Here are the people who match."
 //
@@ -142,6 +143,7 @@ export default function EmployerCandidates() {
 
   return (
     <div className="space-y-8">
+      <BackButton href="/employer/jd" label="Back to what we understood" />
       <header className="max-w-3xl">
         <h1 className="text-3xl font-bold tracking-tight text-wb-navy md:text-4xl">
           Here are the people who match.

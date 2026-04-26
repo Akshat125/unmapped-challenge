@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { useEmployerStore } from '@/lib/employer-store';
 import { useCatalog } from '@/lib/catalog-client';
+import { BackButton } from '@/components/ui/BackButton';
 
 // Skill-first search. The employer types the skills they need. We rank
 // candidates by verified matches first, self-reported matches second. No
@@ -51,6 +52,7 @@ export default function EmployerSearch() {
 
   return (
     <div>
+      <BackButton href="/employer" label="Back to Step 1" className="mb-4" />
       <header>
         <h1 className="text-2xl font-semibold">Skill-first search</h1>
         <p className="mt-1 text-sm text-neutral-700">

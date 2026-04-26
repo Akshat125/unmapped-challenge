@@ -1,7 +1,7 @@
 // unmapped.profile/v1 — JSON-LD schema for portable skill identities.
 // Spec §1 of V3.0. The same schema is produced by:
 //   • /profile (youth self-serve export)
-//   • /navigator/[id] (navigator-mediated export)
+//   • /ngo/[id] (NGO-mediated export)
 // and consumed by:
 //   • /employer (skill-first candidate decoder)
 //   • /share/[token] (read-only view for employers with a share link)

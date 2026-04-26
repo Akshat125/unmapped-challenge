@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useNavigatorStore } from '@/lib/navigator-store';
+import { useNgoStore } from '@/lib/ngo-store';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 
-export default function NavigatorCaseload() {
-  const profiles = useNavigatorStore((s) => s.profiles);
-  const addProfile = useNavigatorStore((s) => s.addProfile);
-  const removeProfile = useNavigatorStore((s) => s.removeProfile);
+export default function NgoCaseload() {
+  const profiles = useNgoStore((s) => s.profiles);
+  const addProfile = useNgoStore((s) => s.addProfile);
+  const removeProfile = useNgoStore((s) => s.removeProfile);
 
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState({
@@ -134,7 +134,7 @@ export default function NavigatorCaseload() {
                 </div>
                 <div className="flex flex-wrap items-center gap-2 text-sm">
                   <Link
-                    href={`/navigator/${p.id}`}
+                    href={`/ngo/${p.id}`}
                     className="rounded border border-ink bg-white px-3 py-1"
                   >
                     Open

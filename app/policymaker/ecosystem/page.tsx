@@ -6,6 +6,7 @@ import {
   ALL_SCOPES,
   type ApiScope,
 } from '@/lib/ecosystem-store';
+import { BackButton } from '@/components/ui/BackButton';
 
 // V3.0 §4 Step 4 — API & Ecosystem Management. Tenant list, per-key scopes
 // with rate limits, revoke + create, last-used + 24h request counts.
@@ -45,6 +46,7 @@ export default function EcosystemPage() {
 
   return (
     <div>
+      <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
       <header className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">API &amp; ecosystem</h1>

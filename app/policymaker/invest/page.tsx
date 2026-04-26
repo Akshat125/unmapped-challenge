@@ -5,6 +5,7 @@ import { useAggregate } from '@/lib/policymaker-client';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
+import { BackButton } from '@/components/ui/BackButton';
 
 // §7.2 Investment Prioritization. Three weight sliders with the defended
 // defaults in the spec (skill_gap=0.4, employment_growth=0.4, wage_floor=0.2).
@@ -115,6 +116,7 @@ export default function InvestPage() {
 
   return (
     <div>
+      <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
       <header>
         <h1 className="text-2xl font-semibold text-wb-navy">
           Investment prioritization · {data.country_name}

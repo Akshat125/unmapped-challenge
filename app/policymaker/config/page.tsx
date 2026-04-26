@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { useProfile } from '@/lib/profile-store';
+import { BackButton } from '@/components/ui/BackButton';
 
 // White-label config UI. Policymaker pastes a JSON that matches the
 // CountryConfig schema; we validate via /api/policymaker/validate-config
@@ -79,6 +80,7 @@ export default function ConfigPage() {
 
   return (
     <div>
+      <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
       <header>
         <h1 className="text-2xl font-semibold">White-label configuration</h1>
         <p className="mt-1 text-sm text-neutral-700">

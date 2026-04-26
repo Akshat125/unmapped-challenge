@@ -5,6 +5,7 @@ import { useAggregate } from '@/lib/policymaker-client';
 import { iscoToSector } from '@/lib/sector-map';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { BackButton } from '@/components/ui/BackButton';
 
 // Color ramp for near-term displacement risk. Intentionally stops short of
 // white at 0% so a "0 risk" cell still reads as data-present. Accessible-
@@ -88,6 +89,7 @@ export default function SkillGapsPage() {
 
   return (
     <div>
+      <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
       <header className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold text-wb-navy">Skill-gap heatmap · {data.country_name}</h1>

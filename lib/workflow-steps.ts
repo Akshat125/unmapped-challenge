@@ -19,10 +19,10 @@ export const EMPLOYER_STEPS: StepDefinition[] = [
 ];
 
 export const NGO_STEPS: StepDefinition[] = [
-  { label: 'Your youth', href: '/navigator' },
-  { label: 'Add intake', href: '/navigator/bulk' },
+  { label: 'Your youth', href: '/ngo' },
+  { label: 'Add intake', href: '/ngo/bulk' },
   { label: 'Verify & coach' }, // reached via profile detail
-  { label: 'Track transitions', href: '/navigator/impact' },
+  { label: 'Track transitions', href: '/ngo/impact' },
 ];
 
 export const POLICYMAKER_STEPS: StepDefinition[] = [

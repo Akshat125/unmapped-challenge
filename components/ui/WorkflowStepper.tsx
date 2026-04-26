@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 // Horizontal workflow stepper. Active step is prop-driven, not
-// URL-derived — so detail routes (e.g., /navigator/[id]) can still show a
+// URL-derived — so detail routes (e.g., /ngo/[id]) can still show a
 // meaningful step without invalid active-path logic.
 //
 // Visual: connected nodes. Completed steps are filled navy, the active

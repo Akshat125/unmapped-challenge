@@ -13,7 +13,7 @@ export type ActiveRole = 'youth' | 'employer' | 'ngo' | 'policymaker';
 export const ROLE_HOMES: Record<ActiveRole, string> = {
   youth: '/entry',
   employer: '/employer',
-  ngo: '/navigator',
+  ngo: '/ngo',
   policymaker: '/policymaker',
 };
 

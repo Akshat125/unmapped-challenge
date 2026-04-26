@@ -3,22 +3,22 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { HeartHandshake } from 'lucide-react';
-import { useNavigatorStore } from '@/lib/navigator-store';
+import { useNgoStore } from '@/lib/ngo-store';
 import { RoleSwitcher } from './RoleSwitcher';
 import { WorkflowStepper } from './ui/WorkflowStepper';
 import { NGO_STEPS, matchStep } from '@/lib/workflow-steps';
 
-export function NavigatorHeader() {
-  const name = useNavigatorStore((s) => s.navigatorName);
-  const setName = useNavigatorStore((s) => s.setNavigatorName);
-  const pathname = usePathname() ?? '/navigator';
+export function NgoHeader() {
+  const name = useNgoStore((s) => s.navigatorName);
+  const setName = useNgoStore((s) => s.setNavigatorName);
+  const pathname = usePathname() ?? '/ngo';
   const currentIndex = Math.max(0, matchStep(NGO_STEPS, pathname));
 
   return (
     <header className="sticky top-0 z-40 border-b border-wb-line bg-wb-sand/95 backdrop-blur">
       <div className="mx-auto flex max-w-[80rem] flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link
-          href="/navigator"
+          href="/ngo"
           className="inline-flex items-center gap-2 rounded text-lg font-bold text-wb-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-wb-blue"
         >
           <HeartHandshake className="h-5 w-5 text-ys-teal" strokeWidth={2} aria-hidden />

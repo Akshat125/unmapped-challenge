@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 import { useAggregate } from '@/lib/policymaker-client';
 import { Card } from '@/components/ui/Card';
+import { BackButton } from '@/components/ui/BackButton';
 
 // Sector time-series page. Recharts is tree-shakeable per spec §4.
 // Single chart with one line per sector; clicking the legend toggles.
@@ -57,6 +58,7 @@ export default function SectorsPage() {
 
   return (
     <div>
+      <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
       <header>
         <h1 className="text-2xl font-semibold text-wb-navy">Sector growth · {data.country_name}</h1>
         <p className="mt-2 text-sm text-wb-ink/70">

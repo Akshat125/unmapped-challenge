@@ -1,13 +1,14 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useNavigatorStore } from '@/lib/navigator-store';
+import { useNgoStore } from '@/lib/ngo-store';
+import { BackButton } from '@/components/ui/BackButton';
 
 // V3.0 §3 Step 4 — Transition Monitoring. Shows how many "unmapped" profiles
 // have moved into the "Discovery" phase for employers (= been exported).
 // Also reports placement, validations, and average time in program.
-export default function NavigatorImpact() {
-  const profiles = useNavigatorStore((s) => s.profiles);
+export default function NgoImpact() {
+  const profiles = useNgoStore((s) => s.profiles);
 
   const stats = useMemo(() => {
     const total = profiles.length;
@@ -40,10 +41,13 @@ export default function NavigatorImpact() {
 
   if (profiles.length === 0) {
     return (
-      <p className="rounded border border-dashed border-neutral-300 bg-white p-6 text-center text-sm text-neutral-600">
-        No caseload entries yet. Impact metrics will appear once you add intakes
-        on the Your youth page.
-      </p>
+      <div>
+        <BackButton href="/ngo" label="Back to your youth" className="mb-4" />
+        <p className="rounded border border-dashed border-wb-line bg-white p-6 text-center text-sm text-wb-ink/60">
+          No caseload entries yet. Impact metrics will appear once you add intakes
+          on the Your youth page.
+        </p>
+      </div>
     );
   }
 
@@ -54,6 +58,7 @@ export default function NavigatorImpact() {
 
   return (
     <div>
+      <BackButton href="/ngo" label="Back to your youth" className="mb-4" />
       <h1 className="text-2xl font-semibold">Impact &amp; transitions</h1>
       <p className="mt-1 text-sm text-neutral-700">
         Aggregate outcomes across your caseload. Discovery = profiles exported

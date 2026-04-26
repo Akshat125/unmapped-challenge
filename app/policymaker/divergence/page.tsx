@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { useMarketSignalStore } from '@/lib/market-signal-store';
-import { useNavigatorStore } from '@/lib/navigator-store';
+import { useNgoStore } from '@/lib/ngo-store';
 import { useEmployerStore } from '@/lib/employer-store';
 import { useCatalog } from '@/lib/catalog-client';
 import type { SkillMapResult } from '@/lib/esco-mapper';
 import { Card } from '@/components/ui/Card';
+import { BackButton } from '@/components/ui/BackButton';
 
 // Supply vs demand divergence heatmap (V3.0 §4 Step 2).
 //
@@ -32,7 +33,7 @@ interface Row {
 export default function DivergencePage() {
   const catalog = useCatalog();
   const jds = useMarketSignalStore((s) => s.recentJds);
-  const navigatorProfiles = useNavigatorStore((s) => s.profiles);
+  const navigatorProfiles = useNgoStore((s) => s.profiles);
   const employerCandidates = useEmployerStore((s) => s.candidates);
 
   // Supply skills per navigator profile need a mapping. We re-run the mock
@@ -116,6 +117,7 @@ export default function DivergencePage() {
   if (rows.length === 0) {
     return (
       <div>
+        <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
         <header>
           <h1 className="text-2xl font-semibold text-wb-navy">Supply &amp; demand divergence</h1>
           <p className="mt-2 text-sm text-wb-ink/70">
@@ -127,7 +129,7 @@ export default function DivergencePage() {
         <ul className="mt-8 space-y-3 text-sm text-wb-ink">
           <li>
             →{' '}
-            <Link href="/navigator/bulk" className="underline hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
+            <Link href="/ngo/bulk" className="underline hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
               Add youth profiles via bulk intake
             </Link>
           </li>
@@ -144,6 +146,7 @@ export default function DivergencePage() {
 
   return (
     <div>
+      <BackButton href="/policymaker" label="Back to overview" className="mb-4" />
       <header>
         <h1 className="text-2xl font-semibold text-wb-navy">Supply &amp; demand divergence</h1>
         <p className="mt-2 text-sm text-wb-ink/70">

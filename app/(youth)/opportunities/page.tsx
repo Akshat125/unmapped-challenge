@@ -6,6 +6,7 @@ import { useProfile } from '@/lib/profile-store';
 import { useT } from '@/lib/i18n';
 import type { OpportunityCard } from '@/app/api/match/route';
 import { OpportunityCardView } from '@/components/OpportunityCardView';
+import { BackButton } from '@/components/ui/BackButton';
 
 interface MatchResponse {
   country: string;
@@ -66,6 +67,7 @@ export default function OpportunitiesPage() {
 
   return (
     <div>
+      <BackButton href="/profile" label="Back to your profile" className="mb-4" />
       <header>
         <h1 className="text-3xl font-semibold">{t('opportunities.heading')}</h1>
         <p className="mt-1 text-neutral-700">{t('opportunities.subheading')}</p>

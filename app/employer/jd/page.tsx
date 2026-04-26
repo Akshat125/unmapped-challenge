@@ -10,6 +10,7 @@ import type { JdMapResult } from '@/lib/jd-mapper';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Disclosure } from '@/components/ui/Disclosure';
+import { BackButton } from '@/components/ui/BackButton';
 
 // Step 2 of the Employer wizard: "Here's what we understood."
 //
@@ -100,6 +101,7 @@ export default function EmployerStep2() {
 
   return (
     <div className="space-y-8">
+      <BackButton href="/employer" label="Back to Step 1" />
       <header className="max-w-3xl">
         <h1 className="text-3xl font-bold tracking-tight text-wb-navy md:text-4xl">
           {result
