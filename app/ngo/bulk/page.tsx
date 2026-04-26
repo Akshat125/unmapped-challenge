@@ -1,9 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
-import { useNavigatorStore } from '@/lib/navigator-store';
+import { useNgoStore } from '@/lib/ngo-store';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import { BackButton } from '@/components/ui/BackButton';
+import { Button } from '@/components/ui/Button';
+import { Plus, Upload } from 'lucide-react';
 
 // Bulk intake — V3.0 §3 Group 3 "digitize skills for groups of youth
 // simultaneously." Two modes:
@@ -31,7 +33,7 @@ const EMPTY_ROW: Row = {
 };
 
 export default function BulkIntake() {
-  const addProfile = useNavigatorStore((s) => s.addProfile);
+  const addProfile = useNgoStore((s) => s.addProfile);
   const [rows, setRows] = useState<Row[]>(Array.from({ length: 4 }, () => ({ ...EMPTY_ROW })));
   const [csv, setCsv] = useState('');
   const [result, setResult] = useState<string | null>(null);
@@ -97,12 +99,10 @@ export default function BulkIntake() {
 
   return (
     <div>
+      <BackButton href="/ngo" label="Back to your youth" className="mb-4" />
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
-          <Link href="/navigator" className="text-xs text-neutral-500 underline">
-            ← Caseload
-          </Link>
-          <h1 className="mt-1 text-2xl font-semibold">Bulk intake</h1>
+          <h1 className="text-2xl font-semibold">Bulk intake</h1>
           <p className="mt-1 text-sm text-neutral-700">
             Digitize several youth profiles at once. Use the grid for a handful
             or paste a CSV for a full cohort.
@@ -195,12 +195,12 @@ export default function BulkIntake() {
           </table>
         </div>
         <div className="mt-3 flex gap-2">
-          <button onClick={addRow} className="rounded border border-neutral-300 bg-white px-3 py-1 text-sm">
-            + Row
-          </button>
-          <button onClick={submitGrid} className="rounded bg-ink px-3 py-1 text-sm text-white">
+          <Button variant="secondary" size="sm" onClick={addRow} icon={Plus}>
+            Row
+          </Button>
+          <Button size="sm" onClick={submitGrid}>
             Create profiles
-          </button>
+          </Button>
         </div>
       </section>
 
@@ -220,13 +220,15 @@ export default function BulkIntake() {
           className="mt-2 w-full rounded border border-neutral-300 bg-white p-2 font-mono text-xs"
           placeholder="display_name,country,work_text,tools_text,languages&#10;Amara,GH,I fix phones,soldering iron Android,en;tw"
         />
-        <button
+        <Button
           onClick={submitCsv}
           disabled={!csv.trim()}
-          className="mt-2 rounded bg-ink px-3 py-1 text-sm text-white disabled:opacity-50"
+          size="sm"
+          icon={Upload}
+          className="mt-2 disabled:opacity-50"
         >
           Import CSV
-        </button>
+        </Button>
       </section>
     </div>
   );

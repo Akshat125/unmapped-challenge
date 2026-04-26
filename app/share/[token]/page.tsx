@@ -1,11 +1,13 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import { useMemo } from 'react';
 import { decodeShareToken } from '@/lib/share-token';
 import { validateProfileV1 } from '@/lib/profile-schema';
 import { ProfilePassportView } from '@/components/ProfilePassportView';
+import { BrandMark } from '@/components/ui/BrandMark';
+import { LinkButton } from '@/components/ui/LinkButton';
+import { ArrowRight } from 'lucide-react';
 
 export default function SharePage() {
   const params = useParams<{ token: string }>();
@@ -18,46 +20,60 @@ export default function SharePage() {
   );
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
-      <div className="mb-4 flex items-baseline justify-between gap-2">
-        <Link href="/employer" className="text-sm text-neutral-600 underline">
-          Open in employer decoder →
-        </Link>
-        <Link href="/" className="text-sm text-neutral-600 underline">
-          ← UNMAPPED
-        </Link>
-      </div>
-
-      <div className="rounded border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
-        <strong>Read-only share link.</strong> The full profile was encoded
-        into this URL by the subject. Prototype scope: a production deployment
-        uses signed, short-lived tokens with server-side audit.
-      </div>
-
-      {!decoded && (
-        <div className="mt-6 rounded border border-red-300 bg-red-50 p-4 text-sm text-red-900">
-          This share link could not be decoded. It may be truncated.
+    <div className="min-h-screen bg-white">
+      <header className="border-b border-wb-line">
+        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+          <BrandMark />
+          <LinkButton
+            href="/employer"
+            variant="secondary"
+            size="sm"
+            iconRight={ArrowRight}
+          >
+            Open in employer decoder
+          </LinkButton>
         </div>
-      )}
+      </header>
 
-      {decoded && !validation.ok && (
-        <div className="mt-6 rounded border border-red-300 bg-red-50 p-4 text-sm text-red-900">
-          Decoded payload is not a valid <code>unmapped.profile/v1</code> document.
-          <ul className="mt-2 list-disc pl-5">
-            {validation.issues.map((i, idx) => (
-              <li key={idx}>
-                <code>{i.path}</code> — {i.message}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <main className="mx-auto max-w-4xl px-6 py-10">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-wb-ink/50">
+          Shared Digital Skill Passport
+        </p>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-wb-navy">
+          A candidate has shared their profile with you
+        </h1>
 
-      {decoded && validation.ok && (
-        <div className="mt-6 rounded border border-neutral-300 bg-white p-5">
-          <ProfilePassportView profile={decoded} />
+        <div className="mt-6 rounded-lg border border-ys-amber bg-ys-amber/10 p-4 text-sm text-wb-ink">
+          <strong>Read-only share link.</strong> The full profile was encoded
+          into this URL by the subject. Prototype scope: a production deployment
+          uses signed, short-lived tokens with server-side audit.
         </div>
-      )}
+
+        {!decoded && (
+          <div className="mt-6 rounded-lg border border-ys-coral bg-ys-coral/10 p-4 text-sm text-ys-coral">
+            This share link could not be decoded. It may be truncated.
+          </div>
+        )}
+
+        {decoded && !validation.ok && (
+          <div className="mt-6 rounded-lg border border-ys-coral bg-ys-coral/10 p-4 text-sm text-ys-coral">
+            Decoded payload is not a valid <code>unmapped.profile/v1</code> document.
+            <ul className="mt-2 list-disc pl-5">
+              {validation.issues.map((i, idx) => (
+                <li key={idx}>
+                  <code>{i.path}</code> — {i.message}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {decoded && validation.ok && (
+          <div className="mt-6 rounded-lg border border-wb-line bg-white p-6 shadow-sm">
+            <ProfilePassportView profile={decoded} />
+          </div>
+        )}
+      </main>
     </div>
   );
 }

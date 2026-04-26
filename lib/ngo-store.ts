@@ -5,12 +5,19 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import type { CountryCode } from '@/lib/config/countries';
 import { uuid } from '@/lib/profile-schema';
 
-// Navigator caseload. Each caseload entry is a youth profile the navigator
-// maintains on behalf of a young person who lacks a device / literacy to
-// self-serve. The profile is still Amara-owned in principle: the navigator
-// captures it, but the JSON export (from the youth profile page) is what
-// ultimately travels with her.
-export interface NavigatorProfile {
+// NGO caseload — the NGO or training provider manages a set of youth
+// profiles, vouching for specific competencies and tracking transitions.
+// The practitioner (the human doing the vouching) is still referred to
+// as a "navigator" inside the store — that's the job title. The group
+// they work for is the NGO / training provider.
+//
+// Note on rename: this file replaces lib/navigator-store.ts. The
+// localStorage key stays "unmapped-navigator" so existing session data
+// survives the rename. The `navigatorId` / `navigatorName` fields are
+// preserved because they travel into the exported profile as
+// `navigator_id` / `navigator_name` — a public JSON-LD contract.
+
+export interface NgoCaseloadProfile {
   id: string;
   displayName: string;
   country: CountryCode;
@@ -42,19 +49,19 @@ export interface NavigatorProfile {
   last_exported_at?: string;
 }
 
-interface NavigatorState {
-  navigatorId: string;      // UUID, stable across sessions for this navigator
+interface NgoState {
+  navigatorId: string;      // UUID, stable across sessions for this practitioner
   navigatorName: string;
-  profiles: NavigatorProfile[];
+  profiles: NgoCaseloadProfile[];
   setNavigatorName: (name: string) => void;
-  addProfile: (p: Omit<NavigatorProfile, 'id' | 'createdAt' | 'lastUpdatedAt' | 'validations' | 'localPathways' | 'status' | 'exports_count'>) => NavigatorProfile;
-  updateProfile: (id: string, patch: Partial<NavigatorProfile>) => void;
+  addProfile: (p: Omit<NgoCaseloadProfile, 'id' | 'createdAt' | 'lastUpdatedAt' | 'validations' | 'localPathways' | 'status' | 'exports_count'>) => NgoCaseloadProfile;
+  updateProfile: (id: string, patch: Partial<NgoCaseloadProfile>) => void;
   removeProfile: (id: string) => void;
-  addValidation: (id: string, v: NavigatorProfile['validations'][number]) => void;
+  addValidation: (id: string, v: NgoCaseloadProfile['validations'][number]) => void;
   markExported: (id: string) => void;
 }
 
-export const useNavigatorStore = create<NavigatorState>()(
+export const useNgoStore = create<NgoState>()(
   persist(
     (set, get) => ({
       navigatorId: uuid(),
@@ -63,7 +70,7 @@ export const useNavigatorStore = create<NavigatorState>()(
       setNavigatorName: (name) => set({ navigatorName: name }),
       addProfile: (p) => {
         const now = new Date().toISOString();
-        const profile: NavigatorProfile = {
+        const profile: NgoCaseloadProfile = {
           ...p,
           id: uuid(),
           createdAt: now,
@@ -118,3 +125,4 @@ export const useNavigatorStore = create<NavigatorState>()(
     },
   ),
 );
+

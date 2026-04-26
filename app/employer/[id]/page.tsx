@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { useEmployerStore } from '@/lib/employer-store';
 import { ProfilePassportView } from '@/components/ProfilePassportView';
+import { BackButton } from '@/components/ui/BackButton';
 
 export default function EmployerCandidateDetail() {
   const params = useParams<{ id: string }>();
@@ -30,12 +31,10 @@ export default function EmployerCandidateDetail() {
 
   return (
     <div>
+      <BackButton href="/employer/candidates" label="Back to candidates" className="mb-4" />
       <header className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
-          <Link href="/employer" className="text-xs text-neutral-500 underline">
-            ← Shortlist
-          </Link>
-          <h1 className="mt-1 text-2xl font-semibold">
+          <h1 className="text-2xl font-semibold">
             {profile.subject.display_name ?? 'Anonymous candidate'}
           </h1>
           <p className="text-xs text-neutral-600">

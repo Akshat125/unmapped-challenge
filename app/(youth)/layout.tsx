@@ -5,7 +5,7 @@ export default function YouthLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <YouthHeader />
-      <main className="mx-auto max-w-3xl px-4 py-8">{children}</main>
+      <main className="mx-auto w-full max-w-[64rem] px-6 py-10">{children}</main>
     </>
   );
 }

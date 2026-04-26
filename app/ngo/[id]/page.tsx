@@ -1,16 +1,18 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useNavigatorStore } from '@/lib/navigator-store';
+import { useNgoStore } from '@/lib/ngo-store';
 import { useCatalog } from '@/lib/catalog-client';
 import { COUNTRIES } from '@/lib/config/countries';
-import type { NavigatorProfile } from '@/lib/navigator-store';
+import type { NgoCaseloadProfile } from '@/lib/ngo-store';
 import type { SkillMapResult } from '@/lib/esco-mapper';
 import { signVerification } from '@/lib/profile-schema';
 import { buildNavigatorProfileV1 } from '@/lib/profile-v1-builder';
 import { resilienceGaps } from '@/lib/resilience';
+import { BackButton } from '@/components/ui/BackButton';
+import { Button } from '@/components/ui/Button';
+import { Download, Plus } from 'lucide-react';
 
 const VALIDATION_METHODS = [
   { id: 'observation', label: 'Observation (demonstrated in person)' },
@@ -19,14 +21,14 @@ const VALIDATION_METHODS = [
   { id: 'training_certificate', label: 'Training certificate on file' },
 ] as const;
 
-export default function NavigatorProfilePage() {
+export default function NgoCaseloadProfilePage() {
   const params = useParams<{ id: string }>();
-  const profile = useNavigatorStore((s) => s.profiles.find((p) => p.id === params.id));
-  const updateProfile = useNavigatorStore((s) => s.updateProfile);
-  const addValidation = useNavigatorStore((s) => s.addValidation);
-  const markExported = useNavigatorStore((s) => s.markExported);
-  const navigatorName = useNavigatorStore((s) => s.navigatorName);
-  const navigatorId = useNavigatorStore((s) => s.navigatorId);
+  const profile = useNgoStore((s) => s.profiles.find((p) => p.id === params.id));
+  const updateProfile = useNgoStore((s) => s.updateProfile);
+  const addValidation = useNgoStore((s) => s.addValidation);
+  const markExported = useNgoStore((s) => s.markExported);
+  const navigatorName = useNgoStore((s) => s.navigatorName);
+  const navigatorId = useNgoStore((s) => s.navigatorId);
   const catalog = useCatalog();
 
   const [mapping, setMapping] = useState<SkillMapResult | null>(null);
@@ -61,15 +63,13 @@ export default function NavigatorProfilePage() {
   if (!profile) {
     return (
       <div>
+        <BackButton href="/ngo" label="Back to your youth" className="mb-4" />
         <p>Profile not found.</p>
-        <Link href="/navigator" className="mt-4 inline-block underline">
-          Back to caseload
-        </Link>
       </div>
     );
   }
 
-  function downloadProfileJson(p: NavigatorProfile) {
+  function downloadProfileJson(p: NgoCaseloadProfile) {
     if (!catalog) return;
     const payload = buildNavigatorProfileV1(
       p,
@@ -130,23 +130,23 @@ export default function NavigatorProfilePage() {
 
   return (
     <div>
+      <BackButton href="/ngo" label="Back to your youth" className="mb-4" />
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
-          <Link href="/navigator" className="text-xs text-neutral-500 underline">
-            ← Caseload
-          </Link>
-          <h1 className="mt-1 text-2xl font-semibold">{profile.displayName}</h1>
+          <h1 className="text-2xl font-semibold">{profile.displayName}</h1>
           <p className="text-xs text-neutral-600">
             {COUNTRIES[profile.country].name} · status {profile.status}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={Download}
             onClick={() => downloadProfileJson(profile)}
-            className="rounded border border-ink bg-white px-3 py-1 text-sm"
           >
             Export (JSON)
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -174,7 +174,7 @@ export default function NavigatorProfilePage() {
           <select
             value={profile.status}
             onChange={(e) =>
-              updateProfile(profile.id, { status: e.target.value as NavigatorProfile['status'] })
+              updateProfile(profile.id, { status: e.target.value as NgoCaseloadProfile['status'] })
             }
             className="mt-1 block w-full rounded border border-neutral-300 bg-white px-3 py-2"
           >
@@ -265,13 +265,14 @@ export default function NavigatorProfilePage() {
             />
           </label>
         </div>
-        <button
+        <Button
           onClick={submitValidation}
-          className="mt-3 rounded bg-ink px-3 py-1 text-sm text-white disabled:opacity-50"
           disabled={!validationDraft.skillUri}
+          size="sm"
+          className="mt-3 disabled:opacity-50"
         >
           Record validation
-        </button>
+        </Button>
       </section>
 
       {profile.validations.length > 0 && (
@@ -339,12 +340,9 @@ export default function NavigatorProfilePage() {
             placeholder="e.g. GIZ Ghana — Electronics apprenticeship, starts March"
             className="flex-1 rounded border border-neutral-300 bg-white px-3 py-2"
           />
-          <button
-            onClick={submitPathway}
-            className="rounded bg-ink px-3 py-2 text-sm text-white"
-          >
+          <Button onClick={submitPathway} size="sm" icon={Plus}>
             Add
-          </button>
+          </Button>
         </div>
         {profile.localPathways.length > 0 && (
           <ul className="mt-3 list-disc space-y-1 pl-6 text-sm">

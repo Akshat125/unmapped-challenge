@@ -1,49 +1,29 @@
 'use client';
 
-import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { CountrySwitcher } from './CountrySwitcher';
 import { BandwidthBadge } from './BandwidthBadge';
-import { useT } from '@/lib/i18n';
+import { RoleSwitcher } from './RoleSwitcher';
+import { BrandMark } from './ui/BrandMark';
+import { WorkflowStepper } from './ui/WorkflowStepper';
+import { YOUTH_STEPS, matchStep } from '@/lib/workflow-steps';
 
 export function YouthHeader() {
-  const t = useT();
+  const pathname = usePathname() ?? '/entry';
+  const currentIndex = Math.max(0, matchStep(YOUTH_STEPS, pathname));
+
   return (
-    <header className="print:hidden border-b border-wb-line bg-white">
-      <div className="mx-auto flex max-w-[48rem] flex-wrap items-center justify-between gap-3 px-4 py-3">
-        <Link href="/" className="text-lg font-bold tracking-tight text-wb-navy focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-          {t('brand.name')}
-        </Link>
-        <nav className="flex flex-wrap items-center gap-3 text-sm">
-          <Link href="/" className="hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            {t('nav.entry')}
-          </Link>
-          <Link href="/profile" className="hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            {t('nav.profile')}
-          </Link>
-          <Link href="/opportunities" className="hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            {t('nav.opportunities')}
-          </Link>
-          <span className="text-wb-line">·</span>
-          <Link href="/navigator" className="text-xs text-wb-ink/60 hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            Navigator
-          </Link>
-          <Link href="/employer" className="text-xs text-wb-ink/60 hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            Employer
-          </Link>
-          <Link href="/policymaker" className="text-xs text-wb-ink/60 hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            Policymaker
-          </Link>
-          <Link href="/integrate" className="text-xs text-wb-ink/60 hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            Integrate
-          </Link>
-          <Link href="/about/limits" className="text-xs text-wb-ink/60 hover:text-wb-blue focus:outline-none focus:ring-2 focus:ring-wb-blue rounded">
-            Limits
-          </Link>
-        </nav>
+    <header className="print:hidden sticky top-0 z-40 border-b border-wb-line bg-white/95 backdrop-blur">
+      <div className="mx-auto flex max-w-[72rem] flex-wrap items-center justify-between gap-3 px-6 py-4">
+        <BrandMark href="/entry" />
         <div className="flex items-center gap-2">
           <BandwidthBadge />
           <CountrySwitcher />
+          <RoleSwitcher />
         </div>
+      </div>
+      <div className="mx-auto max-w-[72rem] border-t border-wb-line/70 px-6 py-3">
+        <WorkflowStepper steps={YOUTH_STEPS} currentIndex={currentIndex} />
       </div>
     </header>
   );
