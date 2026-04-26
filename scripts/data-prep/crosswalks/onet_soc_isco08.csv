@@ -1,0 +1,29 @@
+# O*NET-SOC (2019) to ISCO-08 crosswalk.
+# Source: BLS/ILO published crosswalk
+#   https://www.bls.gov/soc/soc_2018_to_isco_08_crosswalk.xlsx
+# Official crosswalk is LOSSY — expect ~15% unmatched; build_occupation_subset.py
+# logs every miss to public/data/crosswalk_misses.json (§6.1 requirement).
+#
+# This committed seed covers the demo occupation subset. For production,
+# replace the rows below with the full published CSV export. The loader
+# treats any unknown SOC code in the CSV as unmatched (safe default).
+soc_code,isco_code,note
+49-3023.00,7231,Motor vehicle mechanics
+49-2097.00,7421,Electronic equipment installers -> Electronics mechanics and servicers
+49-2022.00,7422,Telecom equipment installers -> ICT installers and servicers
+15-1254.00,2513,Web developers
+15-1252.00,2512,Software developers
+15-1232.00,3512,Computer user support -> ICT user support technicians
+41-2031.00,5223,Retail sales -> Shop sales assistants
+51-6052.00,7533,Tailors/dressmakers -> Sewing workers
+47-2031.00,7115,Carpenters
+47-2152.00,7126,Plumbers
+51-4121.00,7212,Welders
+53-3058.00,8322,"Taxi drivers, chauffeurs"
+35-2014.00,5120,Cooks restaurant -> Cooks
+43-9061.00,4110,Office clerks -> General office clerks
+43-4051.00,4222,Customer service reps -> Contact centre clerks
+37-2012.00,9111,Cleaners -> Domestic cleaners and helpers
+45-2092.00,9211,Farmworkers -> Crop farm labourers
+# Intentionally-unmatched rows for testing the miss-logging path:
+# None in the seed. Live fetch will introduce natural misses (~15%).

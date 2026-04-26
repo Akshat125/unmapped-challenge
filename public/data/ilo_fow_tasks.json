@@ -1,0 +1,121 @@
+{
+  "source": "ILO Future of Work — occupation task-content indices (seed, global baseline)",
+  "fetched_at": "2026-04-25",
+  "values": {
+    "by_isco": [
+      {
+        "isco_code": "2512",
+        "routine_share": 0.22,
+        "cognitive_share": 0.82,
+        "manual_share": 0.08
+      },
+      {
+        "isco_code": "2513",
+        "routine_share": 0.28,
+        "cognitive_share": 0.78,
+        "manual_share": 0.1
+      },
+      {
+        "isco_code": "3512",
+        "routine_share": 0.48,
+        "cognitive_share": 0.62,
+        "manual_share": 0.15
+      },
+      {
+        "isco_code": "3514",
+        "routine_share": 0.42,
+        "cognitive_share": 0.68,
+        "manual_share": 0.18
+      },
+      {
+        "isco_code": "7421",
+        "routine_share": 0.55,
+        "cognitive_share": 0.42,
+        "manual_share": 0.72
+      },
+      {
+        "isco_code": "7422",
+        "routine_share": 0.52,
+        "cognitive_share": 0.46,
+        "manual_share": 0.7
+      },
+      {
+        "isco_code": "7231",
+        "routine_share": 0.58,
+        "cognitive_share": 0.32,
+        "manual_share": 0.85
+      },
+      {
+        "isco_code": "7115",
+        "routine_share": 0.48,
+        "cognitive_share": 0.28,
+        "manual_share": 0.92
+      },
+      {
+        "isco_code": "7126",
+        "routine_share": 0.5,
+        "cognitive_share": 0.3,
+        "manual_share": 0.88
+      },
+      {
+        "isco_code": "7212",
+        "routine_share": 0.62,
+        "cognitive_share": 0.22,
+        "manual_share": 0.94
+      },
+      {
+        "isco_code": "7533",
+        "routine_share": 0.78,
+        "cognitive_share": 0.18,
+        "manual_share": 0.9
+      },
+      {
+        "isco_code": "5120",
+        "routine_share": 0.65,
+        "cognitive_share": 0.3,
+        "manual_share": 0.8
+      },
+      {
+        "isco_code": "5223",
+        "routine_share": 0.62,
+        "cognitive_share": 0.4,
+        "manual_share": 0.45
+      },
+      {
+        "isco_code": "4110",
+        "routine_share": 0.82,
+        "cognitive_share": 0.55,
+        "manual_share": 0.2
+      },
+      {
+        "isco_code": "4222",
+        "routine_share": 0.7,
+        "cognitive_share": 0.52,
+        "manual_share": 0.12
+      },
+      {
+        "isco_code": "8322",
+        "routine_share": 0.72,
+        "cognitive_share": 0.28,
+        "manual_share": 0.7
+      },
+      {
+        "isco_code": "9111",
+        "routine_share": 0.88,
+        "cognitive_share": 0.12,
+        "manual_share": 0.95
+      },
+      {
+        "isco_code": "9211",
+        "routine_share": 0.68,
+        "cognitive_share": 0.15,
+        "manual_share": 0.95
+      }
+    ],
+    "country_overrides": {
+      "GH": {},
+      "BD": {}
+    },
+    "us_routine_weighted_mean": 0.38
+  }
+}

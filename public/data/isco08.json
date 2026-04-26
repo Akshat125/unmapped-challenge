@@ -1,0 +1,102 @@
+{
+  "source": "ILO ISCO-08 (curated subset, seed data — replace via live fetch for production)",
+  "fetched_at": "2026-04-25",
+  "values": [
+    {
+      "code": "3512",
+      "title": "Information and communications technology user support technicians"
+    },
+    {
+      "code": "3514",
+      "title": "Web technicians"
+    },
+    {
+      "code": "5120",
+      "title": "Cooks"
+    },
+    {
+      "code": "5223",
+      "title": "Shop sales assistants"
+    },
+    {
+      "code": "5412",
+      "title": "Police officers"
+    },
+    {
+      "code": "7115",
+      "title": "Carpenters and joiners"
+    },
+    {
+      "code": "7126",
+      "title": "Plumbers and pipe fitters"
+    },
+    {
+      "code": "7212",
+      "title": "Welders and flamecutters"
+    },
+    {
+      "code": "7221",
+      "title": "Blacksmiths, hammersmiths and forging-press workers"
+    },
+    {
+      "code": "7231",
+      "title": "Motor vehicle mechanics and repairers"
+    },
+    {
+      "code": "7421",
+      "title": "Electronics mechanics and servicers"
+    },
+    {
+      "code": "7422",
+      "title": "Information and communications technology installers and servicers"
+    },
+    {
+      "code": "7533",
+      "title": "Sewing, embroidery and related workers"
+    },
+    {
+      "code": "4110",
+      "title": "General office clerks"
+    },
+    {
+      "code": "4222",
+      "title": "Contact centre information clerks"
+    },
+    {
+      "code": "8322",
+      "title": "Car, taxi and van drivers"
+    },
+    {
+      "code": "9111",
+      "title": "Domestic cleaners and helpers"
+    },
+    {
+      "code": "9211",
+      "title": "Crop farm labourers"
+    },
+    {
+      "code": "2512",
+      "title": "Software developers"
+    },
+    {
+      "code": "2513",
+      "title": "Web and multimedia developers"
+    },
+    {
+      "code": "2421",
+      "title": "Management and organization analysts"
+    },
+    {
+      "code": "2622",
+      "title": "Librarians and related information professionals"
+    },
+    {
+      "code": "2351",
+      "title": "Education methods specialists"
+    },
+    {
+      "code": "2352",
+      "title": "Special needs teachers"
+    }
+  ]
+}

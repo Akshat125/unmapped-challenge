@@ -1,0 +1,126 @@
+{
+  "source": "O*NET (US DOL) Task Statements (curated subset, seed data)",
+  "fetched_at": "2026-04-25",
+  "values": [
+    {
+      "soc_code": "49-3023.00",
+      "tasks": [
+        "Test drive vehicles and test components and systems, using equipment such as infrared engine analyzers.",
+        "Repair or replace parts such as pistons, rods, gears, valves, and bearings.",
+        "Confer with customers to obtain descriptions of vehicle problems."
+      ]
+    },
+    {
+      "soc_code": "49-2097.00",
+      "tasks": [
+        "Install equipment such as navigation, radar, and communication systems.",
+        "Inspect and test electronic equipment to locate causes of malfunction."
+      ]
+    },
+    {
+      "soc_code": "49-2022.00",
+      "tasks": [
+        "Install telecommunications equipment in residences or businesses.",
+        "Test repaired, newly installed, or updated equipment to ensure that it functions properly."
+      ]
+    },
+    {
+      "soc_code": "15-1254.00",
+      "tasks": [
+        "Write supporting code for web applications or websites.",
+        "Design, build, or maintain websites using authoring or scripting languages.",
+        "Identify problems uncovered by testing or customer feedback, and correct problems."
+      ]
+    },
+    {
+      "soc_code": "15-1252.00",
+      "tasks": [
+        "Analyze user needs and software requirements to determine feasibility of design within time and cost constraints.",
+        "Develop and direct software system testing and validation procedures, programming, and documentation."
+      ]
+    },
+    {
+      "soc_code": "15-1232.00",
+      "tasks": [
+        "Answer user inquiries regarding computer software or hardware operation to resolve problems.",
+        "Set up equipment for employee use, performing or ensuring proper installation of cables, operating systems, or appropriate software."
+      ]
+    },
+    {
+      "soc_code": "41-2031.00",
+      "tasks": [
+        "Greet customers and ascertain what each customer wants or needs.",
+        "Compute sales prices, total purchases, and receive and process cash or credit payment."
+      ]
+    },
+    {
+      "soc_code": "51-6052.00",
+      "tasks": [
+        "Sew garments using a sewing machine or by hand.",
+        "Measure parts such as sleeves or pant legs, and mark or pin-fold alterations."
+      ]
+    },
+    {
+      "soc_code": "47-2031.00",
+      "tasks": [
+        "Measure and mark cutting lines on materials, using a ruler, pencil, chalk, and marking gauge.",
+        "Assemble and fasten materials to make frameworks or props, using hand tools and wood screws."
+      ]
+    },
+    {
+      "soc_code": "47-2152.00",
+      "tasks": [
+        "Assemble pipe sections, tubing, or fittings, using couplings, clamps, screws, bolts, cement, plastic solvent, caulking, or soldering, brazing, or welding equipment.",
+        "Review blueprints, building codes, or specifications to determine work details or procedures."
+      ]
+    },
+    {
+      "soc_code": "51-4121.00",
+      "tasks": [
+        "Operate safety equipment and use safe work habits.",
+        "Weld components in flat, vertical, or overhead positions."
+      ]
+    },
+    {
+      "soc_code": "53-3058.00",
+      "tasks": [
+        "Follow safe driving practices and traffic laws.",
+        "Transport passengers or goods to specified destinations."
+      ]
+    },
+    {
+      "soc_code": "35-2014.00",
+      "tasks": [
+        "Season and cook food according to recipes.",
+        "Wash, peel, cut, and seed fruits and vegetables to prepare them for consumption."
+      ]
+    },
+    {
+      "soc_code": "43-9061.00",
+      "tasks": [
+        "Operate office machines, such as photocopiers and scanners, facsimile machines, voice mail systems, and personal computers.",
+        "Answer telephones, direct calls, and take messages."
+      ]
+    },
+    {
+      "soc_code": "43-4051.00",
+      "tasks": [
+        "Confer with customers by telephone or in person to provide information about products or services.",
+        "Keep records of customer interactions or transactions."
+      ]
+    },
+    {
+      "soc_code": "37-2012.00",
+      "tasks": [
+        "Clean rooms, hallways, lobbies, lounges, restrooms, corridors, elevators, stairways."
+      ]
+    },
+    {
+      "soc_code": "45-2092.00",
+      "tasks": [
+        "Harvest fruits and vegetables by hand.",
+        "Operate tractors, tractor-drawn machinery, and self-propelled machinery to plow, cultivate, or harvest crops."
+      ]
+    }
+  ]
+}

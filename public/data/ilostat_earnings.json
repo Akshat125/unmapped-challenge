@@ -1,0 +1,294 @@
+{
+  "source": "ILO ILOSTAT — EAR_4MTH_SEX_ECO_CUR_NB_A (seed values, swap for live fetch)",
+  "fetched_at": "2026-04-25",
+  "values": {
+    "by_sector": {
+      "GH": {
+        "Agriculture": {
+          "currency": "GHS",
+          "mean_monthly": 720,
+          "year": 2024
+        },
+        "Manufacturing": {
+          "currency": "GHS",
+          "mean_monthly": 1350,
+          "year": 2024
+        },
+        "Construction": {
+          "currency": "GHS",
+          "mean_monthly": 1420,
+          "year": 2024
+        },
+        "Wholesale and retail trade": {
+          "currency": "GHS",
+          "mean_monthly": 1180,
+          "year": 2024
+        },
+        "Information and communication": {
+          "currency": "GHS",
+          "mean_monthly": 2840,
+          "year": 2024
+        },
+        "Accommodation and food service": {
+          "currency": "GHS",
+          "mean_monthly": 980,
+          "year": 2024
+        }
+      },
+      "BD": {
+        "Agriculture": {
+          "currency": "BDT",
+          "mean_monthly": 9800,
+          "year": 2024
+        },
+        "Manufacturing": {
+          "currency": "BDT",
+          "mean_monthly": 14500,
+          "year": 2024
+        },
+        "Construction": {
+          "currency": "BDT",
+          "mean_monthly": 16200,
+          "year": 2024
+        },
+        "Wholesale and retail trade": {
+          "currency": "BDT",
+          "mean_monthly": 13400,
+          "year": 2024
+        },
+        "Information and communication": {
+          "currency": "BDT",
+          "mean_monthly": 28600,
+          "year": 2024
+        },
+        "Accommodation and food service": {
+          "currency": "BDT",
+          "mean_monthly": 11200,
+          "year": 2024
+        }
+      }
+    },
+    "by_sector_and_education": {
+      "GH": [
+        {
+          "sector": "Agriculture",
+          "education": "basic",
+          "mean_monthly": 640,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Agriculture",
+          "education": "secondary",
+          "mean_monthly": 820,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Agriculture",
+          "education": "tertiary",
+          "mean_monthly": 1100,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Manufacturing",
+          "education": "basic",
+          "mean_monthly": 1050,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Manufacturing",
+          "education": "secondary",
+          "mean_monthly": 1380,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Manufacturing",
+          "education": "tertiary",
+          "mean_monthly": 2180,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Construction",
+          "education": "basic",
+          "mean_monthly": 1150,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Construction",
+          "education": "secondary",
+          "mean_monthly": 1460,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Construction",
+          "education": "tertiary",
+          "mean_monthly": 2280,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Information and communication",
+          "education": "basic",
+          "mean_monthly": 1600,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Information and communication",
+          "education": "secondary",
+          "mean_monthly": 2200,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Information and communication",
+          "education": "tertiary",
+          "mean_monthly": 3480,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Wholesale and retail trade",
+          "education": "basic",
+          "mean_monthly": 950,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Wholesale and retail trade",
+          "education": "secondary",
+          "mean_monthly": 1230,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Wholesale and retail trade",
+          "education": "tertiary",
+          "mean_monthly": 1850,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Accommodation and food service",
+          "education": "basic",
+          "mean_monthly": 850,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Accommodation and food service",
+          "education": "secondary",
+          "mean_monthly": 1020,
+          "currency": "GHS"
+        },
+        {
+          "sector": "Accommodation and food service",
+          "education": "tertiary",
+          "mean_monthly": 1400,
+          "currency": "GHS"
+        }
+      ],
+      "BD": [
+        {
+          "sector": "Agriculture",
+          "education": "basic",
+          "mean_monthly": 8800,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Agriculture",
+          "education": "secondary",
+          "mean_monthly": 11200,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Agriculture",
+          "education": "tertiary",
+          "mean_monthly": 15800,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Manufacturing",
+          "education": "basic",
+          "mean_monthly": 11800,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Manufacturing",
+          "education": "secondary",
+          "mean_monthly": 15200,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Manufacturing",
+          "education": "tertiary",
+          "mean_monthly": 24800,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Construction",
+          "education": "basic",
+          "mean_monthly": 13400,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Construction",
+          "education": "secondary",
+          "mean_monthly": 17200,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Construction",
+          "education": "tertiary",
+          "mean_monthly": 25400,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Information and communication",
+          "education": "basic",
+          "mean_monthly": 16200,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Information and communication",
+          "education": "secondary",
+          "mean_monthly": 22400,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Information and communication",
+          "education": "tertiary",
+          "mean_monthly": 36400,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Wholesale and retail trade",
+          "education": "basic",
+          "mean_monthly": 10800,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Wholesale and retail trade",
+          "education": "secondary",
+          "mean_monthly": 14100,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Wholesale and retail trade",
+          "education": "tertiary",
+          "mean_monthly": 21600,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Accommodation and food service",
+          "education": "basic",
+          "mean_monthly": 9600,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Accommodation and food service",
+          "education": "secondary",
+          "mean_monthly": 11900,
+          "currency": "BDT"
+        },
+        {
+          "sector": "Accommodation and food service",
+          "education": "tertiary",
+          "mean_monthly": 16200,
+          "currency": "BDT"
+        }
+      ]
+    }
+  }
+}

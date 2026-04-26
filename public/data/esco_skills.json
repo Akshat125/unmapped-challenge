@@ -1,0 +1,150 @@
+{
+  "source": "ESCO v1.1.x skills pillar (curated subset)",
+  "fetched_at": "2026-04-25",
+  "values": [
+    {
+      "uri": "S1.1.1",
+      "label": "hand tool use"
+    },
+    {
+      "uri": "S1.1.2",
+      "label": "soldering"
+    },
+    {
+      "uri": "S1.1.3",
+      "label": "diagnostic testing of electronics"
+    },
+    {
+      "uri": "S1.1.4",
+      "label": "smartphone hardware repair"
+    },
+    {
+      "uri": "S1.1.5",
+      "label": "operating system installation"
+    },
+    {
+      "uri": "S1.2.1",
+      "label": "JavaScript programming"
+    },
+    {
+      "uri": "S1.2.2",
+      "label": "HTML"
+    },
+    {
+      "uri": "S1.2.3",
+      "label": "CSS"
+    },
+    {
+      "uri": "S1.2.4",
+      "label": "web application design"
+    },
+    {
+      "uri": "S1.2.5",
+      "label": "version control with git"
+    },
+    {
+      "uri": "S1.2.6",
+      "label": "Python programming"
+    },
+    {
+      "uri": "S1.2.7",
+      "label": "database querying"
+    },
+    {
+      "uri": "S2.1.1",
+      "label": "customer communication"
+    },
+    {
+      "uri": "S2.1.2",
+      "label": "written English"
+    },
+    {
+      "uri": "S2.1.3",
+      "label": "local language fluency"
+    },
+    {
+      "uri": "S2.1.4",
+      "label": "basic accounting"
+    },
+    {
+      "uri": "S2.1.5",
+      "label": "cash handling"
+    },
+    {
+      "uri": "S2.1.6",
+      "label": "inventory management"
+    },
+    {
+      "uri": "S3.1.1",
+      "label": "vehicle engine diagnostics"
+    },
+    {
+      "uri": "S3.1.2",
+      "label": "vehicle body repair"
+    },
+    {
+      "uri": "S3.1.3",
+      "label": "safe driving"
+    },
+    {
+      "uri": "S4.1.1",
+      "label": "welding metals"
+    },
+    {
+      "uri": "S4.1.2",
+      "label": "pipe fitting"
+    },
+    {
+      "uri": "S4.1.3",
+      "label": "reading technical drawings"
+    },
+    {
+      "uri": "S4.1.4",
+      "label": "carpentry joinery"
+    },
+    {
+      "uri": "S4.1.5",
+      "label": "textile sewing"
+    },
+    {
+      "uri": "S4.1.6",
+      "label": "pattern cutting"
+    },
+    {
+      "uri": "S5.1.1",
+      "label": "food preparation"
+    },
+    {
+      "uri": "S5.1.2",
+      "label": "food safety"
+    },
+    {
+      "uri": "S6.1.1",
+      "label": "crop cultivation"
+    },
+    {
+      "uri": "S6.1.2",
+      "label": "household cleaning"
+    },
+    {
+      "uri": "S7.1.1",
+      "label": "typing"
+    },
+    {
+      "uri": "S7.1.2",
+      "label": "spreadsheet use"
+    },
+    {
+      "uri": "S7.1.3",
+      "label": "office document filing"
+    },
+    {
+      "uri": "S7.1.4",
+      "label": "phone etiquette"
+    },
+    {
+      "uri": "S7.1.5",
+      "label": "call handling"
+    }
+  ]
+}

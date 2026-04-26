@@ -1,0 +1,80 @@
+{
+  "_note": "Twi (Akan) in Latin script. Best-effort strings pending review by a fluent Twi speaker. Do not ship the demo without that review.",
+  "brand": {
+    "name": "UNMAPPED",
+    "tagline": "Nea wunim nyinaa yɛ adi."
+  },
+  "nav": {
+    "entry": "Fi ase",
+    "profile": "Wo profile",
+    "opportunities": "Adwuma a ɛwɔ hɔ",
+    "policymaker": "Aban adwumayɛfoɔ"
+  },
+  "entry": {
+    "title": "Ka w'adwuma ne nea wunim kyerɛ yɛn",
+    "subtitle": "Nsɛmmisa num. Wotumi gyae biara.",
+    "q1_education": "Sukuu deɛn na woawie?",
+    "q2_work": "Adwuma bɛn na woayɛ, sɛ wɔtua wo ho ka o, sɛ wɔntuaa wo ho ka o?",
+    "q2_placeholder": "sɛ ebia: Mesiesie phone na masi websites mmienu ama m'anuanom",
+    "q3_tools": "Mfidie, nnwuma so nneɛma, anaa software a woadi dwuma",
+    "q3_placeholder": "sɛ ebia: soldering iron, Android, JavaScript",
+    "q4_languages": "Kasa ahorow a woka",
+    "q5_aspirations": "Ɛdeɛn na wopɛ sɛ woyɛ no yie anaa wosua?",
+    "q5_placeholder": "sɛ ebia: Mepɛ sɛ mesua web apps ho nneɛma",
+    "skip": "Gyae",
+    "back": "San kɔ",
+    "continue": "Kɔ so",
+    "finish": "Hwɛ me profile",
+    "low_bandwidth": "Internet a ɛnyɛ den mod reyɛ adwuma",
+    "saving_locally": "Wo mmuae no wɔ phone yi so.",
+    "country_label": "Ɔman",
+    "mapping_in_progress": "Yɛrekenkan wo mmuae…",
+    "mapping_failed": "Yɛantumi ankɔ skills service no so. Wo mmuae wɔ hɔ — sɔ hwɛ bio."
+  },
+  "profile": {
+    "heading": "W'abilities profile",
+    "subheading": "Nea wunim yɛ dedaw, deɛ wobɛtumi de akɔ baabiara.",
+    "skills_found": "Abilities a yɛhunuiɛ",
+    "no_skills_yet": "Yɛnhunuu biribiara. San kɔ na fa nsɛm pii ka ho.",
+    "for_systems": "Ma computer system (ESCO / ISCO codes)",
+    "for_systems_intro": "Wei ne codes a employers, training providers, ne aban tumi kenkan.",
+    "occupations_suggested": "Adwuma a ɛfata wo",
+    "occupations_intro": "Gyina w'abilities so. Mia Opportunities na hwɛ nsɛm no.",
+    "print": "Tintim",
+    "export_json": "Gye (JSON)",
+    "see_opportunities": "Hwɛ opportunities",
+    "flagged_title": "Yɛnnye nni pi wɔ profile yi ho",
+    "edit": "Sesa mmuae"
+  },
+  "opportunities": {
+    "heading": "Adwuma a ɛfata wo",
+    "subheading": "Gyina wo profile ne labor market data so.",
+    "no_results": "Yɛnhunuu biribiara. San kɔ na fa nsɛm pii ka wo profile ho.",
+    "match_label": "Skills match",
+    "match_format": "{matched} wɔ {total} skills",
+    "missing_label": "Skills a aka",
+    "signals_heading": "Akontaabuo no",
+    "signal_wage": "Average bosome akatua wɔ sector yi mu",
+    "signal_growth": "Sector mu adwuma nkɔsoɔ (afe biara)",
+    "signal_premium": "Tertiary nhyehyɛeɛ premium wɔ secondary so wɔ sector yi mu",
+    "risk_heading": "Automation ahwɛyie",
+    "risk_long_term": "Daa risk",
+    "risk_near_term_gh": "Seesei risk wɔ Ghana",
+    "risk_near_term_bd": "Seesei risk wɔ Bangladesh",
+    "risk_tooltip_heading": "Sɛnea yɛbu seesei risk",
+    "risk_tooltip_formula": "near_term = frey_osborne × infrastructure_factor × task_composition_factor",
+    "risk_tooltip_framing": "Daa risk nsesa. Nea yɛbu ne bere a risk no bɛba — gyina broadband ne task mix so.",
+    "wittgenstein_heading": "Baabi a worekɔ wɔ afe 2035 mu",
+    "pathway_heading": "Sɛ wopɛ sɛ wudu hɔ a",
+    "pathway_providers": "Training providers a ɛwɔ baabi"
+  },
+  "country_switcher": {
+    "label": "Ɔman",
+    "active": "Reyɛ adwuma",
+    "stub": "Stub config"
+  },
+  "bandwidth": {
+    "low": "Internet a ɛnyɛ den mod reyɛ adwuma",
+    "offline": "Wonni internet so — yɛrekyerɛ data a yɛakora"
+  }
+}

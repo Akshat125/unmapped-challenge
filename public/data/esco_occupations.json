@@ -1,0 +1,229 @@
+{
+  "source": "ESCO v1.1.x (curated subset, seed data — replace via live fetch for production)",
+  "fetched_at": "2026-04-25",
+  "values": [
+    {
+      "isco_code": "7231",
+      "esco_uri": "http://data.europa.eu/esco/occupation/7231-motor-vehicle-mechanic",
+      "preferred_label": "Motor vehicle mechanic",
+      "plain_language": "Fixes cars, motorbikes and trucks",
+      "essential_skills": [
+        "S1.1.1",
+        "S3.1.1",
+        "S3.1.2",
+        "S4.1.3",
+        "S2.1.1",
+        "S2.1.5"
+      ]
+    },
+    {
+      "isco_code": "7421",
+      "esco_uri": "http://data.europa.eu/esco/occupation/7421-electronics-mechanic",
+      "preferred_label": "Electronics mechanic",
+      "plain_language": "Repairs electronic devices and equipment",
+      "essential_skills": [
+        "S1.1.1",
+        "S1.1.2",
+        "S1.1.3",
+        "S1.1.4",
+        "S1.1.5",
+        "S2.1.1"
+      ]
+    },
+    {
+      "isco_code": "7422",
+      "esco_uri": "http://data.europa.eu/esco/occupation/7422-ict-installer",
+      "preferred_label": "ICT installer and servicer",
+      "plain_language": "Installs and services phones, routers and IT equipment",
+      "essential_skills": [
+        "S1.1.1",
+        "S1.1.4",
+        "S1.1.5",
+        "S2.1.1",
+        "S2.1.2",
+        "S2.1.6"
+      ]
+    },
+    {
+      "isco_code": "2513",
+      "esco_uri": "http://data.europa.eu/esco/occupation/2513-web-developer",
+      "preferred_label": "Web developer",
+      "plain_language": "Builds websites and web applications",
+      "essential_skills": [
+        "S1.2.1",
+        "S1.2.2",
+        "S1.2.3",
+        "S1.2.4",
+        "S1.2.5",
+        "S2.1.2"
+      ]
+    },
+    {
+      "isco_code": "2512",
+      "esco_uri": "http://data.europa.eu/esco/occupation/2512-software-developer",
+      "preferred_label": "Software developer",
+      "plain_language": "Writes software for computers and phones",
+      "essential_skills": [
+        "S1.2.1",
+        "S1.2.5",
+        "S1.2.6",
+        "S1.2.7",
+        "S2.1.2"
+      ]
+    },
+    {
+      "isco_code": "3512",
+      "esco_uri": "http://data.europa.eu/esco/occupation/3512-ict-support-technician",
+      "preferred_label": "ICT user support technician",
+      "plain_language": "Helps people solve computer and software problems",
+      "essential_skills": [
+        "S1.1.5",
+        "S2.1.1",
+        "S2.1.2",
+        "S7.1.1",
+        "S7.1.4"
+      ]
+    },
+    {
+      "isco_code": "3514",
+      "esco_uri": "http://data.europa.eu/esco/occupation/3514-web-technician",
+      "preferred_label": "Web technician",
+      "plain_language": "Maintains websites and fixes web problems",
+      "essential_skills": [
+        "S1.2.2",
+        "S1.2.3",
+        "S1.2.5",
+        "S2.1.1"
+      ]
+    },
+    {
+      "isco_code": "5223",
+      "esco_uri": "http://data.europa.eu/esco/occupation/5223-shop-sales-assistant",
+      "preferred_label": "Shop sales assistant",
+      "plain_language": "Sells goods in a shop and helps customers",
+      "essential_skills": [
+        "S2.1.1",
+        "S2.1.3",
+        "S2.1.5",
+        "S2.1.6"
+      ]
+    },
+    {
+      "isco_code": "7533",
+      "esco_uri": "http://data.europa.eu/esco/occupation/7533-tailor",
+      "preferred_label": "Tailor / sewing worker",
+      "plain_language": "Sews and alters clothing",
+      "essential_skills": [
+        "S4.1.5",
+        "S4.1.6",
+        "S1.1.1",
+        "S2.1.1",
+        "S2.1.5"
+      ]
+    },
+    {
+      "isco_code": "7115",
+      "esco_uri": "http://data.europa.eu/esco/occupation/7115-carpenter",
+      "preferred_label": "Carpenter",
+      "plain_language": "Builds and fits wooden structures and furniture",
+      "essential_skills": [
+        "S4.1.3",
+        "S4.1.4",
+        "S1.1.1",
+        "S2.1.1"
+      ]
+    },
+    {
+      "isco_code": "7126",
+      "esco_uri": "http://data.europa.eu/esco/occupation/7126-plumber",
+      "preferred_label": "Plumber",
+      "plain_language": "Installs and repairs water pipes and fittings",
+      "essential_skills": [
+        "S4.1.2",
+        "S4.1.3",
+        "S1.1.1",
+        "S2.1.1"
+      ]
+    },
+    {
+      "isco_code": "7212",
+      "esco_uri": "http://data.europa.eu/esco/occupation/7212-welder",
+      "preferred_label": "Welder",
+      "plain_language": "Joins metal parts by welding",
+      "essential_skills": [
+        "S4.1.1",
+        "S4.1.3",
+        "S1.1.1",
+        "S2.1.1"
+      ]
+    },
+    {
+      "isco_code": "8322",
+      "esco_uri": "http://data.europa.eu/esco/occupation/8322-driver",
+      "preferred_label": "Car, taxi or van driver",
+      "plain_language": "Drives passengers or goods for a living",
+      "essential_skills": [
+        "S3.1.3",
+        "S2.1.1",
+        "S2.1.5"
+      ]
+    },
+    {
+      "isco_code": "5120",
+      "esco_uri": "http://data.europa.eu/esco/occupation/5120-cook",
+      "preferred_label": "Cook",
+      "plain_language": "Prepares food in homes, restaurants or stalls",
+      "essential_skills": [
+        "S5.1.1",
+        "S5.1.2",
+        "S2.1.5",
+        "S2.1.6"
+      ]
+    },
+    {
+      "isco_code": "4110",
+      "esco_uri": "http://data.europa.eu/esco/occupation/4110-office-clerk",
+      "preferred_label": "General office clerk",
+      "plain_language": "Handles paperwork, records and office tasks",
+      "essential_skills": [
+        "S7.1.1",
+        "S7.1.2",
+        "S7.1.3",
+        "S2.1.2"
+      ]
+    },
+    {
+      "isco_code": "4222",
+      "esco_uri": "http://data.europa.eu/esco/occupation/4222-contact-centre-clerk",
+      "preferred_label": "Contact centre clerk",
+      "plain_language": "Answers calls and handles customer questions",
+      "essential_skills": [
+        "S7.1.4",
+        "S7.1.5",
+        "S2.1.1",
+        "S2.1.2",
+        "S2.1.3"
+      ]
+    },
+    {
+      "isco_code": "9111",
+      "esco_uri": "http://data.europa.eu/esco/occupation/9111-domestic-cleaner",
+      "preferred_label": "Domestic cleaner / helper",
+      "plain_language": "Cleans homes and helps with household chores",
+      "essential_skills": [
+        "S6.1.2",
+        "S2.1.3"
+      ]
+    },
+    {
+      "isco_code": "9211",
+      "esco_uri": "http://data.europa.eu/esco/occupation/9211-crop-farm-worker",
+      "preferred_label": "Crop farm worker",
+      "plain_language": "Plants, tends and harvests crops",
+      "essential_skills": [
+        "S6.1.1",
+        "S2.1.3"
+      ]
+    }
+  ]
+}

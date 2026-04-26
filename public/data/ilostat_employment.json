@@ -1,0 +1,310 @@
+{
+  "source": "ILO ILOSTAT — EMP_TEMP_SEX_ECO_NB_A (seed values, swap for live fetch)",
+  "fetched_at": "2026-04-25",
+  "values": {
+    "GH": [
+      {
+        "sector": "Agriculture",
+        "year": 2020,
+        "employment_thousands": 3450
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2021,
+        "employment_thousands": 3480
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2022,
+        "employment_thousands": 3500
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2023,
+        "employment_thousands": 3510
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2024,
+        "employment_thousands": 3520
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2020,
+        "employment_thousands": 1200
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2021,
+        "employment_thousands": 1240
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2022,
+        "employment_thousands": 1280
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2023,
+        "employment_thousands": 1310
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2024,
+        "employment_thousands": 1340
+      },
+      {
+        "sector": "Construction",
+        "year": 2020,
+        "employment_thousands": 550
+      },
+      {
+        "sector": "Construction",
+        "year": 2021,
+        "employment_thousands": 580
+      },
+      {
+        "sector": "Construction",
+        "year": 2022,
+        "employment_thousands": 610
+      },
+      {
+        "sector": "Construction",
+        "year": 2023,
+        "employment_thousands": 635
+      },
+      {
+        "sector": "Construction",
+        "year": 2024,
+        "employment_thousands": 655
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2020,
+        "employment_thousands": 2100
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2021,
+        "employment_thousands": 2155
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2022,
+        "employment_thousands": 2210
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2023,
+        "employment_thousands": 2260
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2024,
+        "employment_thousands": 2295
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2020,
+        "employment_thousands": 62
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2021,
+        "employment_thousands": 70
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2022,
+        "employment_thousands": 80
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2023,
+        "employment_thousands": 92
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2024,
+        "employment_thousands": 103
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2020,
+        "employment_thousands": 380
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2021,
+        "employment_thousands": 395
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2022,
+        "employment_thousands": 415
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2023,
+        "employment_thousands": 430
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2024,
+        "employment_thousands": 445
+      }
+    ],
+    "BD": [
+      {
+        "sector": "Agriculture",
+        "year": 2020,
+        "employment_thousands": 24500
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2021,
+        "employment_thousands": 24400
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2022,
+        "employment_thousands": 24300
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2023,
+        "employment_thousands": 24200
+      },
+      {
+        "sector": "Agriculture",
+        "year": 2024,
+        "employment_thousands": 24100
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2020,
+        "employment_thousands": 9500
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2021,
+        "employment_thousands": 9750
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2022,
+        "employment_thousands": 10020
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2023,
+        "employment_thousands": 10350
+      },
+      {
+        "sector": "Manufacturing",
+        "year": 2024,
+        "employment_thousands": 10620
+      },
+      {
+        "sector": "Construction",
+        "year": 2020,
+        "employment_thousands": 3800
+      },
+      {
+        "sector": "Construction",
+        "year": 2021,
+        "employment_thousands": 3900
+      },
+      {
+        "sector": "Construction",
+        "year": 2022,
+        "employment_thousands": 4000
+      },
+      {
+        "sector": "Construction",
+        "year": 2023,
+        "employment_thousands": 4110
+      },
+      {
+        "sector": "Construction",
+        "year": 2024,
+        "employment_thousands": 4220
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2020,
+        "employment_thousands": 7800
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2021,
+        "employment_thousands": 7920
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2022,
+        "employment_thousands": 8050
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2023,
+        "employment_thousands": 8180
+      },
+      {
+        "sector": "Wholesale and retail trade",
+        "year": 2024,
+        "employment_thousands": 8300
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2020,
+        "employment_thousands": 210
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2021,
+        "employment_thousands": 240
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2022,
+        "employment_thousands": 280
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2023,
+        "employment_thousands": 320
+      },
+      {
+        "sector": "Information and communication",
+        "year": 2024,
+        "employment_thousands": 365
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2020,
+        "employment_thousands": 1400
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2021,
+        "employment_thousands": 1440
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2022,
+        "employment_thousands": 1490
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2023,
+        "employment_thousands": 1530
+      },
+      {
+        "sector": "Accommodation and food service",
+        "year": 2024,
+        "employment_thousands": 1570
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "brand": {
+    "name": "UNMAPPED",
+    "tagline": "Your skills, made visible."
+  },
+  "nav": {
+    "entry": "Start",
+    "profile": "Your profile",
+    "opportunities": "Opportunities",
+    "policymaker": "Policymaker view"
+  },
+  "entry": {
+    "title": "Tell us about your work and skills",
+    "subtitle": "Five questions. You can skip any of them.",
+    "q1_education": "What's the highest level of school you've completed?",
+    "q2_work": "What work have you done, paid or unpaid?",
+    "q2_placeholder": "e.g. I fix phones and have built two small websites for friends",
+    "q3_tools": "Tools, machines, or software you've used",
+    "q3_placeholder": "e.g. soldering iron, Android, JavaScript",
+    "q4_languages": "Languages you speak",
+    "q5_aspirations": "What would you like to do better or learn next?",
+    "q5_placeholder": "e.g. I'd like to learn more about web apps",
+    "skip": "Skip",
+    "back": "Back",
+    "continue": "Continue",
+    "finish": "See my profile",
+    "low_bandwidth": "Low-bandwidth mode active",
+    "saving_locally": "Your answers are saved on this device.",
+    "country_label": "Country",
+    "mapping_in_progress": "Reading your answers…",
+    "mapping_failed": "We couldn't reach the skills service. Your answers are saved — try again in a moment."
+  },
+  "profile": {
+    "heading": "Your skills profile",
+    "subheading": "A portable summary of what you already know how to do.",
+    "skills_found": "Skills we recognized",
+    "no_skills_yet": "No skills mapped yet. Go back and add a bit more detail.",
+    "for_systems": "For systems (ESCO / ISCO codes)",
+    "for_systems_intro": "These are the standardized codes for the skills above. Employers, training providers, and governments can read them directly.",
+    "occupations_suggested": "Occupations that match",
+    "occupations_intro": "Based on the skills above. Tap Opportunities to see the details.",
+    "print": "Print",
+    "export_json": "Download (JSON)",
+    "see_opportunities": "See opportunities",
+    "flagged_title": "We're not confident about this profile",
+    "edit": "Edit answers"
+  },
+  "opportunities": {
+    "heading": "Opportunities for you",
+    "subheading": "Based on your profile and local labor market data.",
+    "no_results": "No matches yet. Go back and add more detail to your profile.",
+    "match_label": "Skills match",
+    "match_format": "{matched} of {total} skills",
+    "missing_label": "Missing skills",
+    "signals_heading": "The numbers",
+    "signal_wage": "Average monthly earnings in this sector",
+    "signal_growth": "Sector employment growth (year over year)",
+    "signal_premium": "Wage premium for tertiary over secondary in this sector",
+    "risk_heading": "Automation outlook",
+    "risk_long_term": "Long-term risk",
+    "risk_near_term_gh": "Near-term risk in Ghana",
+    "risk_near_term_bd": "Near-term risk in Bangladesh",
+    "risk_tooltip_heading": "How we calculate near-term risk",
+    "risk_tooltip_formula": "near_term = frey_osborne × infrastructure_factor × task_composition_factor",
+    "risk_tooltip_framing": "Long-term risk is unchanged. What we calibrate is when the risk arrives — based on local broadband and task mix.",
+    "wittgenstein_heading": "Where you are heading by 2035",
+    "pathway_heading": "To reach this",
+    "pathway_providers": "Local training providers"
+  },
+  "country_switcher": {
+    "label": "Country",
+    "active": "Active",
+    "stub": "Stub config"
+  },
+  "bandwidth": {
+    "low": "Low-bandwidth mode active",
+    "offline": "You're offline — showing saved data"
+  }
+}

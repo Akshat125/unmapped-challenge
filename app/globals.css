@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  color-scheme: light;
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  header,
+  nav,
+  footer,
+  button,
+  .print\:hidden {
+    display: none !important;
+  }
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  article {
+    break-inside: avoid;
+  }
+}

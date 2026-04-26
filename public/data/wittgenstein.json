@@ -1,0 +1,52 @@
+{
+  "source": "Wittgenstein Centre 2025-2035 education attainment projections (seed values)",
+  "fetched_at": "2026-04-25",
+  "values": {
+    "GH": [
+      {
+        "year": 2025,
+        "no_education_pct": 9,
+        "basic_pct": 46,
+        "secondary_pct": 33,
+        "tertiary_pct": 12
+      },
+      {
+        "year": 2030,
+        "no_education_pct": 7,
+        "basic_pct": 42,
+        "secondary_pct": 35,
+        "tertiary_pct": 16
+      },
+      {
+        "year": 2035,
+        "no_education_pct": 5,
+        "basic_pct": 38,
+        "secondary_pct": 36,
+        "tertiary_pct": 21
+      }
+    ],
+    "BD": [
+      {
+        "year": 2025,
+        "no_education_pct": 6,
+        "basic_pct": 38,
+        "secondary_pct": 38,
+        "tertiary_pct": 18
+      },
+      {
+        "year": 2030,
+        "no_education_pct": 4,
+        "basic_pct": 34,
+        "secondary_pct": 39,
+        "tertiary_pct": 23
+      },
+      {
+        "year": 2035,
+        "no_education_pct": 3,
+        "basic_pct": 30,
+        "secondary_pct": 39,
+        "tertiary_pct": 28
+      }
+    ]
+  }
+}
