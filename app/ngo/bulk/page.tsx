@@ -26,7 +26,7 @@ type Row = {
 
 const EMPTY_ROW: Row = {
   displayName: '',
-  country: 'GH',
+  country: 'GHA',
   workText: '',
   toolsText: '',
   languages: '',
@@ -87,10 +87,10 @@ export default function BulkIntake() {
     const body = header.includes('display_name') ? lines.slice(1) : lines;
     const parsed: Row[] = body.map((line) => {
       const cells = line.split(',').map((c) => c.trim());
-      const [displayName = '', country = 'GH', workText = '', toolsText = '', languages = ''] = cells;
+      const [displayName = '', country = 'GHA', workText = '', toolsText = '', languages = ''] = cells;
       const c = (country.toUpperCase() as CountryCode) in COUNTRIES
         ? (country.toUpperCase() as CountryCode)
-        : 'GH';
+        : 'GHA';
       return { displayName, country: c, workText, toolsText, languages };
     });
     commitRows('CSV', parsed);
@@ -148,13 +148,11 @@ export default function BulkIntake() {
                       onChange={(e) => updateRow(i, { country: e.target.value as CountryCode })}
                       className="rounded border border-neutral-300 bg-white px-2 py-1"
                     >
-                      {(Object.keys(COUNTRIES) as CountryCode[])
-                        .filter((c) => COUNTRIES[c].active)
-                        .map((c) => (
-                          <option key={c} value={c}>
-                            {c}
-                          </option>
-                        ))}
+                      {(Object.keys(COUNTRIES) as CountryCode[]).map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
                     </select>
                   </td>
                   <td className="px-2 py-1">

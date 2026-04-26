@@ -15,7 +15,7 @@ export default function NgoCaseload() {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState({
     displayName: '',
-    country: 'GH' as CountryCode,
+    country: 'GHA' as CountryCode,
     workText: '',
     toolsText: '',
   });
@@ -31,7 +31,7 @@ export default function NgoCaseload() {
     e.preventDefault();
     if (!draft.displayName) return;
     addProfile(draft);
-    setDraft({ displayName: '', country: 'GH', workText: '', toolsText: '' });
+    setDraft({ displayName: '', country: 'GHA', workText: '', toolsText: '' });
     setOpen(false);
   }
 
@@ -82,13 +82,11 @@ export default function NgoCaseload() {
               onChange={(e) => setDraft({ ...draft, country: e.target.value as CountryCode })}
               className="mt-1 w-full rounded border border-wb-line bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-wb-blue"
             >
-              {(Object.keys(COUNTRIES) as CountryCode[])
-                .filter((c) => COUNTRIES[c].active)
-                .map((c) => (
-                  <option key={c} value={c}>
-                    {COUNTRIES[c].name}
-                  </option>
-                ))}
+              {(Object.keys(COUNTRIES) as CountryCode[]).map((c) => (
+                <option key={c} value={c}>
+                  {COUNTRIES[c].name}
+                </option>
+              ))}
             </select>
           </label>
           <label className="block">

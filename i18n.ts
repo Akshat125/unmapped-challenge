@@ -1,6 +1,8 @@
 import { getRequestConfig } from 'next-intl/server';
 
-export const locales = ['en', 'tw-Latn'] as const;
+// Locales correspond to CountryConfig.displayLanguage. tw-Latn was retired
+// when the country namespace switched to BOL/GHA/VNM — see LOCALE_DECISION.md.
+export const locales = ['en', 'es', 'vi'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'en';
 

@@ -1,10 +1,12 @@
 'use client';
 
-import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import { ACTIVE_COUNTRIES, COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { useProfile } from '@/lib/profile-store';
 import { useT } from '@/lib/i18n';
 
-const ORDER: CountryCode[] = ['GH', 'BD', 'VN', 'KE', 'BR'];
+// Renders three options: Ghana (English), Bolivia (Spanish), Vietnam (Vietnamese).
+// Each label is in the country's own display language so the dropdown itself
+// demonstrates the localization story.
 
 export function CountrySwitcher() {
   const country = useProfile((s) => s.country);
@@ -20,12 +22,11 @@ export function CountrySwitcher() {
         className="min-h-[44px] rounded border border-wb-line bg-white px-3 py-1 font-medium focus:outline-none focus:ring-2 focus:ring-wb-blue"
         aria-label="Country"
       >
-        {ORDER.map((code) => {
+        {ACTIVE_COUNTRIES.map((code) => {
           const c = COUNTRIES[code];
           return (
-            <option key={code} value={code} disabled={!c.active}>
-              {c.name}
-              {c.active ? '' : ' (stub)'}
+            <option key={code} value={code}>
+              {c.nativeName}
             </option>
           );
         })}

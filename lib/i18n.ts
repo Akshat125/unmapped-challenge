@@ -2,25 +2,30 @@
 
 import { useMemo } from 'react';
 import en from '@/messages/en.json';
-import twLatn from '@/messages/tw-Latn.json';
-import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
+import es from '@/messages/es.json';
+import vi from '@/messages/vi.json';
+import { COUNTRIES, type CountryCode, type DisplayLanguage } from '@/lib/config/countries';
 import { useProfile } from '@/lib/profile-store';
 
 // Lightweight runtime i18n. The country switcher is client-side and must
 // re-render strings instantly, so we skip next-intl's URL-routing machinery
-// and read directly from the Zustand store. `next-intl` is still installed
-// if the team wants to upgrade to its provider pattern later.
+// and read directly from the Zustand store.
+//
+// Display language is keyed off CountryConfig.displayLanguage:
+//   GHA → en
+//   BOL → es
+//   VNM → vi
 
 type Messages = typeof en;
 
-const BUNDLES: Record<string, Messages> = {
+const BUNDLES: Record<DisplayLanguage, Messages> = {
   en: en as Messages,
-  'tw-Latn': twLatn as Messages,
+  es: es as Messages,
+  vi: vi as Messages,
 };
 
-export function localeFor(country: CountryCode): string {
-  const locale = COUNTRIES[country].locale;
-  return BUNDLES[locale] ? locale : 'en';
+export function languageFor(country: CountryCode): DisplayLanguage {
+  return COUNTRIES[country].displayLanguage;
 }
 
 function lookup(messages: Messages, key: string): string {
@@ -37,7 +42,7 @@ function lookup(messages: Messages, key: string): string {
 
 export function useT() {
   const country = useProfile((s) => s.country);
-  const locale = localeFor(country);
-  const bundle = BUNDLES[locale];
+  const lang = languageFor(country);
+  const bundle = BUNDLES[lang];
   return useMemo(() => (key: string) => lookup(bundle, key), [bundle]);
 }

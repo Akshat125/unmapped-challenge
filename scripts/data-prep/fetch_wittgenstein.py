@@ -11,17 +11,22 @@ from __future__ import annotations
 from _common import write_output
 
 # Percentage of 20-24 age cohort (both sexes) at each attainment level.
-# Rows must sum to ~100 within a country+year.
+# Rows must sum to ~100 within a country+year. Country namespace is ISO-3.
 PROJECTIONS = {
-    "GH": [
+    "GHA": [
         {"year": 2025, "no_education_pct": 9, "basic_pct": 46, "secondary_pct": 33, "tertiary_pct": 12},
         {"year": 2030, "no_education_pct": 7, "basic_pct": 42, "secondary_pct": 35, "tertiary_pct": 16},
         {"year": 2035, "no_education_pct": 5, "basic_pct": 38, "secondary_pct": 36, "tertiary_pct": 21},
     ],
-    "BD": [
-        {"year": 2025, "no_education_pct": 6, "basic_pct": 38, "secondary_pct": 38, "tertiary_pct": 18},
-        {"year": 2030, "no_education_pct": 4, "basic_pct": 34, "secondary_pct": 39, "tertiary_pct": 23},
-        {"year": 2035, "no_education_pct": 3, "basic_pct": 30, "secondary_pct": 39, "tertiary_pct": 28},
+    "BOL": [
+        {"year": 2025, "no_education_pct": 5, "basic_pct": 38, "secondary_pct": 38, "tertiary_pct": 19},
+        {"year": 2030, "no_education_pct": 4, "basic_pct": 33, "secondary_pct": 39, "tertiary_pct": 24},
+        {"year": 2035, "no_education_pct": 3, "basic_pct": 29, "secondary_pct": 39, "tertiary_pct": 29},
+    ],
+    "VNM": [
+        {"year": 2025, "no_education_pct": 2, "basic_pct": 30, "secondary_pct": 47, "tertiary_pct": 21},
+        {"year": 2030, "no_education_pct": 2, "basic_pct": 26, "secondary_pct": 45, "tertiary_pct": 27},
+        {"year": 2035, "no_education_pct": 1, "basic_pct": 22, "secondary_pct": 43, "tertiary_pct": 34},
     ],
 }
 

@@ -155,10 +155,16 @@ def main() -> None:
     csv_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_CSV_DIR
 
     if not csv_dir.exists():
-        print(f"ERROR: CSV directory not found: {csv_dir}")
-        print("Download the ESCO v1.2.1 CSV release from:")
-        print("  https://esco.ec.europa.eu/en/use-esco/download")
-        sys.exit(1)
+        # The ESCO v1.2.1 release is large (~250 MB) and lives outside the
+        # repo. When it's missing we keep the already-committed
+        # public/data/esco_*.json files instead of failing the pipeline, so
+        # data-prep stays runnable on any clone. The Frey-Osborne overlay
+        # below still patches frey_osborne_raw on the existing committed file.
+        print(f"WARN: ESCO CSV directory not found: {csv_dir}")
+        print("  Skipping fetch_esco — keeping existing public/data/esco_*.json.")
+        print("  Download the ESCO v1.2.1 CSV release from:")
+        print("    https://esco.ec.europa.eu/en/use-esco/download")
+        return
 
     print(f"Reading ESCO CSVs from: {csv_dir}")
 

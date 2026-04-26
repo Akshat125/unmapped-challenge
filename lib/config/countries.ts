@@ -1,4 +1,15 @@
-export type CountryCode = 'GH' | 'BD' | 'VN' | 'KE' | 'BR';
+// Country namespace is ISO-3 to align with the ILO data files
+// data/ilo_emp_occ_{BOL,GHA,VNM}.csv. Three demo-grade countries:
+//   GHA — English UI (English is Ghana's official language)
+//   BOL — Spanish UI
+//   VNM — Vietnamese UI
+//
+// The previous GH/BD/VN/KE/BR namespace + Twi-in-Latin demo locale was retired
+// when this file was rewritten; see LOCALE_DECISION.md for the audit trail.
+
+export type CountryCode = 'BOL' | 'GHA' | 'VNM';
+
+export type DisplayLanguage = 'en' | 'es' | 'vi';
 
 export type OpportunityEmphasis = 'self_employment_gig' | 'formal_training';
 
@@ -11,8 +22,14 @@ export interface EducationLevel {
 export interface CountryConfig {
   code: CountryCode;
   name: string;
+  // Native-script display name shown inside the country switcher option label.
+  // Always written in the country's `displayLanguage`.
+  nativeName: string;
   locale: string;
-  active: boolean;
+  // The language bundle the rest of the UI re-renders into when this country
+  // is selected. `locale` is kept for back-compat with /policymaker/config
+  // schema validation; `displayLanguage` is what i18n.ts consumes.
+  displayLanguage: DisplayLanguage;
   educationLevels: EducationLevel[];
   languages: { code: string; label: string }[];
   currencyLabel: string;
@@ -22,28 +39,25 @@ export interface CountryConfig {
   broadbandPenetration: number;
   // ILO routine-task share (0-1). Higher => more automation-exposed task mix.
   routineTaskShare: number;
-  // Local training providers referenced on opportunity cards. Placeholder list
-  // so the pathway copy has something concrete; replace with verified providers
-  // before the demo recording.
   trainingProviders: string[];
 }
 
 // Frey-Osborne's US baseline routine-task share used to normalize
 // task_composition_factor in the risk calibration formula (§6.4).
-// Single constant, not per-country.
 export const US_ROUTINE_TASK_SHARE = 0.38;
 
 export const COUNTRIES: Record<CountryCode, CountryConfig> = {
-  GH: {
-    code: 'GH',
+  GHA: {
+    code: 'GHA',
     name: 'Ghana',
-    locale: 'tw-Latn',
-    active: true,
+    nativeName: 'Ghana',
+    locale: 'en',
+    displayLanguage: 'en',
     educationLevels: [
-      { id: 'none', label: 'No formal schooling', localizedLabel: 'Mennya sukuu biara' },
-      { id: 'bece', label: 'BECE (Junior High)', localizedLabel: 'BECE (JHS)' },
-      { id: 'shs', label: 'SHS / WASSCE', localizedLabel: 'SHS / WASSCE' },
-      { id: 'tertiary', label: 'Tertiary / University', localizedLabel: 'Sukuupɔn' },
+      { id: 'none', label: 'No formal schooling' },
+      { id: 'bece', label: 'BECE (Junior High)' },
+      { id: 'shs', label: 'SHS / WASSCE' },
+      { id: 'tertiary', label: 'Tertiary / University' },
     ],
     languages: [
       { code: 'en', label: 'English' },
@@ -59,101 +73,92 @@ export const COUNTRIES: Record<CountryCode, CountryConfig> = {
     trainingProviders: ['NVTI', 'GIZ Ghana', 'Ashesi Career Centre', 'MEST Africa'],
   },
 
-  BD: {
-    code: 'BD',
-    name: 'Bangladesh',
-    // Locale reserved — Bangla strings not shipped this session
-    // (see LOCALE_DECISION.md). UI falls back to English for BD.
-    locale: 'en',
-    active: true,
+  BOL: {
+    code: 'BOL',
+    name: 'Bolivia',
+    nativeName: 'Bolivia',
+    locale: 'es',
+    displayLanguage: 'es',
     educationLevels: [
-      { id: 'none', label: 'No formal schooling' },
-      { id: 'ssc', label: 'SSC (Secondary)' },
-      { id: 'hsc', label: 'HSC (Higher Secondary)' },
-      { id: 'bachelor', label: 'Bachelor / University' },
+      { id: 'none', label: 'Sin escolaridad formal', localizedLabel: 'Sin escolaridad formal' },
+      { id: 'primaria', label: 'Primaria', localizedLabel: 'Primaria' },
+      { id: 'secundaria', label: 'Secundaria (Bachillerato)', localizedLabel: 'Secundaria (Bachillerato)' },
+      { id: 'tecnico', label: 'Técnico / Instituto', localizedLabel: 'Técnico / Instituto' },
+      { id: 'universidad', label: 'Universidad', localizedLabel: 'Universidad' },
     ],
     languages: [
-      { code: 'bn', label: 'Bengali' },
-      { code: 'en', label: 'English' },
+      { code: 'es', label: 'Español' },
+      { code: 'qu', label: 'Quechua' },
+      { code: 'ay', label: 'Aymara' },
+      { code: 'gn', label: 'Guaraní' },
     ],
-    currencyLabel: 'BDT',
-    opportunityEmphasis: 'formal_training',
-    broadbandPenetration: 40,
-    routineTaskShare: 0.52,
-    trainingProviders: ['BTEB', 'a2i Skills', 'BRAC Skills Development', 'ILO Bangladesh'],
+    currencyLabel: 'BOB',
+    opportunityEmphasis: 'self_employment_gig',
+    broadbandPenetration: 53,
+    routineTaskShare: 0.5,
+    trainingProviders: [
+      'INFOCAL',
+      'Fundación Trabajo Empresa',
+      'Universidad Mayor de San Andrés',
+      'CEDLA',
+    ],
   },
 
-  VN: {
-    code: 'VN',
+  VNM: {
+    code: 'VNM',
     name: 'Vietnam',
-    locale: 'en',
-    active: false,
+    nativeName: 'Việt Nam',
+    locale: 'vi',
+    displayLanguage: 'vi',
     educationLevels: [
-      { id: 'none', label: 'No formal schooling' },
-      { id: 'lower_secondary', label: 'Lower secondary' },
-      { id: 'upper_secondary', label: 'Upper secondary' },
-      { id: 'tertiary', label: 'Tertiary / University' },
+      { id: 'none', label: 'Chưa đi học', localizedLabel: 'Chưa đi học' },
+      { id: 'lower_secondary', label: 'Trung học cơ sở', localizedLabel: 'Trung học cơ sở' },
+      { id: 'upper_secondary', label: 'Trung học phổ thông', localizedLabel: 'Trung học phổ thông' },
+      { id: 'vocational', label: 'Trường nghề', localizedLabel: 'Trường nghề' },
+      { id: 'tertiary', label: 'Đại học / Cao đẳng', localizedLabel: 'Đại học / Cao đẳng' },
     ],
     languages: [
-      { code: 'vi', label: 'Vietnamese' },
+      { code: 'vi', label: 'Tiếng Việt' },
       { code: 'en', label: 'English' },
     ],
     currencyLabel: 'VND',
     opportunityEmphasis: 'formal_training',
     broadbandPenetration: 82,
     routineTaskShare: 0.44,
-    trainingProviders: ['[stub] vocational college', '[stub] training provider'],
-  },
-
-  KE: {
-    code: 'KE',
-    name: 'Kenya',
-    locale: 'en',
-    active: false,
-    educationLevels: [
-      { id: 'none', label: 'No formal schooling' },
-      { id: 'kcpe', label: 'KCPE (Primary)' },
-      { id: 'kcse', label: 'KCSE (Secondary)' },
-      { id: 'tertiary', label: 'Tertiary / University' },
+    trainingProviders: [
+      'Tổng cục Giáo dục Nghề nghiệp (DVET)',
+      'GIZ Vietnam',
+      'VinAcademy',
+      'FPT Polytechnic',
     ],
-    languages: [
-      { code: 'sw', label: 'Swahili' },
-      { code: 'en', label: 'English' },
-    ],
-    currencyLabel: 'KES',
-    opportunityEmphasis: 'self_employment_gig',
-    broadbandPenetration: 55,
-    routineTaskShare: 0.5,
-    trainingProviders: ['[stub] TVET institute', '[stub] training provider'],
-  },
-
-  BR: {
-    code: 'BR',
-    name: 'Brazil',
-    locale: 'en',
-    active: false,
-    educationLevels: [
-      { id: 'none', label: 'No formal schooling' },
-      { id: 'ensino_fundamental', label: 'Ensino fundamental' },
-      { id: 'ensino_medio', label: 'Ensino médio' },
-      { id: 'superior', label: 'Ensino superior' },
-    ],
-    languages: [
-      { code: 'pt', label: 'Portuguese' },
-      { code: 'en', label: 'English' },
-    ],
-    currencyLabel: 'BRL',
-    opportunityEmphasis: 'formal_training',
-    broadbandPenetration: 90,
-    routineTaskShare: 0.42,
-    trainingProviders: ['[stub] SENAI', '[stub] training provider'],
   },
 };
 
-export const ACTIVE_COUNTRIES: CountryCode[] = (
-  Object.keys(COUNTRIES) as CountryCode[]
-).filter((c) => COUNTRIES[c].active);
+export const ACTIVE_COUNTRIES: CountryCode[] = ['GHA', 'BOL', 'VNM'];
+
+export const DEFAULT_COUNTRY: CountryCode = 'GHA';
 
 export function getCountry(code: CountryCode): CountryConfig {
   return COUNTRIES[code];
+}
+
+// Backwards-compat helper: persisted profiles from earlier sessions used the
+// 2-letter codes GH/BD/VN/KE/BR. Map any legacy code to the closest current
+// country so localStorage migrations don't dump users on a 404 screen.
+const LEGACY_CODE_MAP: Record<string, CountryCode> = {
+  GH: 'GHA',
+  GHA: 'GHA',
+  BO: 'BOL',
+  BOL: 'BOL',
+  VN: 'VNM',
+  VNM: 'VNM',
+  // Retired countries fall through to Ghana so the demo never breaks.
+  BD: 'GHA',
+  KE: 'GHA',
+  BR: 'GHA',
+};
+
+export function migrateCountryCode(raw: string | undefined): CountryCode {
+  if (!raw) return DEFAULT_COUNTRY;
+  return LEGACY_CODE_MAP[raw] ?? DEFAULT_COUNTRY;
 }

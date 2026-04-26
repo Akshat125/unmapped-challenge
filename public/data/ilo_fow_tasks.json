@@ -1,6 +1,6 @@
 {
   "source": "ILO Future of Work — occupation task-content indices (seed, global baseline)",
-  "fetched_at": "2026-04-25",
+  "fetched_at": "2026-04-26",
   "values": {
     "by_isco": [
       {
@@ -113,8 +113,9 @@
       }
     ],
     "country_overrides": {
-      "GH": {},
-      "BD": {}
+      "GHA": {},
+      "BOL": {},
+      "VNM": {}
     },
     "us_routine_weighted_mean": 0.38
   }

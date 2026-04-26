@@ -48,9 +48,9 @@ function Endpoint({
 
 export default function IntegratePage() {
   const ghConfig = `{
-  "code": "GH",
+  "code": "GHA",
   "name": "Ghana",
-  "locale": "tw-Latn",
+  "locale": "en",
   "currencyLabel": "GHS",
   "opportunityEmphasis": "self_employment_gig",
   "broadbandPenetration": 68,
@@ -67,7 +67,7 @@ export default function IntegratePage() {
   "trainingProviders": ["NVTI", "GIZ Ghana", "Ashesi Career Centre"]
 }`;
   const vnConfig = `{
-  "code": "VN",
+  "code": "VNM",
   "name": "Vietnam",
   "locale": "vi",
   "currencyLabel": "VND",
@@ -83,7 +83,7 @@ export default function IntegratePage() {
     { "code": "vi", "label": "Tiếng Việt" },
     { "code": "en", "label": "English" }
   ],
-  "trainingProviders": ["[stub] vocational college"]
+  "trainingProviders": ["DVET", "GIZ Vietnam", "FPT Polytechnic"]
 }`;
 
   return (

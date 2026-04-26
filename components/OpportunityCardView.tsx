@@ -7,6 +7,7 @@ import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { RiskLens } from './RiskLens';
 import { Disclosure } from './ui/Disclosure';
 import { OpportunityTypeBadge } from './ui/OpportunityTypeBadge';
+import { WhyRecommended } from './WhyRecommended';
 
 function Signal({
   label,
@@ -61,6 +62,12 @@ export function OpportunityCardView({
           <p className="mt-2 text-sm text-wb-ink/80">{card.plain_language}</p>
         </div>
       </header>
+
+      {/* "Why we recommended this" — surfaces the blended ranker's three
+          sub-scores and the concrete data references. Expanded by default
+          per spec so the youth user sees the automation risk + provenance
+          without an extra click. */}
+      <WhyRecommended card={card} />
 
       {/* Match count — plain sentence, not formula. */}
       <section className="mt-5 rounded border border-wb-line bg-wb-sand/60 p-4">

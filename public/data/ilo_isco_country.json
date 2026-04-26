@@ -1,0 +1,951 @@
+{
+  "source": "ILO ILOSTAT bulk download — EMP_TEMP_SEX_OCU_NB by ISCO-08 1-digit · aggregated from data/ilo_emp_occ_{BOL,GHA,VNM}.csv",
+  "fetched_at": "2026-04-26",
+  "values": {
+    "BOL": {
+      "latest_year": 2023,
+      "by_isco_1": {
+        "0": {
+          "latest_year": 2023,
+          "latest_value_thousands": 6.413,
+          "emp_share": 0.001,
+          "yoy_pct": 42.01,
+          "cagr_3y_pct": 8.11,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 6.413,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 4.516,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 4.656,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 5.076,
+              "frequency": "A"
+            }
+          ]
+        },
+        "1": {
+          "latest_year": 2023,
+          "latest_value_thousands": 113.251,
+          "emp_share": 0.0172,
+          "yoy_pct": 2.12,
+          "cagr_3y_pct": 12.07,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 113.251,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 110.899,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 117.885,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 80.466,
+              "frequency": "A"
+            }
+          ]
+        },
+        "2": {
+          "latest_year": 2023,
+          "latest_value_thousands": 482.183,
+          "emp_share": 0.0733,
+          "yoy_pct": 7.35,
+          "cagr_3y_pct": -1.01,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 482.183,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 449.166,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 416.17,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 497.111,
+              "frequency": "A"
+            }
+          ]
+        },
+        "3": {
+          "latest_year": 2023,
+          "latest_value_thousands": 423.985,
+          "emp_share": 0.0645,
+          "yoy_pct": 16.41,
+          "cagr_3y_pct": 15.14,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 423.985,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 364.229,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 322.305,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 277.737,
+              "frequency": "A"
+            }
+          ]
+        },
+        "4": {
+          "latest_year": 2023,
+          "latest_value_thousands": 187.647,
+          "emp_share": 0.0285,
+          "yoy_pct": 10.83,
+          "cagr_3y_pct": 9.25,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 187.647,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 169.308,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 148.651,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 143.91,
+              "frequency": "A"
+            }
+          ]
+        },
+        "5": {
+          "latest_year": 2023,
+          "latest_value_thousands": 1524.789,
+          "emp_share": 0.2319,
+          "yoy_pct": 0.74,
+          "cagr_3y_pct": 8.74,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 1524.789,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 1513.542,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 1404.622,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 1185.896,
+              "frequency": "A"
+            }
+          ]
+        },
+        "6": {
+          "latest_year": 2023,
+          "latest_value_thousands": 1602.343,
+          "emp_share": 0.2437,
+          "yoy_pct": 3.98,
+          "cagr_3y_pct": -0.02,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 1602.343,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 1541.0,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 1652.833,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 1603.491,
+              "frequency": "A"
+            }
+          ]
+        },
+        "7": {
+          "latest_year": 2023,
+          "latest_value_thousands": 1193.816,
+          "emp_share": 0.1816,
+          "yoy_pct": -2.89,
+          "cagr_3y_pct": 9.97,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 1193.816,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 1229.349,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 1136.031,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 897.643,
+              "frequency": "A"
+            }
+          ]
+        },
+        "8": {
+          "latest_year": 2023,
+          "latest_value_thousands": 571.033,
+          "emp_share": 0.0869,
+          "yoy_pct": 0.63,
+          "cagr_3y_pct": 12.07,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 571.033,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 567.461,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 517.925,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 405.724,
+              "frequency": "A"
+            }
+          ]
+        },
+        "9": {
+          "latest_year": 2023,
+          "latest_value_thousands": 475.533,
+          "emp_share": 0.0723,
+          "yoy_pct": 3.46,
+          "cagr_3y_pct": 11.74,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 475.533,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 459.644,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 427.707,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 340.808,
+              "frequency": "A"
+            }
+          ]
+        }
+      },
+      "source_file": "data/ilo_emp_occ_BOL.csv",
+      "rows_used": 40
+    },
+    "GHA": {
+      "latest_year": 2023,
+      "by_isco_1": {
+        "0": {
+          "latest_year": 2023,
+          "latest_value_thousands": 54.132,
+          "emp_share": 0.0012,
+          "yoy_pct": 560.87,
+          "cagr_3y_pct": null,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 54.132,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 8.191,
+              "frequency": "A"
+            }
+          ]
+        },
+        "1": {
+          "latest_year": 2023,
+          "latest_value_thousands": 802.581,
+          "emp_share": 0.0172,
+          "yoy_pct": 309.93,
+          "cagr_3y_pct": 98.34,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 802.581,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 195.784,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 204.02,
+              "frequency": "A"
+            }
+          ]
+        },
+        "2": {
+          "latest_year": 2023,
+          "latest_value_thousands": 2795.254,
+          "emp_share": 0.06,
+          "yoy_pct": 331.27,
+          "cagr_3y_pct": 82.21,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 2795.254,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 648.142,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 841.9,
+              "frequency": "A"
+            }
+          ]
+        },
+        "3": {
+          "latest_year": 2023,
+          "latest_value_thousands": 730.342,
+          "emp_share": 0.0157,
+          "yoy_pct": 297.34,
+          "cagr_3y_pct": 103.39,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 730.342,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 183.81,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 176.55,
+              "frequency": "A"
+            }
+          ]
+        },
+        "4": {
+          "latest_year": 2023,
+          "latest_value_thousands": 780.924,
+          "emp_share": 0.0168,
+          "yoy_pct": 338.54,
+          "cagr_3y_pct": 93.52,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 780.924,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 178.075,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 208.52,
+              "frequency": "A"
+            }
+          ]
+        },
+        "5": {
+          "latest_year": 2023,
+          "latest_value_thousands": 12805.439,
+          "emp_share": 0.2747,
+          "yoy_pct": 332.29,
+          "cagr_3y_pct": 116.48,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 12805.439,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 2962.205,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 2732.53,
+              "frequency": "A"
+            }
+          ]
+        },
+        "6": {
+          "latest_year": 2023,
+          "latest_value_thousands": 17091.747,
+          "emp_share": 0.3667,
+          "yoy_pct": 321.91,
+          "cagr_3y_pct": 109.93,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 17091.747,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 4051.014,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 3878.09,
+              "frequency": "A"
+            }
+          ]
+        },
+        "7": {
+          "latest_year": 2023,
+          "latest_value_thousands": 6298.688,
+          "emp_share": 0.1351,
+          "yoy_pct": 248.88,
+          "cagr_3y_pct": 82.49,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 6298.688,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 1805.395,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 1891.25,
+              "frequency": "A"
+            }
+          ]
+        },
+        "8": {
+          "latest_year": 2023,
+          "latest_value_thousands": 2398.262,
+          "emp_share": 0.0515,
+          "yoy_pct": 347.98,
+          "cagr_3y_pct": 93.89,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 2398.262,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 535.356,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 637.94,
+              "frequency": "A"
+            }
+          ]
+        },
+        "9": {
+          "latest_year": 2023,
+          "latest_value_thousands": 2909.706,
+          "emp_share": 0.0624,
+          "yoy_pct": 304.6,
+          "cagr_3y_pct": 142.72,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 2909.706,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 719.148,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 493.9,
+              "frequency": "A"
+            }
+          ]
+        }
+      },
+      "source_file": "data/ilo_emp_occ_GHA.csv",
+      "rows_used": 29
+    },
+    "VNM": {
+      "latest_year": 2023,
+      "by_isco_1": {
+        "0": {
+          "latest_year": 2023,
+          "latest_value_thousands": 287.246,
+          "emp_share": 0.0054,
+          "yoy_pct": 16.26,
+          "cagr_3y_pct": 37.48,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 287.246,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 247.067,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 244.804,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 110.539,
+              "frequency": "A"
+            }
+          ]
+        },
+        "1": {
+          "latest_year": 2023,
+          "latest_value_thousands": 477.021,
+          "emp_share": 0.0089,
+          "yoy_pct": 1.08,
+          "cagr_3y_pct": -4.61,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 477.021,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 471.938,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 478.489,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 549.61,
+              "frequency": "A"
+            }
+          ]
+        },
+        "2": {
+          "latest_year": 2023,
+          "latest_value_thousands": 3618.994,
+          "emp_share": 0.0678,
+          "yoy_pct": -0.89,
+          "cagr_3y_pct": -5.72,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 3618.994,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 3651.42,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 3595.661,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 4318.486,
+              "frequency": "A"
+            }
+          ]
+        },
+        "3": {
+          "latest_year": 2023,
+          "latest_value_thousands": 1728.83,
+          "emp_share": 0.0324,
+          "yoy_pct": 4.09,
+          "cagr_3y_pct": 0.09,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 1728.83,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 1660.921,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 1634.481,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 1724.351,
+              "frequency": "A"
+            }
+          ]
+        },
+        "4": {
+          "latest_year": 2023,
+          "latest_value_thousands": 1300.531,
+          "emp_share": 0.0244,
+          "yoy_pct": 6.02,
+          "cagr_3y_pct": 8.46,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 1300.531,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 1226.732,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 1126.656,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 1019.255,
+              "frequency": "A"
+            }
+          ]
+        },
+        "5": {
+          "latest_year": 2023,
+          "latest_value_thousands": 10155.08,
+          "emp_share": 0.1902,
+          "yoy_pct": 4.2,
+          "cagr_3y_pct": 1.88,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 10155.08,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 9746.121,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 9299.062,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 9604.198,
+              "frequency": "A"
+            }
+          ]
+        },
+        "6": {
+          "latest_year": 2023,
+          "latest_value_thousands": 8231.025,
+          "emp_share": 0.1541,
+          "yoy_pct": -7.79,
+          "cagr_3y_pct": 28.44,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 8231.025,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 8926.599,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 8723.403,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 3884.93,
+              "frequency": "A"
+            }
+          ]
+        },
+        "7": {
+          "latest_year": 2023,
+          "latest_value_thousands": 7281.678,
+          "emp_share": 0.1364,
+          "yoy_pct": -0.64,
+          "cagr_3y_pct": -0.29,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 7281.678,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 7328.615,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 7139.544,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 7345.661,
+              "frequency": "A"
+            }
+          ]
+        },
+        "8": {
+          "latest_year": 2023,
+          "latest_value_thousands": 7509.447,
+          "emp_share": 0.1406,
+          "yoy_pct": -1.01,
+          "cagr_3y_pct": 1.66,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 7509.447,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 7586.312,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 6926.628,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 7147.787,
+              "frequency": "A"
+            }
+          ]
+        },
+        "9": {
+          "latest_year": 2023,
+          "latest_value_thousands": 13095.997,
+          "emp_share": 0.2452,
+          "yoy_pct": 4.69,
+          "cagr_3y_pct": -9.42,
+          "source_rows": [
+            {
+              "year": 2023,
+              "period": "2023",
+              "value": 13095.997,
+              "frequency": "A"
+            },
+            {
+              "year": 2022,
+              "period": "2022",
+              "value": 12509.769,
+              "frequency": "A"
+            },
+            {
+              "year": 2021,
+              "period": "2021",
+              "value": 12596.707,
+              "frequency": "A"
+            },
+            {
+              "year": 2020,
+              "period": "2020",
+              "value": 17619.097,
+              "frequency": "A"
+            }
+          ]
+        }
+      },
+      "source_file": "data/ilo_emp_occ_VNM.csv",
+      "rows_used": 40
+    }
+  }
+}

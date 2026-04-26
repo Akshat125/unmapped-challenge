@@ -1,12 +1,13 @@
 # O*NET-SOC (2019) to ISCO-08 crosswalk.
 # Source: BLS/ILO published crosswalk
 #   https://www.bls.gov/soc/soc_2018_to_isco_08_crosswalk.xlsx
-# Official crosswalk is LOSSY — expect ~15% unmatched; build_occupation_subset.py
-# logs every miss to public/data/crosswalk_misses.json (§6.1 requirement).
+# Official crosswalk is LOSSY — expect ~15% unmatched; build_frey_osborne_overlay.py
+# logs the miss rate.
 #
-# This committed seed covers the demo occupation subset. For production,
-# replace the rows below with the full published CSV export. The loader
-# treats any unknown SOC code in the CSV as unmatched (safe default).
+# Subset committed here covers the ISCO codes used by the ESCO occupation
+# pool plus high-volume Frey-Osborne SOCs (cashiers, drivers, secretaries,
+# etc.) so the demo's automation-safety score has reach without shipping
+# the full ~800-row BLS crosswalk.
 soc_code,isco_code,note
 49-3023.00,7231,Motor vehicle mechanics
 49-2097.00,7421,Electronic equipment installers -> Electronics mechanics and servicers
@@ -25,5 +26,152 @@ soc_code,isco_code,note
 43-4051.00,4222,Customer service reps -> Contact centre clerks
 37-2012.00,9111,Cleaners -> Domestic cleaners and helpers
 45-2092.00,9211,Farmworkers -> Crop farm labourers
-# Intentionally-unmatched rows for testing the miss-logging path:
-# None in the seed. Live fetch will introduce natural misses (~15%).
+# ── extended subset ──
+41-2011.00,5230,Cashiers
+41-2011.00,5223,Cashiers (also retail)
+43-6014.00,4120,"Secretaries -> Secretaries (general)"
+43-3071.00,4211,Tellers -> Bank tellers and related clerks
+43-3031.00,3313,Bookkeeping clerks -> Accounting associate professionals
+43-5081.00,4321,Stock clerks -> Stock clerks
+51-3011.00,7512,Bakers
+51-3022.00,7511,Meat trimmers -> Butchers
+51-4033.00,7223,"Grinding, lapping machine setters -> Metal working machine tool setters"
+51-4031.00,7223,Cutting/punching machine setters -> Metal working machine tool setters
+51-4035.00,8121,Milling/planing machine setters -> Metal processing plant operators
+51-4193.00,8121,Plating/coating machine setters -> Metal processing plant operators
+51-4041.00,7223,Machinists -> Metal working machine tool setters
+51-9012.00,8131,Separating/filtering machine -> Chemical processing plant operators
+51-9041.00,8131,"Extruding, forming, pressing machine -> Chemical processing plant operators"
+51-6031.00,8152,Sewing machine operators -> Weaving and knitting machines operators
+51-6064.00,8152,Textile winding/twisting -> Weaving and knitting machines operators
+51-6091.00,8152,Extruding/forming machine setters synthetic fibers -> Weaving and knitting machines operators
+51-9111.00,8183,"Packaging and filling machine operators"
+53-7062.00,9333,"Laborers freight, stock, material movers -> Freight handlers"
+53-7064.00,9333,"Packers and packagers -> Freight handlers"
+53-3032.00,8332,Heavy/tractor-trailer truck drivers -> Heavy truck drivers
+53-3033.00,8322,Light truck drivers -> Car drivers
+53-3052.00,8331,Bus drivers -> Bus drivers
+53-1031.00,1324,First-Line Supervisors of Transportation -> Supply/distribution managers
+17-1011.00,2161,Architects
+17-2071.00,2151,Electrical engineers
+17-2141.00,2144,Mechanical engineers
+17-2051.00,2142,Civil engineers
+17-1022.00,2165,Surveyors -> Cartographers and surveyors
+19-2031.00,2113,Chemists
+19-1032.00,2132,Foresters -> Farming and forestry advisers
+17-2111.00,2149,Health and Safety Engineers -> Engineering professionals NEC
+15-1211.00,2511,Computer systems analysts -> Systems analysts
+15-1212.00,2529,Information security analysts -> Database and network professionals NEC
+15-1241.00,2523,Computer network architects -> Computer network professionals
+15-1244.00,2522,Network and computer systems admins -> Systems administrators
+15-1251.00,2519,Computer programmers -> Software and applications developers and analysts
+15-1299.00,2519,Computer occupations all other -> Software and applications developers and analysts
+15-2011.00,2120,Actuaries -> Mathematicians actuaries and statisticians
+21-1023.00,2635,Mental health and substance abuse social workers -> Social work and counselling professionals
+21-1014.00,2635,Mental health counselors -> Social work and counselling professionals
+21-1093.00,3412,Social and human service assistants -> Social work associate professionals
+21-2011.00,2636,Clergy -> Religious professionals
+23-1011.00,2611,Lawyers
+23-2011.00,3411,Paralegals -> Legal and related associate professionals
+25-2021.00,2341,Elementary school teachers
+25-2031.00,2330,Secondary school teachers
+25-3011.00,2351,Adult basic and secondary education teachers -> Education methods specialists
+25-4012.00,2621,Curators -> Archivists and curators
+25-4021.00,2622,Librarians
+27-1024.00,2166,Graphic designers -> Graphic and multimedia designers
+27-2011.00,2655,Actors
+27-2031.00,2653,Dancers
+27-3041.00,2642,Editors -> Journalists
+27-3043.00,2641,Writers and authors -> Authors and related writers
+29-1141.00,2221,Registered nurses -> Nursing professionals
+29-1051.00,2262,Pharmacists
+29-2052.00,3213,Pharmacy technicians -> Pharmaceutical technicians and assistants
+31-9091.00,5329,Dental assistants -> Personal care workers in health services NEC
+31-1131.00,5322,Nursing assistants -> Home-based personal care workers
+33-3011.00,3411,Bailiffs -> Legal and related associate professionals
+33-9032.00,5414,Security guards
+33-9092.00,5419,"Lifeguards, ski patrol -> Protective services workers NEC"
+35-3023.00,5131,Fast food and counter workers -> Waiters
+35-3031.00,5131,Waiters and waitresses -> Waiters
+37-2011.00,9112,"Janitors and cleaners, except maids and housekeeping -> Cleaners and helpers in offices, hotels, and other establishments"
+39-3091.00,5142,"Amusement and recreation attendants -> Beauticians and related workers"
+39-4011.00,5163,Embalmers -> Undertakers and embalmers
+39-5011.00,5141,Barbers -> Hairdressers
+39-5012.00,5141,"Hairdressers, hairstylists -> Hairdressers"
+39-5093.00,5142,Shampooers -> Beauticians and related workers
+41-3011.00,3322,Advertising sales agents -> Commercial sales representatives
+41-4011.00,3322,Sales reps wholesale technical -> Commercial sales representatives
+41-4012.00,3322,Sales reps wholesale -> Commercial sales representatives
+41-9012.00,5249,Models -> Sales workers NEC
+43-2011.00,4223,Switchboard operators -> Telephone switchboard operators
+43-3061.00,3313,Procurement clerks -> Accounting associate professionals
+43-4081.00,4226,Hotel desk clerks -> Receptionists (general)
+43-5021.00,4321,Couriers and messengers -> Stock clerks
+43-5052.00,4412,"Postal service mail carriers -> Mail carriers and sorting clerks"
+43-5053.00,4412,"Postal service mail sorters -> Mail carriers and sorting clerks"
+43-9021.00,4131,Data entry keyers -> Typists and word processing operators
+43-9022.00,4131,Word processors and typists -> Typists and word processing operators
+45-2011.00,3142,"Agricultural inspectors -> Agronomy and forestry technicians"
+47-2061.00,7115,Construction laborers -> Carpenters (general construction)
+47-2073.00,8342,Operating engineers -> Earthmoving and related plant operators
+47-2111.00,7411,Electricians
+47-2121.00,7125,Glaziers
+47-2151.00,7126,Pipelayers -> Plumbers and pipe fitters
+47-2181.00,7121,Roofers
+47-3011.00,9313,"Helpers brickmasons -> Building construction labourers"
+47-4051.00,7119,Highway maintenance workers -> Building frame and related trades workers NEC
+49-2093.00,7421,Electrical electronics installers transportation -> Electronics mechanics and servicers
+49-2094.00,7412,"Electrical electronics repairers, commercial industrial -> Electrical mechanics and fitters"
+49-9012.00,7412,Control and valve installers -> Electrical mechanics and fitters
+49-9021.00,7126,Heating air conditioning refrigeration mechanics -> Plumbers and pipe fitters
+49-9051.00,7411,Electrical power-line installers -> Building and related electricians
+49-9052.00,7422,Telecommunications line installers -> ICT installers and servicers
+49-9071.00,7233,Maintenance and repair workers general -> Agricultural and industrial machinery mechanics
+49-9096.00,7215,Riggers -> Riggers and cable splicers
+51-1011.00,3122,First-Line Supervisors Production -> Manufacturing supervisors
+51-2092.00,8281,"Team assemblers -> Assemblers"
+51-3091.00,8160,"Food and tobacco roasting machine operators -> Food and related products machine operators"
+51-4011.00,3119,Computer-controlled machine tool operators -> Process control technicians NEC
+51-4012.00,3119,CNC machine tool programmers -> Process control technicians NEC
+51-4032.00,7223,Drilling/boring machine setters -> Metal working machine tool setters
+51-4034.00,7223,Lathe and turning machine -> Metal working machine tool setters
+51-4072.00,7223,"Molding, coremaking machine -> Metal working machine tool setters"
+51-4191.00,7223,Heat treating equipment setters -> Metal working machine tool setters
+51-9061.00,7543,Inspectors testers sorters samplers weighers -> Product graders and testers (excluding food and beverages)
+53-3021.00,8331,Bus drivers transit -> Bus drivers
+53-7051.00,8344,Industrial truck and tractor operators -> Lifting truck operators
+51-2031.00,8211,Engine and other machine assemblers -> Mechanical machinery assemblers
+13-1071.00,2423,Human resources specialists -> Personnel and careers professionals
+13-1111.00,2421,Management analysts -> Management and organization analysts
+13-2011.00,2411,"Accountants and auditors -> Accountants"
+11-1021.00,1120,General and operations managers -> Managing directors and chief executives
+11-9013.00,1311,Farmers ranchers and other agricultural managers
+11-3031.00,1211,Financial managers
+11-3121.00,1212,Human resources managers
+13-2051.00,2412,Financial analysts -> Financial and investment advisers
+27-1014.00,2166,Special effects artists and animators -> Graphic and multimedia designers
+27-3091.00,2643,Interpreters and translators
+49-9043.00,7233,Maintenance workers machinery -> Agricultural and industrial machinery mechanics
+51-9081.00,7521,Dental laboratory technicians -> Wood treaters
+51-2099.00,8281,Assemblers and fabricators all other -> Assemblers
+# ── ISCO major group 6: Skilled agricultural, forestry and fishery workers ──
+# Critical for BOL/VNM coverage — without these the FO overlay returns empty
+# at every level for agricultural ESCO occupations and the youth card silently
+# falls back to the country routine-task share.
+45-1011.00,6111,First-line supervisors of farming -> Field crop and vegetable growers
+45-2021.00,6129,Animal breeders -> Animal producers NEC
+45-2041.00,9213,Graders and sorters agricultural products -> Crop farm labourers
+45-2091.00,8341,Agricultural equipment operators -> Mobile farm and forestry plant operators
+45-2092.00,9211,Farmworkers crop -> Crop farm labourers
+45-2093.00,6121,Farmworkers farm and ranch animals -> Livestock and dairy producers
+45-3011.00,6222,"Fishers and related fishing workers -> Inland and coastal waters fishery workers"
+45-4011.00,6210,Forest and conservation workers -> Forestry and related workers
+45-4021.00,6210,Fallers -> Forestry and related workers
+45-4022.00,8341,Logging equipment operators -> Mobile farm and forestry plant operators
+45-4023.00,6210,Log graders and scalers -> Forestry and related workers
+45-4029.00,6210,Logging workers all other -> Forestry and related workers
+19-1031.00,2132,Conservation scientists -> Farming and forestry advisers
+19-4011.00,3142,Agricultural and food science technicians -> Agronomy and forestry technicians
+# ── ISCO 0 Armed forces — not represented in Frey-Osborne, intentionally
+# left uncovered. ESCO occupations under ISCO 0 fall through to the country
+# routine-task share, which is acceptable for the youth-facing card.

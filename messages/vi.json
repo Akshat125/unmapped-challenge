@@ -1,0 +1,99 @@
+{
+  "_note": "Vietnamese — best-effort draft strings pending review by a native Vietnamese speaker. Do not ship the demo without that review.",
+  "brand": {
+    "name": "UNMAPPED",
+    "tagline": "Kỹ năng của bạn, được nhìn thấy."
+  },
+  "nav": {
+    "entry": "Bắt đầu",
+    "profile": "Hồ sơ của bạn",
+    "opportunities": "Cơ hội",
+    "policymaker": "Chế độ nhà hoạch định"
+  },
+  "role_picker": {
+    "eyebrow": "Hạ tầng chung của thị trường lao động",
+    "title": "Bạn đứng ở phía nào của thị trường lao động?",
+    "subtitle": "Chọn chế độ phù hợp với công việc của bạn hôm nay. Mỗi vai trò có một quy trình riêng. Bạn có thể đổi sau.",
+    "returning": "Chào mừng trở lại",
+    "or_different": "Hoặc chọn vai trò khác",
+    "continue_as": "Tiếp tục với vai trò"
+  },
+  "switch_role": "Đổi vai trò",
+  "entry": {
+    "title": "Hãy cho chúng tôi biết về công việc và kỹ năng của bạn",
+    "subtitle": "Năm câu hỏi. Bạn có thể bỏ qua bất kỳ câu nào.",
+    "q1_education": "Bạn đã học đến cấp nào cao nhất?",
+    "q2_work": "Bạn đã làm những công việc gì, có lương hay không?",
+    "q2_placeholder": "ví dụ: Tôi sửa điện thoại và đã làm hai trang web nhỏ cho bạn bè",
+    "q3_tools": "Công cụ, máy móc hay phần mềm bạn đã dùng",
+    "q3_placeholder": "ví dụ: mỏ hàn, Android, JavaScript",
+    "q4_languages": "Ngôn ngữ bạn nói",
+    "q5_aspirations": "Bạn muốn làm tốt hơn hoặc học gì tiếp theo?",
+    "q5_placeholder": "ví dụ: Tôi muốn học thêm về ứng dụng web",
+    "skip": "Bỏ qua",
+    "back": "Quay lại",
+    "continue": "Tiếp tục",
+    "finish": "Xem hồ sơ của tôi",
+    "low_bandwidth": "Đang dùng chế độ băng thông thấp",
+    "saving_locally": "Câu trả lời của bạn được lưu trên thiết bị này.",
+    "country_label": "Quốc gia",
+    "mapping_in_progress": "Đang đọc câu trả lời của bạn…",
+    "mapping_failed": "Không kết nối được dịch vụ kỹ năng. Câu trả lời đã được lưu — vui lòng thử lại sau."
+  },
+  "profile": {
+    "heading": "Hồ sơ kỹ năng của bạn",
+    "subheading": "Một bản tóm tắt di động về những gì bạn đã biết làm.",
+    "skills_found": "Kỹ năng chúng tôi nhận ra",
+    "no_skills_yet": "Chưa có kỹ năng nào được ánh xạ. Quay lại và thêm chi tiết.",
+    "for_systems": "Hiển thị mã chuẩn (ESCO / ISCO)",
+    "for_systems_intro": "Nhà tuyển dụng, đơn vị đào tạo và cơ quan nhà nước có thể đọc trực tiếp. Bạn có thể bỏ qua.",
+    "occupations_suggested": "Công việc phù hợp với kỹ năng của bạn",
+    "occupations_intro": "Dựa trên thông tin bạn chia sẻ. Nhấn Cơ hội để xem chi tiết.",
+    "print": "In",
+    "export_json": "Tải xuống (JSON)",
+    "see_opportunities": "Xem cơ hội",
+    "flagged_title": "Chúng tôi chưa tự tin về hồ sơ này",
+    "edit": "Chỉnh sửa câu trả lời"
+  },
+  "opportunities": {
+    "heading": "Cơ hội cho bạn",
+    "subheading": "Dựa trên hồ sơ của bạn và dữ liệu thị trường lao động địa phương.",
+    "no_results": "Chưa có kết quả phù hợp. Hãy quay lại và bổ sung chi tiết cho hồ sơ.",
+    "match_label": "Mức độ trùng kỹ năng",
+    "match_format": "{matched} trên {total} kỹ năng",
+    "missing_label": "Kỹ năng còn thiếu",
+    "signals_heading": "Các con số",
+    "signal_wage": "Thu nhập trung bình hàng tháng trong ngành này",
+    "signal_growth": "Tăng trưởng việc làm của ngành (so với năm trước)",
+    "signal_premium": "Mức chênh lương của bậc đại học so với trung học trong ngành này",
+    "risk_heading": "Công việc này có thể thay đổi như thế nào",
+    "risk_long_term": "Rủi ro dài hạn (chuẩn Hoa Kỳ)",
+    "risk_near_term": "Chỉ số rủi ro địa phương",
+    "risk_near_term_gh": "Chỉ số rủi ro địa phương · Ghana",
+    "risk_near_term_bd": "Chỉ số rủi ro địa phương · Bangladesh",
+    "risk_tooltip_heading": "Cách tính Chỉ số Rủi ro Địa phương",
+    "risk_tooltip_formula": "rủi_ro_địa_phương = frey_osborne × yếu_tố_hạ_tầng × yếu_tố_cấu_phần_công_việc",
+    "risk_tooltip_framing": "Chỉ số Rủi ro Địa phương đo áp lực tự động hóa trong điều kiện địa phương — độ phủ băng thông và tỉ lệ công việc lặp lại. Ở những thị trường có nhiều việc lặp lại và hạ tầng số mỏng, rủi ro địa phương có thể vượt mức chuẩn Hoa Kỳ.",
+    "show_calculation": "Xem cách chúng tôi tính",
+    "show_standard_code": "Xem mã nghề chuẩn",
+    "wittgenstein_heading": "Bạn đang đi đến đâu vào năm 2035",
+    "pathway_heading": "Để đạt được",
+    "pathway_providers": "Đơn vị đào tạo địa phương",
+    "why_heading": "Vì sao chúng tôi đề xuất công việc này",
+    "why_intro": "Đề xuất này kết hợp ba nguồn tham chiếu có thể kiểm chứng. Mỗi nguồn được tính từ các tệp dữ liệu được cam kết trong kho.",
+    "why_demand": "Nhu cầu trong nước (50%)",
+    "why_skill": "Mức độ trùng kỹ năng (35%)",
+    "why_safety": "Mức an toàn trước tự động hóa (15%)",
+    "why_total": "Tổng điểm",
+    "automation_risk_heading": "Rủi ro tự động hóa cho công việc này"
+  },
+  "country_switcher": {
+    "label": "Quốc gia",
+    "active": "Đang dùng",
+    "stub": "Cấu hình thử"
+  },
+  "bandwidth": {
+    "low": "Đang dùng chế độ băng thông thấp",
+    "offline": "Bạn đang ngoại tuyến — đang hiển thị dữ liệu đã lưu"
+  }
+}

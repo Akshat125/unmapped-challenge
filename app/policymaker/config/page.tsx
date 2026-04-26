@@ -101,7 +101,7 @@ export default function ConfigPage() {
 
       <section className="mt-6 flex flex-wrap items-center gap-2 text-sm">
         <span className="text-wb-ink/70">Start from:</span>
-        {(['GH', 'BD', 'VN', 'KE', 'BR'] as CountryCode[]).map((c) => (
+        {(['GHA', 'BOL', 'VNM'] as CountryCode[]).map((c) => (
           <button
             key={c}
             onClick={() => loadExisting(c)}
