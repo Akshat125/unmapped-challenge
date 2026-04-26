@@ -9,7 +9,7 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 import { getEscoOccupations, getEscoSkills } from '@/lib/data-loaders/esco';
-import { BM25Index } from '@/lib/bm25';
+import { getEscoIndex } from '@/lib/esco-bm25-index';
 
 export interface SkillMapInput {
   education?: string;
@@ -42,23 +42,7 @@ export interface SkillMapResult {
 
 // ── BM25 index (module-level singleton, built once per process) ───────────
 
-let _indexPromise: Promise<{ index: BM25Index; labelByUri: Map<string, string> }> | null = null;
-
-function getIndex() {
-  if (!_indexPromise) {
-    _indexPromise = getEscoSkills().then(({ value: skills }) => {
-      const docs = skills.map((s) => ({
-        id: s.uri,
-        text: `${s.label} ${(s.alt_labels ?? []).join(' ')} ${s.description ?? ''}`.trim(),
-      }));
-      return {
-        index: new BM25Index(docs),
-        labelByUri: new Map(skills.map((s) => [s.uri, s.label])),
-      };
-    });
-  }
-  return _indexPromise;
-}
+const getIndex = getEscoIndex;
 
 // ── Claude implementation (Option D: BM25 retrieval → single Claude call) ─
 
@@ -149,10 +133,10 @@ async function callClaude(prompt: string): Promise<ClaudeMatch[] | null> {
 
 async function runClaude(input: SkillMapInput): Promise<SkillMapResult> {
   const { index, labelByUri } = await getIndex();
-  const { value: skills } = await getEscoSkills();
   const { value: occupations } = await getEscoOccupations();
 
-  const validUris = new Set(skills.map((s) => s.uri));
+  // labelByUri keys are all valid URIs — avoids a second getEscoSkills() read.
+  const validUris = new Set(labelByUri.keys());
 
   // BM25 retrieval — get top candidates from the full skill set
   const query = buildQuery(input);
@@ -208,9 +192,10 @@ async function runClaude(input: SkillMapInput): Promise<SkillMapResult> {
     source_field: m.source_field,
   }));
 
+  const skillSet = new Set(esco_skills);
   const isco_occupations = Array.from(new Set(
     occupations
-      .filter((occ) => occ.essential_skills.some((s) => esco_skills.includes(s)))
+      .filter((occ) => occ.essential_skills.some((s) => skillSet.has(s)))
       .map((occ) => occ.isco_code),
   ));
 
@@ -264,9 +249,10 @@ async function runMock(input: SkillMapInput): Promise<SkillMapResult> {
     source_field: dominantField,
   }));
 
+  const skillSet = new Set(esco_skills);
   const isco_occupations = Array.from(new Set(
     occupations
-      .filter((occ) => occ.essential_skills.some((s) => esco_skills.includes(s)))
+      .filter((occ) => occ.essential_skills.some((s) => skillSet.has(s)))
       .map((occ) => occ.isco_code),
   ));
 

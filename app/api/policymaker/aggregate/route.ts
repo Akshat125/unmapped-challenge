@@ -10,7 +10,7 @@ import { getWbes } from '@/lib/data-loaders/wbes';
 import { getWdi } from '@/lib/data-loaders/wdi';
 import { getWittgenstein, attainmentDelta } from '@/lib/data-loaders/wittgenstein';
 import { tertiaryPremium } from '@/lib/returns-to-education';
-import { getJoinedOccupations } from '@/lib/data-loaders/joined';
+import { getEscoOccupations } from '@/lib/data-loaders/esco';
 import { getFowForCountry } from '@/lib/data-loaders/ilo-fow';
 import { calibrateRisk } from '@/lib/risk-calibration';
 import {
@@ -40,7 +40,7 @@ export async function GET(req: Request) {
     wbes,
     wdi,
     wittgenstein,
-    joined,
+    escoOcc,
     fow,
   ] = await Promise.all([
     getEmployment(country),
@@ -49,7 +49,7 @@ export async function GET(req: Request) {
     getWbes(country),
     getWdi(country),
     getWittgenstein(country),
-    getJoinedOccupations(),
+    getEscoOccupations(),
     getFowForCountry(country),
   ]);
 
@@ -76,9 +76,9 @@ export async function GET(req: Request) {
   });
 
   // Per-occupation risk — shows the sectoral/occupational heatmap on /skill-gaps
-  const occupationRisks = joined.value.map((occ) => {
+  const occupationRisks = escoOcc.value.map((occ) => {
     const tc = fow.value.byIsco.get(occ.isco_code);
-    const breakdown = calibrateRisk(occ.frey_osborne_raw, config, {
+    const breakdown = calibrateRisk(occ.frey_osborne_raw ?? 0, config, {
       occupationRoutineShare: tc?.routine_share,
       cognitiveShare: tc?.cognitive_share,
       manualShare: tc?.manual_share,

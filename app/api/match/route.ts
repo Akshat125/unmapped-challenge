@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { COUNTRIES, type CountryCode } from '@/lib/config/countries';
 import { getEscoSkills, getEscoOccupations } from '@/lib/data-loaders/esco';
-import { getJoinedOccupations } from '@/lib/data-loaders/joined';
 import {
   getEmployment,
   getEarningsBySector,
@@ -63,8 +62,7 @@ export interface OpportunityCard {
   pathway: {
     training_providers: string[];
   };
-  onet_tasks: string[];
-  source_trace: string[]; // every source label referenced on the card
+  source_trace: string[];
 }
 
 interface MatchRequest {
@@ -90,7 +88,6 @@ export async function POST(req: Request) {
   const [
     escoOcc,
     escoSkills,
-    joined,
     employment,
     earnings,
     earningsEdu,
@@ -99,7 +96,6 @@ export async function POST(req: Request) {
   ] = await Promise.all([
     getEscoOccupations(),
     getEscoSkills(),
-    getJoinedOccupations(),
     getEmployment(country),
     getEarningsBySector(country),
     getEarningsByEducation(country),
@@ -109,7 +105,6 @@ export async function POST(req: Request) {
 
   // Rank via ESCO essentialSkills overlap (§7.1.1).
   const ranked = rankMatches(escoOcc.value, profileSkillUris, escoSkills.value);
-  const joinedByIsco = new Map(joined.value.map((o) => [o.isco_code, o]));
 
   // Show top ~6 and always include at least 3 even when matches are thin.
   const topMatched = ranked.filter((r) => r.matched > 0).slice(0, 6);
@@ -124,8 +119,7 @@ export async function POST(req: Request) {
       .filter((r) => r.sector === sector)
       .reduce((max, r) => (r.year > max ? r.year : max), 0);
     const premium = tertiaryPremium(earningsEdu.value, sector);
-    const joinedOcc = joinedByIsco.get(iscoCode);
-    const foRaw = joinedOcc?.frey_osborne_raw ?? 0;
+    const foRaw = match.occupation.frey_osborne_raw ?? 0;
     const taskContent = fow.value.byIsco.get(iscoCode);
     const breakdown = calibrateRisk(foRaw, config, {
       occupationRoutineShare: taskContent?.routine_share,
@@ -196,7 +190,6 @@ export async function POST(req: Request) {
         source: wittgenstein.source,
       },
       pathway: { training_providers: config.trainingProviders },
-      onet_tasks: joinedOcc?.onet_tasks ?? [],
       source_trace,
     };
   });
